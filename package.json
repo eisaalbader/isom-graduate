@@ -2,7 +2,7 @@
   "name": "isom-graduate",
   "version": "1.0.0",
   "private": true,
-  "description": "ISOM Club student guide 2026/2027 \u2014 the printed course maps, and the graduation planner built from them.",
+  "description": "ISOM Club student guide 2026/2027 — the printed course maps, and the graduation planner built from them.",
   "scripts": {
     "qr": "cd guide && python3 mkqr.py",
     "sheets": "cd guide && node build.js",
