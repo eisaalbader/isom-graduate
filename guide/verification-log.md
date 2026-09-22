@@ -536,3 +536,70 @@ Checked on that machine, against the live URL, not a local copy:
 
 The QR on all six sheets encodes that address and was decoded back out of the
 finished PDFs at A2, A3 and A4 print resolution after the final rebuild.
+
+
+---
+
+## S. Made reproducible, and turned into a project — 23 Sep 2026
+
+### The repo only built on the machine it was written on
+
+Every render and verify script carried the sandbox's own Chromium path,
+hard-coded. Moved to the club's computer, all of them failed at the first line.
+They now read `CHROMIUM_PATH`, fall back to that pinned build only if it happens
+to exist, and otherwise let Playwright use whatever `npm run setup` installed.
+Nineteen files.
+
+With that fixed the guide built on the club's machine but **`verify.js mis`
+failed there**: `band over ladder-note | 1013316 over ladder-note |
+1011430 over ladder-note`. Measured on that machine, the overlap was 4px
+(`gridH 1126, canvasH 1148, lastCardBottom 1395, noteTop 1392`). The container
+runs Chromium 1194 and the club's machine runs 1243, and the two disagree by
+about 13px in accumulated text height down a stacked map — enough to put the
+last row of cards on the caption on one and clear it on the other.
+
+Fixed by giving the stacked maps slack rather than tuning to one machine:
+`.canvas--stack > .grid` row-gap 5mm → 4.1mm and the ladder note's margin
+2.5mm → 1.8mm. Both machines now pass all six sheets.
+
+Line endings were the second half of the same problem. The planner inlines the
+guide's CSS and markup, so a line ending is a byte in the shipped page, and a
+Windows checkout would have published a different site from the same commit.
+`.gitattributes` now pins everything to LF.
+
+### What was checked, on both machines
+
+| | container (Chromium 1194) | club's machine (1243) |
+|---|---|---|
+| `verify.js` all six sheets | PASS | PASS |
+| `align-check.js` | 0.02px spread | 0.02px spread |
+| planner tests (22) | pass | pass |
+| `public/index.html` | `663e8e4e…` | `663e8e4e…` |
+
+A clean `git clone` of the repo reproduces the same `public/index.html`, byte
+for byte. The published site was re-deployed from that build and fetched back
+from `https://isom-graduate.vercel.app`: same MD5, same 709,032 bytes.
+
+`qrcheck.py` decoded the QR back out of all six re-rendered PDFs at A2, A3 and
+A4.
+
+### The site, walked end to end on the live URL
+
+Major picked → 25 general courses ticked → MIS sheet → electives → pace → plan.
+Two rules watched while clicking:
+
+- ticking **1013340** in the Analytics path greyed the App Development path out
+  entirely, header and all
+- ticking **0900102** in Group 1 greyed the other nine courses in that group,
+  leaving Groups 2 and 3 open
+
+The plan came out 8 of 45 left, two terms, finishing Spring 2027, with the
+courses it chose marked SUGGESTED and the free electives marked FREE.
+
+### The project
+
+The club's standing agreement, the design contract, this log, the course data,
+the deploy notes and the readme are loaded as knowledge into a Claude project,
+**ISOM Student Guide & Planner**, with the settled rules written into its
+instructions — including that no one signs in to the KU portal on the club's
+behalf.
