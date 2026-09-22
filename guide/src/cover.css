@@ -1,0 +1,91 @@
+/* ============================================================
+   Cover sheets — both versions. A2 landscape, same as the maps.
+   ============================================================ */
+.cover{position:relative;width:594mm;height:420mm;overflow:hidden}
+
+/* ---------- version A — the club's own cover, tidied ---------- */
+.cA{background:#F2F1EF}
+.cA__crest{position:absolute;left:20mm;top:18mm;width:34mm}
+.cA__cba{
+  position:absolute;left:20mm;top:80mm;width:52mm;text-align:center;
+  font-family:DMSans;font-weight:700;font-size:7pt;color:#3A3330;line-height:1.5;
+}
+.cA__cba span{display:block;font-family:Tajawal;font-weight:700;font-size:8pt;direction:rtl}
+.cA__mark{
+  position:absolute;right:20mm;top:20mm;text-align:right;
+  font-family:BarlowC;font-weight:700;font-style:italic;font-size:44pt;
+  line-height:.86;letter-spacing:.01em;color:#141110;
+}
+.cA__club{position:absolute;left:50%;top:22mm;transform:translateX(-50%);text-align:center}
+.cA__club img{width:76mm;display:block;margin:0 auto}
+.cA__clubname{
+  margin-top:5mm;font-family:Aleo;font-size:17pt;color:#3A3330;line-height:1.35;
+}
+.cA__panel{
+  position:absolute;left:40mm;right:40mm;top:182mm;height:126mm;
+  background:#fff;box-shadow:0 1.6mm 6mm rgba(0,0,0,.10);
+  transform:skewY(-1.5deg);
+}
+.cA__bar{position:absolute;background:#DEDCDA}
+.cA__year{
+  position:absolute;left:50mm;top:161mm;
+  font-family:BarlowC;font-weight:700;font-size:26pt;color:#8A8482;letter-spacing:.03em;
+}
+.cA__title{
+  position:absolute;left:40mm;right:40mm;top:182mm;height:126mm;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transform:skewY(-1.5deg);
+}
+.cA__ar{font-family:Cairo;font-weight:900;font-size:124pt;color:#7A0000;line-height:1.16;direction:rtl}
+.cA__en{
+  margin-top:6mm;font-family:BarlowC;font-weight:700;font-style:italic;font-size:27pt;
+  letter-spacing:.2em;color:#4A4241;
+}
+.cA__motto{
+  position:absolute;left:0;right:0;bottom:16mm;text-align:center;
+  font-family:BarlowC;font-weight:700;font-size:50pt;letter-spacing:.02em;color:#DEDCDA;
+}
+.cA__qr{position:absolute;left:20mm;bottom:20mm;width:28mm}
+.cA__gears{position:absolute;left:0;top:0;width:594mm;height:420mm;fill:none;
+  stroke:#D6D3D1;stroke-width:1.1;opacity:.85}
+.cA__ghost{
+  position:absolute;right:22mm;bottom:60mm;
+  font-family:Aleo;font-weight:700;font-size:86pt;color:#E4E2E0;line-height:1;
+}
+
+/* ---------- version B — the degree, drawn, in the guide's own palette ---------- */
+.cB{background:var(--bg)}
+.cB__wash{position:absolute;inset:0;background:
+  radial-gradient(86% 76% at 82% 46%, rgba(102,0,0,.11) 0%, rgba(102,0,0,0) 64%),
+  radial-gradient(70% 58% at 96% 92%, rgba(102,0,0,.09) 0%, rgba(102,0,0,0) 62%);}
+.cB__wm{position:absolute;right:-26mm;bottom:-34mm;width:250mm;opacity:.05;mix-blend-mode:multiply}
+.cB__net{position:absolute;inset:0}
+.cB__net path{fill:none;stroke:rgba(102,0,0,.30);stroke-width:.34mm}
+.cB__veil{position:absolute;left:0;top:0;bottom:0;width:70%;
+  background:linear-gradient(90deg, var(--bg) 0%, var(--bg) 46%, rgba(245,245,245,.90) 68%, rgba(245,245,245,0) 100%);}
+
+.cB__head{position:absolute;left:30mm;right:30mm;top:24mm;display:flex;align-items:flex-start;justify-content:space-between}
+.cB__logo{height:74mm;width:auto;display:block}
+.cB__who{
+  margin-top:5mm;font-family:DMSans;font-weight:700;font-size:10pt;letter-spacing:.24em;
+  color:var(--maroon);
+}
+.cB__who b{display:block;margin-top:1.6mm;font-family:Tajawal;font-weight:700;font-size:11pt;
+  letter-spacing:0;direction:rtl;color:#7D6F6D}
+.cB__crest{height:52mm;width:auto;display:block}
+
+.cB__body{position:absolute;left:30mm;top:124mm;bottom:44mm;width:300mm;
+  display:flex;flex-direction:column;justify-content:center}
+.cB__ar{font-family:Cairo;font-weight:900;font-size:134pt;line-height:1.04;direction:rtl;
+  color:var(--maroon);margin:0}
+.cB__rule{width:64mm;height:1.4mm;background:var(--c-elective);margin:8mm 0 7mm;border-radius:2mm}
+.cB__en{font-family:BarlowC;font-weight:700;font-style:italic;font-size:38pt;
+  letter-spacing:.1em;line-height:1;color:var(--ink)}
+.cB__sub{margin-top:7mm;font-family:Aleo;font-size:13.5pt;line-height:1.5;color:#4A4241;max-width:184mm}
+.cB__sub b{display:block;font-family:Tajawal;font-weight:500;font-size:13.5pt;direction:rtl;
+  text-align:right;margin-top:2mm;color:#5E5452}
+
+.cB__year{position:absolute;right:30mm;bottom:26mm;text-align:right;
+  font-family:BarlowC;font-weight:700;font-style:italic;font-size:30pt;color:var(--maroon);line-height:1}
+.cB__year span{display:block;font-family:DMSans;font-weight:700;font-size:8pt;letter-spacing:.2em;
+  color:#857876;margin-top:2mm;font-style:normal}

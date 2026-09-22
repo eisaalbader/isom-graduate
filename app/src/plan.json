@@ -1,0 +1,938 @@
+{
+ "meta": {
+  "total": 45,
+  "year": "2026 / 2027"
+ },
+ "courses": {
+  "9988096": {
+   "en": "English — Module 1",
+   "ar": "اللغة الإنجليزية — المستوى الأول",
+   "cat": "lang",
+   "pre": []
+  },
+  "0410091": {
+   "en": "Pre-Calculus",
+   "ar": "ما قبل التفاضل والتكامل",
+   "cat": "math",
+   "pre": []
+  },
+  "1060307": {
+   "en": "Business, Ethics & Society",
+   "ar": "أخلاقيات منظمة الأعمال والمجتمع",
+   "cat": "biz",
+   "pre": []
+  },
+  "9988106": {
+   "en": "English — Module 2",
+   "ar": "اللغة الإنجليزية — المستوى الثاني",
+   "cat": "lang",
+   "pre": [
+    "9988096"
+   ]
+  },
+  "9988126": {
+   "en": "Academic Writing & Research Skills",
+   "ar": "مهارات الكتابة الأكاديمية والبحث",
+   "cat": "lang",
+   "pre": [
+    "9988106"
+   ]
+  },
+  "1013130": {
+   "en": "Business Information & Technology",
+   "ar": "معلومات وتقنيات إدارة الأعمال",
+   "cat": "core",
+   "pre": [
+    "0410091",
+    "9988106"
+   ]
+  },
+  "1013110": {
+   "en": "Mathematics for Business",
+   "ar": "الرياضيات للعلوم التجارية",
+   "cat": "math",
+   "pre": [
+    "0410091",
+    "9988106"
+   ]
+  },
+  "1020111": {
+   "en": "Accounting Principles (1)",
+   "ar": "مقدمة في المحاسبة المالية (١)",
+   "cat": "acct",
+   "pre": [
+    "0410091",
+    "9988106"
+   ]
+  },
+  "1011201": {
+   "en": "Principles of Management",
+   "ar": "مبادئ الإدارة",
+   "cat": "biz",
+   "pre": [
+    "0410091",
+    "9988106"
+   ]
+  },
+  "1030120": {
+   "en": "Principles of Microeconomics",
+   "ar": "مبادئ الاقتصاد الجزئي",
+   "cat": "econ",
+   "pre": [
+    "0410091",
+    "9988106"
+   ]
+  },
+  "9988146": {
+   "en": "Academic Oral Skills",
+   "ar": "المهارات الأكاديمية الشفهية",
+   "cat": "lang",
+   "pre": [
+    "9988126"
+   ]
+  },
+  "1011303": {
+   "en": "Business Communication & Report Writing",
+   "ar": "الاتصالات الإدارية وكتابة التقارير",
+   "cat": "biz",
+   "pre": [
+    "9988126"
+   ]
+  },
+  "1013240": {
+   "en": "Introduction to Information Systems",
+   "ar": "مقدمة في نظم المعلومات",
+   "cat": "core",
+   "pre": [
+    "1013130"
+   ]
+  },
+  "1013120": {
+   "en": "Business Statistics (1)",
+   "ar": "الإحصاء للعلوم التجارية (١)",
+   "cat": "math",
+   "pre": [
+    "1013110"
+   ]
+  },
+  "1013205": {
+   "en": "Modeling & Decision Making",
+   "ar": "مقدمة في النمذجة وصناعة القرار",
+   "cat": "core",
+   "pre": [
+    "1013110"
+   ]
+  },
+  "1012220": {
+   "en": "Principles of Financial Management",
+   "ar": "مبادئ الإدارة المالية",
+   "cat": "biz",
+   "pre": [
+    "1013110",
+    "1020111"
+   ]
+  },
+  "1020112": {
+   "en": "Accounting Principles (2)",
+   "ar": "مقدمة في المحاسبة المالية (٢)",
+   "cat": "acct",
+   "pre": [
+    "1020111"
+   ]
+  },
+  "1020214": {
+   "en": "Cost & Managerial Accounting",
+   "ar": "مقدمة في محاسبة التكاليف والإدارية",
+   "cat": "acct",
+   "pre": [
+    "1020111"
+   ]
+  },
+  "1013210": {
+   "en": "Operations & Supply Chain Management",
+   "ar": "مقدمة في إدارة العمليات وسلسلة الإمدادات",
+   "cat": "core",
+   "pre": [
+    "1011201"
+   ]
+  },
+  "1011205": {
+   "en": "Organizational Behaviour",
+   "ar": "السلوك التنظيمي",
+   "cat": "biz",
+   "pre": [
+    "1011201"
+   ]
+  },
+  "1011220": {
+   "en": "Principles of Marketing",
+   "ar": "مبادئ التسويق",
+   "cat": "biz",
+   "pre": [
+    "1030120"
+   ]
+  },
+  "1030140": {
+   "en": "Principles of Macroeconomics",
+   "ar": "مبادئ الاقتصاد الكلي",
+   "cat": "econ",
+   "pre": [
+    "1030120"
+   ]
+  },
+  "1013220": {
+   "en": "Business Statistics (2)",
+   "ar": "الإحصاء للعلوم التجارية (٢)",
+   "cat": "math",
+   "pre": [
+    "1013120"
+   ]
+  },
+  "1011450": {
+   "en": "Strategic Management",
+   "ar": "الإدارة الاستراتيجية",
+   "cat": "biz",
+   "pre": [
+    "1011201",
+    "1011220",
+    "1012220",
+    "1013210"
+   ]
+  },
+  "1030240": {
+   "en": "Money and Banking",
+   "ar": "النقود والبنوك",
+   "cat": "econ",
+   "pre": [
+    "1030140"
+   ]
+  },
+  "1013230": {
+   "en": "Business Problem Solving & Programming",
+   "ar": "حل المشاكل التجارية والبرمجة",
+   "cat": "core",
+   "pre": [
+    "1013130"
+   ]
+  },
+  "1013331": {
+   "en": "Systems Analysis & Design",
+   "ar": "تحليل وتصميم النظم",
+   "cat": "core",
+   "pre": [
+    "1013230",
+    "1013240"
+   ]
+  },
+  "1013337": {
+   "en": "Enterprise Architecture, Systems & Technologies",
+   "ar": "الهيكلة التنظيمية والمعلوماتية والتقنية لمنظمة الأعمال",
+   "cat": "core",
+   "pre": [
+    "1013230",
+    "1013240"
+   ]
+  },
+  "1013340": {
+   "en": "Business Analytics for Decision Making",
+   "ar": "تحليل الأعمال لاتخاذ القرارات",
+   "cat": "analytics",
+   "pre": [
+    "1013331"
+   ]
+  },
+  "1013434": {
+   "en": "Data & Information Management",
+   "ar": "إدارة البيانات والمعلومات",
+   "cat": "core",
+   "pre": [
+    "1013331"
+   ]
+  },
+  "1013350": {
+   "en": "Advanced Programming",
+   "ar": "تطوير تطبيقات الأعمال",
+   "cat": "appdev",
+   "pre": [
+    "1013230",
+    "1013240"
+   ]
+  },
+  "1013440": {
+   "en": "Business Data Mining",
+   "ar": "التنقيب في بيانات الأعمال",
+   "cat": "analytics",
+   "pre": [
+    "1013340"
+   ]
+  },
+  "1013441": {
+   "en": "Big Data Management & Analytics",
+   "ar": "تحليل وإدارة البيانات الضخمة",
+   "cat": "analytics",
+   "pre": [
+    "1013340"
+   ]
+  },
+  "1013442": {
+   "en": "Business Data Visualization",
+   "ar": "عرض بيانات الأعمال",
+   "cat": "analytics",
+   "pre": [
+    "1013340"
+   ]
+  },
+  "1013452": {
+   "en": "Web Application Development",
+   "ar": "تطوير تطبيقات شبكة الإنترنت",
+   "cat": "appdev",
+   "pre": [
+    "1013350"
+   ]
+  },
+  "1013453": {
+   "en": "Mobile Application Development",
+   "ar": "تطوير تطبيقات الأجهزة المتنقلة",
+   "cat": "appdev",
+   "pre": [
+    "1013350"
+   ]
+  },
+  "1013454": {
+   "en": "Human Computer Interaction",
+   "ar": "واجهة التفاعل بين الإنسان والحاسوب",
+   "cat": "appdev",
+   "pre": [
+    "1013350"
+   ]
+  },
+  "1013472": {
+   "en": "Information Systems Project",
+   "ar": "مشروع في نظم المعلومات",
+   "cat": "core",
+   "pre": [
+    "1013434"
+   ]
+  },
+  "1013351": {
+   "en": "Introduction to Electronic Commerce",
+   "ar": "مقدمة في التجارة الإلكترونية",
+   "cat": "elective",
+   "pre": [
+    "1013240"
+   ]
+  },
+  "1013451": {
+   "en": "Social Issues in Information Systems",
+   "ar": "القضايا الاجتماعية في نظم المعلومات",
+   "cat": "elective",
+   "pre": [
+    "1013230",
+    "1013240"
+   ]
+  },
+  "1013480": {
+   "en": "Internship in Information Systems",
+   "ar": "تدريب ميداني في نظم المعلومات",
+   "cat": "elective",
+   "pre": [
+    "1013331",
+    "1013337"
+   ]
+  },
+  "1013492": {
+   "en": "Special Topics in Information Systems",
+   "ar": "مواضيع خاصة في نظم المعلومات",
+   "cat": "elective",
+   "pre": [
+    "1013331",
+    "1013337"
+   ]
+  },
+  "1013316": {
+   "en": "Logistics & Supply Chain Management",
+   "ar": "إدارة سلسلة الإمدادات والخدمات اللوجستية",
+   "cat": "support",
+   "pre": []
+  },
+  "1011430": {
+   "en": "Internet Marketing",
+   "ar": "التسويق عبر الإنترنت",
+   "cat": "support",
+   "pre": []
+  },
+  "1013310": {
+   "en": "Production Planning & Scheduling",
+   "ar": "التخطيط والجدولة لعمليات الإنتاج",
+   "cat": "core",
+   "pre": [
+    "1013205",
+    "1013210"
+   ]
+  },
+  "1013321": {
+   "en": "Procurement and Supply Management",
+   "ar": "إدارة المشتريات والتوريد",
+   "cat": "core",
+   "pre": [
+    "1013205",
+    "1013210"
+   ]
+  },
+  "1013415": {
+   "en": "Project Management",
+   "ar": "إدارة المشروعات",
+   "cat": "core",
+   "pre": []
+  },
+  "1013410": {
+   "en": "Quality Management",
+   "ar": "إدارة الجودة",
+   "cat": "core",
+   "pre": [
+    "1013205",
+    "1013210"
+   ]
+  },
+  "1013473": {
+   "en": "Project in Operations & Supply Chain Management",
+   "ar": "مشروع في إدارة العمليات وسلسلة الإمدادات",
+   "cat": "core",
+   "pre": [
+    "1013316",
+    "1013310",
+    "1013321",
+    "1013415",
+    "1013410"
+   ]
+  },
+  "1013450": {
+   "en": "Energy & Petroleum Supply Chain",
+   "ar": "سلسلة إمدادات الطاقة والنفط",
+   "cat": "elective",
+   "pre": [
+    "1013316"
+   ]
+  },
+  "1013420": {
+   "en": "Operations & Supply Chain Analytics",
+   "ar": "تحليلات العمليات وسلسلة الإمدادات",
+   "cat": "elective",
+   "pre": [
+    "1013316",
+    "1013220"
+   ]
+  },
+  "1013485": {
+   "en": "Transportation Management",
+   "ar": "إدارة النقل",
+   "cat": "elective",
+   "pre": [
+    "1013316"
+   ]
+  },
+  "1013493": {
+   "en": "Special Topics in OSCM",
+   "ar": "مواضيع خاصة في إدارة العمليات وسلسلة الإمدادات",
+   "cat": "elective",
+   "pre": [
+    "1013205",
+    "1013210"
+   ]
+  },
+  "1013412": {
+   "en": "Service Operations Management",
+   "ar": "تطبيقات إدارة العمليات في مجالات تقديم الخدمات",
+   "cat": "elective",
+   "pre": [
+    "1013210"
+   ]
+  },
+  "1013425": {
+   "en": "Simulation of Supply Chain Processes",
+   "ar": "محاكاة عمليات سلسلة الإمدادات",
+   "cat": "elective",
+   "pre": [
+    "1013210",
+    "1013220"
+   ]
+  },
+  "1013470": {
+   "en": "Healthcare Operations Management",
+   "ar": "إدارة عمليات الرعاية الصحية",
+   "cat": "elective",
+   "pre": [
+    "1013210"
+   ]
+  },
+  "1013481": {
+   "en": "Internship in OSCM",
+   "ar": "تدريب ميداني في إدارة العمليات وسلسلة الإمدادات",
+   "cat": "elective",
+   "pre": [],
+   "after_credits": 90,
+   "rule_en": "After 90 credits",
+   "rule_ar": "بعد 90 وحدة"
+  },
+  "1011310": {
+   "en": "Entrepreneurship",
+   "ar": "ريادة الأعمال وإدارة المشروعات الصغيرة",
+   "cat": "technical",
+   "pre": []
+  },
+  "1011322": {
+   "en": "Consumer Behavior",
+   "ar": "سلوك المستهلك",
+   "cat": "technical",
+   "pre": []
+  },
+  "1020416": {
+   "en": "Cost & Managerial Accounting",
+   "ar": "التكاليف والمحاسبة الإدارية",
+   "cat": "technical",
+   "pre": []
+  },
+  "0310101": {
+   "en": "Language Communication Skills",
+   "ar": "مهارات الاتصال اللغوية",
+   "cat": "core",
+   "pre": []
+  },
+  "0200110": {
+   "en": "Commercial Law",
+   "ar": "قانون تجاري",
+   "cat": "core",
+   "pre": []
+  },
+  "1350101": {
+   "en": "Psychology",
+   "ar": "علم نفس",
+   "cat": "core",
+   "pre": []
+  },
+  "0310102": {
+   "en": "Aesthetics of Arabic Literature",
+   "ar": "جماليات الأدب العربي",
+   "cat": "core",
+   "pre": []
+  },
+  "0900102": {
+   "en": "Islamic Culture",
+   "ar": "الثقافة الإسلامية",
+   "cat": "lang",
+   "pre": []
+  },
+  "0200105": {
+   "en": "Human Rights",
+   "ar": "حقوق الإنسان",
+   "cat": "lang",
+   "pre": []
+  },
+  "0360108": {
+   "en": "Ethics and Modern Society",
+   "ar": "الأخلاق والمجتمع الحديث",
+   "cat": "lang",
+   "pre": []
+  },
+  "0940145": {
+   "en": "Islam and Issues of Science and Technology",
+   "ar": "الإسلام وقضايا العلم والتكنولوجيا",
+   "cat": "lang",
+   "pre": []
+  },
+  "0200102": {
+   "en": "Legal Culture",
+   "ar": "الثقافة القانونية",
+   "cat": "lang",
+   "pre": []
+  },
+  "1360103": {
+   "en": "Government and Politics of Kuwait",
+   "ar": "حكومة وسياسة الكويت",
+   "cat": "lang",
+   "pre": []
+  },
+  "0200106": {
+   "en": "The Constitutional System in Kuwait",
+   "ar": "النظام الدستوري في الكويت",
+   "cat": "lang",
+   "pre": []
+  },
+  "1360108": {
+   "en": "Culture of Dialogue and Social Peace",
+   "ar": "ثقافة الحوار والسلم الاجتماعي",
+   "cat": "lang",
+   "pre": []
+  },
+  "0940142": {
+   "en": "Islam and Modern Society",
+   "ar": "الإسلام والمجتمع الحديث",
+   "cat": "lang",
+   "pre": []
+  },
+  "1060104": {
+   "en": "Public Ethics and Public Service",
+   "ar": "الأخلاقيات العامة والخدمة العامة",
+   "cat": "lang",
+   "pre": []
+  },
+  "1370101": {
+   "en": "Introduction to Sociology",
+   "ar": "مدخل إلى علم الاجتماع",
+   "cat": "econ",
+   "pre": []
+  },
+  "1370171": {
+   "en": "Introduction to Anthropology",
+   "ar": "مدخل إلى الأنثروبولوجيا",
+   "cat": "econ",
+   "pre": []
+  },
+  "0840102": {
+   "en": "Home Economics",
+   "ar": "الاقتصاد المنزلي",
+   "cat": "econ",
+   "pre": []
+  },
+  "1350205": {
+   "en": "Social Psychology",
+   "ar": "علم النفس الاجتماعي",
+   "cat": "econ",
+   "pre": []
+  },
+  "0330101": {
+   "en": "Modern Arab History",
+   "ar": "التاريخ العربي الحديث",
+   "cat": "econ",
+   "pre": []
+  },
+  "1340101": {
+   "en": "Man and the Environment",
+   "ar": "الإنسان والبيئة",
+   "cat": "econ",
+   "pre": []
+  },
+  "0360101": {
+   "en": "Philosophy of Science",
+   "ar": "فلسفة العلوم",
+   "cat": "math",
+   "pre": []
+  },
+  "0360102": {
+   "en": "Introduction to Logic",
+   "ar": "المدخل إلى المنطق",
+   "cat": "math",
+   "pre": []
+  },
+  "0360103": {
+   "en": "Principles of Philosophy",
+   "ar": "مبادئ الفلسفة",
+   "cat": "math",
+   "pre": []
+  },
+  "0650101": {
+   "en": "Fundamentals of Petroleum",
+   "ar": "أساسيات البترول",
+   "cat": "math",
+   "pre": []
+  },
+  "0420100": {
+   "en": "Chemistry and Life",
+   "ar": "الكيمياء والحياة",
+   "cat": "math",
+   "pre": []
+  },
+  "0430111": {
+   "en": "Energy and Man",
+   "ar": "الطاقة والإنسان",
+   "cat": "math",
+   "pre": []
+  },
+  "0490101": {
+   "en": "Biology",
+   "ar": "بيولوجي",
+   "cat": "math",
+   "pre": []
+  },
+  "0493111": {
+   "en": "Introduction to Biological and Natural Sciences",
+   "ar": "مدخل إلى علوم الأحياء والطبيعة",
+   "cat": "math",
+   "pre": []
+  },
+  "0493112": {
+   "en": "Human Biology",
+   "ar": "بيولوجيا الإنسان",
+   "cat": "math",
+   "pre": []
+  },
+  "0494105": {
+   "en": "Environmental Conservation",
+   "ar": "صيانة البيئة",
+   "cat": "math",
+   "pre": []
+  },
+  "0494261": {
+   "en": "Principles of Plant Ecology",
+   "ar": "مبادئ علم البيئة النباتية",
+   "cat": "math",
+   "pre": []
+  },
+  "0460101": {
+   "en": "Physical Geology",
+   "ar": "جيولوجيا طبيعية",
+   "cat": "math",
+   "pre": []
+  },
+  "0460102": {
+   "en": "Historical Geology",
+   "ar": "جيولوجيا تاريخية",
+   "cat": "math",
+   "pre": []
+  },
+  "0460111": {
+   "en": "The Earth and the Universe",
+   "ar": "الأرض والكون",
+   "cat": "math",
+   "pre": []
+  },
+  "0460112": {
+   "en": "Earth’s Natural Resources",
+   "ar": "موارد الأرض الطبيعية",
+   "cat": "math",
+   "pre": []
+  },
+  "0460113": {
+   "en": "The Changing Earth",
+   "ar": "الأرض المتغيرة",
+   "cat": "math",
+   "pre": []
+  },
+  "0460227": {
+   "en": "Environmental Geology",
+   "ar": "جيولوجيا بيئية",
+   "cat": "math",
+   "pre": []
+  }
+ },
+ "general": [
+  "9988096",
+  "0410091",
+  "1060307",
+  "9988106",
+  "9988126",
+  "1013130",
+  "1013110",
+  "1020111",
+  "1011201",
+  "1030120",
+  "9988146",
+  "1011303",
+  "1013240",
+  "1013120",
+  "1013205",
+  "1012220",
+  "1020112",
+  "1020214",
+  "1013210",
+  "1011205",
+  "1011220",
+  "1030140",
+  "1013220",
+  "1011450",
+  "1030240"
+ ],
+ "electives": {
+  "must": [
+   "0310101",
+   "0200110",
+   "1350101",
+   "0310102"
+  ],
+  "groups": [
+   {
+    "key": "1",
+    "en": "Group 1 — in place of Arab-Islamic civilisation history",
+    "ar": "المجموعة الأولى ـ المقررات البديلة لتاريخ الحضارة العربية الإسلامية",
+    "cat": "lang",
+    "pick": 1,
+    "codes": [
+     "0900102",
+     "0200105",
+     "0360108",
+     "0940145",
+     "0200102",
+     "1360103",
+     "0200106",
+     "1360108",
+     "0940142",
+     "1060104"
+    ]
+   },
+   {
+    "key": "2",
+    "en": "Group 2 — behavioural and social studies",
+    "ar": "المجموعة الثانية ـ دراسات سلوكية واجتماعية",
+    "cat": "econ",
+    "pick": 1,
+    "codes": [
+     "1360103",
+     "1370101",
+     "1370171",
+     "0840102",
+     "1350205",
+     "0330101",
+     "1340101"
+    ]
+   },
+   {
+    "key": "3",
+    "en": "Group 3 — humanities, medical and biological sciences",
+    "ar": "المجموعة الثالثة ـ إنسانيات وعلوم طبية وبيولوجية",
+    "cat": "math",
+    "pick": 1,
+    "codes": [
+     "0360101",
+     "0360102",
+     "0360103",
+     "0360108",
+     "0900102",
+     "0200105",
+     "0650101",
+     "0420100",
+     "0430111",
+     "0490101",
+     "0493111",
+     "0493112",
+     "0494105",
+     "0494261",
+     "0460101",
+     "0460102",
+     "0460111",
+     "0460112",
+     "0460113",
+     "0460227"
+    ]
+   }
+  ],
+  "free": 2
+ },
+ "majors": {
+  "mis": {
+   "en": "Management Information Systems",
+   "ar": "نظم المعلومات الإدارية",
+   "code": "1009",
+   "must": [
+    "1013230",
+    "1013331",
+    "1013337",
+    "1013434",
+    "1013472"
+   ],
+   "paths": [
+    {
+     "key": "analytics",
+     "en": "Analytics Path",
+     "ar": "مسار تحليل الأعمال",
+     "cat": "analytics",
+     "top": "1013340",
+     "pick": 2,
+     "codes": [
+      "1013440",
+      "1013441",
+      "1013442"
+     ]
+    },
+    {
+     "key": "appdev",
+     "en": "App Development Path",
+     "ar": "مسار تطوير التطبيقات",
+     "cat": "appdev",
+     "top": "1013350",
+     "pick": 2,
+     "codes": [
+      "1013452",
+      "1013453",
+      "1013454"
+     ]
+    }
+   ],
+   "choose": [
+    {
+     "key": "mel",
+     "en": "Major elective",
+     "ar": "مقرر اختياري في التخصص",
+     "cat": "elective",
+     "pick": 1,
+     "codes": [
+      "1013351",
+      "1013451",
+      "1013480",
+      "1013492"
+     ]
+    }
+   ],
+   "support": {
+    "en": "Supporting courses",
+    "ar": "المقررات المساندة",
+    "cat": "support",
+    "pick": 2,
+    "codes": [
+     "1013316",
+     "1011430"
+    ]
+   },
+   "pre_override": {}
+  },
+  "oscm": {
+   "en": "Operations and Supply Chain Management",
+   "ar": "إدارة العمليات وسلسلة الإمدادات",
+   "code": "1023",
+   "must": [
+    "1013316",
+    "1013310",
+    "1013321",
+    "1013415",
+    "1013410",
+    "1013473"
+   ],
+   "paths": [],
+   "choose": [
+    {
+     "key": "oel",
+     "en": "Major electives",
+     "ar": "المقررات الاختيارية في التخصص",
+     "cat": "elective",
+     "pick": 3,
+     "codes": [
+      "1013450",
+      "1013420",
+      "1013485",
+      "1013493",
+      "1013412",
+      "1013425",
+      "1013470",
+      "1013481"
+     ]
+    }
+   ],
+   "support": {
+    "en": "Supporting courses",
+    "ar": "المقررات المساندة",
+    "cat": "support",
+    "pick": 2,
+    "codes": [
+     "1013351",
+     "1013340",
+     "1011310",
+     "1011322",
+     "1020416"
+    ]
+   },
+   "pre_override": {
+    "1013340": [],
+    "1013351": []
+   }
+  }
+ }
+}

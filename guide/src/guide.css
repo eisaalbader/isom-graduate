@@ -1,0 +1,668 @@
+/* ============================================================
+   ISOM دليل الطالب — design system  (rev 2)
+   Brand colours sampled from the 2022/2023 club guide.
+   ============================================================ */
+
+/* ---------- fonts (all free / redistributable) ---------- */
+@font-face{font-family:Amiri;src:url('../../node_modules/@fontsource/amiri/files/amiri-arabic-700-normal.woff2') format('woff2');font-weight:700;font-display:block}
+@font-face{font-family:Cairo;src:url('../../node_modules/@fontsource/cairo/files/cairo-arabic-700-normal.woff2') format('woff2');font-weight:700;font-display:block}
+@font-face{font-family:Cairo;src:url('../../node_modules/@fontsource/cairo/files/cairo-arabic-600-normal.woff2') format('woff2');font-weight:600;font-display:block}
+@font-face{font-family:Tajawal;src:url('../../node_modules/@fontsource/tajawal/files/tajawal-arabic-400-normal.woff2') format('woff2');font-weight:400;font-display:block}
+@font-face{font-family:Tajawal;src:url('../../node_modules/@fontsource/tajawal/files/tajawal-arabic-500-normal.woff2') format('woff2');font-weight:500;font-display:block}
+@font-face{font-family:Tajawal;src:url('../../node_modules/@fontsource/tajawal/files/tajawal-arabic-700-normal.woff2') format('woff2');font-weight:700;font-display:block}
+@font-face{font-family:Aleo;src:url('../../node_modules/@fontsource/aleo/files/aleo-latin-400-normal.woff2') format('woff2');font-weight:400;font-display:block}
+@font-face{font-family:Aleo;src:url('../../node_modules/@fontsource/aleo/files/aleo-latin-700-normal.woff2') format('woff2');font-weight:700;font-display:block}
+@font-face{font-family:BarlowC;src:url('../../node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-700-italic.woff2') format('woff2');font-weight:700;font-style:italic;font-display:block}
+@font-face{font-family:BarlowC;src:url('../../node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-600-normal.woff2') format('woff2');font-weight:600;font-display:block}
+@font-face{font-family:DMSans;src:url('../../node_modules/@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2') format('woff2');font-weight:400;font-display:block}
+@font-face{font-family:DMSans;src:url('../../node_modules/@fontsource/dm-sans/files/dm-sans-latin-500-normal.woff2') format('woff2');font-weight:500;font-display:block}
+@font-face{font-family:DMSans;src:url('../../node_modules/@fontsource/dm-sans/files/dm-sans-latin-700-normal.woff2') format('woff2');font-weight:700;font-display:block}
+
+:root{
+  --maroon:#660000;
+  --bg:#F5F5F5;
+  --card:#FFFFFF;
+  --rule:#DCD7D6;
+  --ink:#2E2726;
+  --ink-soft:#7D7270;
+  --ink-faint:#ADA3A1;
+
+  /* one colour per kind of course — high contrast, easy to name out loud */
+  --c-core:#660000;        /* red    — required */
+  --c-analytics:#0E6E63;   /* green  — analytics path */
+  --c-appdev:#1F4E79;      /* blue   — app development path */
+  --c-elective:#A9741A;    /* yellow — pick one */
+  --c-support:#55632B;     /* grey-green — supporting */
+  --c-lang:#1F4E79;        /* blue   — English, Language Center */
+  --c-math:#0E6E63;        /* teal   — maths & statistics */
+  --c-acct:#8A5E14;        /* ochre  — accounting */
+  --c-econ:#9C4614;        /* orange — economics */
+  --c-biz:#5B3A72;         /* plum   — management, marketing, finance */
+
+  --wire:#9A8F8D;
+  --wire-hard:#8C4A4A;
+  --gap:4mm;
+  --pad:14mm;
+  --radius:2mm;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#8a8a8a;font-family:DMSans,sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased}
+
+.page{
+  position:relative;width:594mm;height:420mm;
+  background:var(--bg);padding:var(--pad);
+  overflow:hidden;display:flex;flex-direction:column;
+  page-break-after:always;margin:0 auto;
+}
+@media print{ body{background:none} .page{margin:0} }
+
+/* ---------- watermark ---------- */
+.wm{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.wm img{position:absolute;display:block;mix-blend-mode:multiply}
+.wm .g1{left:-26mm;top:120mm;width:138mm;opacity:.075}
+.wm .g2{right:-18mm;top:58mm;width:90mm;opacity:.055}
+.wm .g3{left:150mm;bottom:-30mm;width:110mm;opacity:.085}
+.wm .g4{right:120mm;top:26mm;width:50mm;opacity:.045}
+.wm .g5{left:40mm;bottom:96mm;width:62mm;opacity:.06}
+.wm .m1{right:26mm;bottom:38mm;width:200mm;opacity:.08}
+.wm .m2{left:-34mm;top:18mm;width:124mm;opacity:.05}
+
+/* ---------- header ---------- */
+.hd{
+  position:relative;z-index:2;
+  display:flex;align-items:center;justify-content:space-between;
+  padding-bottom:3.2mm;margin-bottom:4mm;
+  border-bottom:.6mm solid var(--maroon);
+}
+.hd__club{height:30mm;width:auto;display:block}
+.hd__crest{height:46mm;width:auto;display:block}
+/* left offset = rail + gap + semester column + gap, so the title centres on the
+   same axis as the course columns — title, 130, 434 and 472 share one centre line */
+.hd__titles{
+  position:absolute;left:calc(60mm + 6mm + 26mm + 4mm);right:0;
+  text-align:center;pointer-events:none;
+}
+.hd__en{
+  font-family:BarlowC;font-weight:700;font-style:italic;
+  font-size:30pt;line-height:1;color:var(--maroon);
+  text-transform:uppercase;letter-spacing:.005em;margin:0;
+}
+.hd__ar{
+  font-family:Cairo;font-weight:700;font-size:23pt;color:var(--ink);
+  direction:rtl;line-height:1.3;margin-top:1mm;
+}
+.hd__meta{
+  font-family:DMSans;font-weight:500;font-size:9pt;color:var(--ink-soft);
+  margin-top:1.6mm;letter-spacing:.1em;text-transform:uppercase;
+}
+
+/* ---------- body ---------- */
+.body{position:relative;flex:1;display:flex;gap:6mm;min-height:0}
+.rail{width:60mm;flex:none;display:flex;flex-direction:column;gap:4mm}
+.canvas{flex:1;position:relative;min-width:0}
+
+/* ---------- rail panels ---------- */
+.panel{position:relative;z-index:2;background:rgba(255,255,255,.93);border-radius:var(--radius);padding:3.4mm 4mm;border:.25mm solid var(--rule)}
+.panel--accent{border-left:1.4mm solid var(--maroon)}
+.panel__h{font-family:Aleo;font-weight:700;font-size:10pt;color:var(--maroon);margin:0}
+.panel__h-ar{font-family:Cairo;font-weight:700;font-size:10pt;color:var(--maroon);direction:rtl;text-align:right;margin:0 0 2mm}
+
+.steps{counter-reset:s;margin:0;padding:0;list-style:none}
+.steps li{
+  counter-increment:s;position:relative;padding-left:6.4mm;margin-bottom:1.8mm;
+  font-family:Aleo;font-size:8.4pt;line-height:1.3;color:var(--ink);
+}
+.steps li::before{
+  content:counter(s);position:absolute;left:0;top:.1mm;
+  width:4.6mm;height:4.6mm;border-radius:50%;background:var(--maroon);color:#fff;
+  font-family:DMSans;font-weight:700;font-size:6.4pt;
+  display:flex;align-items:center;justify-content:center;
+}
+.steps li .ar{
+  display:block;font-family:Tajawal;font-size:8.4pt;color:#554C4A;
+  direction:rtl;text-align:right;margin-top:.5mm;line-height:1.5;
+}
+
+/* colour key */
+.key{display:flex;flex-direction:column;gap:1.7mm}
+.key__row{display:flex;align-items:center;gap:2.8mm}
+.key__chip{
+  min-width:11mm;height:5.6mm;border-radius:1.2mm;flex:none;padding:0 1.8mm;
+  display:flex;align-items:center;justify-content:center;
+  font-family:DMSans;font-weight:700;font-size:5.6pt;color:#fff;letter-spacing:.05em;
+  white-space:nowrap;
+}
+/* where the colour itself is the whole message, a swatch beats a word */
+.key__sw{width:6.4mm;height:6.4mm;border-radius:1.2mm;flex:none}
+.key__txt{min-width:0}
+.key__en{font-family:Aleo;font-weight:700;font-size:8.2pt;line-height:1.22;display:block}
+.key__ar{font-family:Tajawal;font-size:8.2pt;color:#554C4A;direction:rtl;text-align:right;display:block;line-height:1.45}
+
+.key__wire{width:12mm;height:0;border-top:.55mm solid var(--wire-hard);flex:none}
+
+/* ---------- the map grid ---------- */
+.grid{
+  position:relative;height:100%;
+  display:grid;
+  grid-template-columns:26mm repeat(8,1fr);
+  column-gap:var(--gap);row-gap:5mm;
+  grid-auto-rows:min-content;
+  align-content:space-between;
+}
+
+/* full-width stripe behind each semester row — makes the alignment obvious */
+.stripe{
+  grid-column:1/10;z-index:0;border-radius:var(--radius);
+  background:var(--tint);pointer-events:none;mix-blend-mode:multiply;
+}
+
+/* the semester marker, read straight on — no tilted text */
+.band{
+  grid-column:1;z-index:4;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  border-radius:var(--radius);background:var(--tint-strong);
+  padding:2mm 1mm;
+}
+.band__l{
+  font-family:DMSans;font-weight:700;font-size:6pt;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--band-ink);line-height:1;
+}
+.band__n{
+  font-family:BarlowC;font-weight:700;font-size:30pt;line-height:.92;
+  color:var(--band-ink);margin:.6mm 0;
+}
+.band__ar{font-family:Tajawal;font-weight:500;font-size:7.4pt;color:var(--band-ink);line-height:1;opacity:.85}
+
+/* path containers */
+.zone{
+  z-index:1;border-radius:3.4mm;pointer-events:none;position:relative;
+  margin:-4.5mm -4.5mm -4.5mm;background:rgba(255,255,255,.42);
+}
+.zone--analytics{border:.75mm solid var(--c-analytics);box-shadow:0 0 0 1.1mm rgba(14,110,99,.10)}
+.zone--appdev{border:.75mm solid var(--c-appdev);box-shadow:0 0 0 1.1mm rgba(31,78,121,.10)}
+.ztag{
+  grid-column:span 3;z-index:3;display:flex;align-items:baseline;gap:2.6mm;
+  padding:0 1mm 1mm;
+}
+.ztag__n{
+  font-family:DMSans;font-weight:700;font-size:6pt;color:#fff;
+  padding:.8mm 2.2mm;border-radius:9mm;letter-spacing:.08em;
+}
+.ztag__en{font-family:Aleo;font-weight:700;font-size:10pt;line-height:1}
+.ztag__ar{font-family:Cairo;font-weight:700;font-size:9.5pt;direction:rtl;line-height:1}
+.ztag__sub{
+  display:block;font-family:DMSans;font-weight:500;font-size:6.4pt;
+  color:var(--ink-soft);letter-spacing:.02em;
+}
+.ztag--analytics .ztag__n{background:var(--c-analytics)}
+.ztag--analytics .ztag__en,.ztag--analytics .ztag__ar{color:var(--c-analytics)}
+.ztag--appdev .ztag__n{background:var(--c-appdev)}
+.ztag--appdev .ztag__en,.ztag--appdev .ztag__ar{color:var(--c-appdev)}
+
+/* the "pick one path" divider */
+.orbox{
+  z-index:4;justify-self:center;width:66%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:1mm;padding:3mm 2mm;
+  border:.45mm dashed var(--maroon);border-radius:2.6mm;background:rgba(102,0,0,.04);
+}
+.orbox__or{font-family:BarlowC;font-weight:700;font-style:italic;font-size:26pt;color:var(--maroon);line-height:.9}
+.orbox__t{font-family:Aleo;font-weight:700;font-size:8pt;color:var(--maroon);line-height:1.25}
+.orbox__a{font-family:Tajawal;font-weight:700;font-size:8pt;color:var(--maroon);direction:rtl;line-height:1.4}
+
+/* ---------- course card ---------- */
+.crd{
+  position:relative;z-index:3;
+  background:rgba(255,255,255,.86);border-radius:var(--radius);overflow:hidden;
+  border:.25mm solid rgba(0,0,0,.09);
+  box-shadow:0 .35mm 1mm rgba(0,0,0,.07);
+  display:flex;flex-direction:column;
+}
+.crd__top{
+  background:var(--cat);display:flex;align-items:center;justify-content:space-between;
+  padding:1.5mm 2.8mm;gap:2mm;
+}
+.crd__code{
+  font-family:DMSans;font-weight:700;font-size:10.5pt;color:#fff;
+  font-variant-numeric:tabular-nums;letter-spacing:.045em;line-height:1;
+}
+.crd__cr{
+  font-family:DMSans;font-weight:700;font-size:6.2pt;color:#fff;
+  background:rgba(255,255,255,.26);border-radius:9mm;padding:.7mm 1.9mm;
+  letter-spacing:.06em;line-height:1;white-space:nowrap;
+}
+.crd__first{
+  background:rgba(0,0,0,.14);color:#fff;
+  font-family:DMSans;font-weight:700;font-size:5.9pt;letter-spacing:.1em;
+  text-transform:uppercase;padding:.9mm 2.8mm;display:flex;justify-content:space-between;gap:2mm;
+}
+.crd__first .ar{font-family:Tajawal;font-weight:700;letter-spacing:0;font-size:6.6pt}
+.crd__body{padding:2.4mm 2.8mm 2.8mm;flex:1;display:flex;flex-direction:column;background:rgba(255,255,255,.55)}
+.crd__en{font-family:Aleo;font-weight:700;font-size:8.6pt;line-height:1.26;color:var(--ink)}
+.crd__ar{
+  font-family:Tajawal;font-weight:500;font-size:8.6pt;line-height:1.5;
+  direction:rtl;text-align:right;color:#4A4241;margin-top:1mm;
+}
+.crd__note{
+  margin-top:1.6mm;font-family:DMSans;font-size:5.9pt;line-height:1.3;
+  color:var(--ink-faint);font-style:italic;
+}
+.crd__fix{
+  margin-top:1.6mm;font-family:DMSans;font-weight:500;font-size:6pt;line-height:1.3;
+  color:#8A4A00;background:#FFF6E8;border-radius:1mm;padding:1.1mm 1.6mm;
+}
+/* wide cards put the two languages side by side instead of leaving a void */
+.crd--wide .crd__names{display:flex;align-items:flex-start;gap:9mm}
+.crd--wide .crd__names>*{flex:1 1 0;min-width:0;margin:0}
+.crd--capstone{box-shadow:0 0 0 .7mm rgba(102,0,0,.3),0 .4mm 1.4mm rgba(0,0,0,.1)}
+
+.cat-core{--cat:var(--c-core)}
+.cat-analytics{--cat:var(--c-analytics)}
+.cat-appdev{--cat:var(--c-appdev)}
+.cat-elective{--cat:var(--c-elective)}
+.cat-support{--cat:var(--c-support)}
+.cat-technical{--cat:var(--c-support)}
+.cat-lang{--cat:var(--c-lang)}
+.cat-math{--cat:var(--c-math)}
+.cat-acct{--cat:var(--c-acct)}
+.cat-econ{--cat:var(--c-econ)}
+.cat-biz{--cat:var(--c-biz)}
+
+/* prerequisite chip — only on cards that sit outside the wired ladder */
+.crd__need{
+  margin-top:1.8mm;display:inline-flex;align-self:flex-start;gap:2mm;align-items:baseline;
+  background:rgba(0,0,0,.05);border-radius:9mm;padding:.9mm 2.4mm;
+}
+.crd__need b{font-family:DMSans;font-weight:700;font-size:6.2pt;color:#5C5250;letter-spacing:.02em}
+.crd__need span{font-family:Tajawal;font-weight:500;font-size:6.6pt;color:#5C5250;direction:rtl}
+
+/* a quiet caption under the semester/step rail */
+.ladder-note{
+  grid-column:1/-1;z-index:2;
+  font-family:DMSans;font-size:6.4pt;color:var(--ink-soft);line-height:1.4;
+  display:flex;justify-content:space-between;gap:8mm;padding:0 1mm;
+}
+.ladder-note span:last-child{font-family:Tajawal;font-size:6.6pt;direction:rtl}
+
+/* ---------- connectors ---------- */
+.wires{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:visible}
+.wires > path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+/* NB: the selector above is deliberately `> path`. The arrowheads are paths
+   inside <defs><marker>; a blanket `.wires path{fill:none}` paints them
+   invisible and every arrow silently disappears. verify.js guards this. */
+.wire--hard{stroke:var(--wire-hard);stroke-width:.45mm;opacity:.8}
+.wire--soft{stroke:var(--wire);stroke-width:.4mm;stroke-dasharray:1.6mm 1.3mm;opacity:.7}
+.wires circle{fill:var(--wire-hard);opacity:.8}
+
+/* ---------- footer ---------- */
+.ft{
+  position:relative;z-index:2;display:flex;align-items:center;gap:5.5mm;
+  margin-top:3.2mm;padding-top:2.8mm;border-top:.25mm solid var(--rule);
+}
+/* the scan block: the code is the point of the footer, so it leads it */
+.ft__scan{
+  flex:none;display:flex;align-items:center;gap:4mm;text-decoration:none;color:inherit;
+  padding-right:6mm;border-right:.25mm solid var(--rule);
+}
+.ft__qr{
+  width:28mm;height:28mm;display:block;flex:none;border-radius:2.2mm;
+  border:.6mm solid var(--maroon);padding:1mm;background:#fff;
+}
+.ft__scanT{display:flex;flex-direction:column;width:58mm}
+.ft__scanH{font-family:BarlowC;font-weight:700;font-style:italic;font-size:12pt;
+  line-height:1.05;color:var(--maroon);letter-spacing:.01em}
+.ft__scanA{font-family:Cairo;font-weight:700;font-size:10pt;line-height:1.6;
+  color:var(--maroon);direction:rtl;text-align:left}
+.ft__scanL{font-family:DMSans;font-size:6.2pt;line-height:1.35;color:var(--ink-soft);margin-top:.6mm}
+.ft__scanL b{display:block;font-family:Tajawal;font-weight:400;font-size:6.4pt;
+  line-height:1.5;direction:rtl;text-align:right;margin-top:.3mm}
+.ft__scanU{margin-top:1.2mm;font-family:DMSans;font-weight:700;font-size:7.2pt;
+  letter-spacing:.02em;color:var(--maroon)}
+.ft__txt{width:46mm;flex:none;font-family:DMSans;font-size:6.6pt;color:var(--ink-soft);line-height:1.5}
+.ft__txt b{color:var(--ink);font-weight:700}
+.ft__changed{flex:1;min-width:0}
+.ft__changed h4{font-family:Aleo;font-weight:700;font-size:8pt;color:#8A4A00;margin:0 0 1.4mm}
+.ft__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4mm}
+.ft__item{
+  font-family:Aleo;font-size:6.8pt;line-height:1.34;color:var(--ink);
+  padding-left:3mm;border-left:.7mm solid #E8C98F;
+}
+.ft__item .ar{display:block;font-family:Tajawal;font-size:6.8pt;color:var(--ink-soft);direction:rtl;text-align:right;line-height:1.5;margin-top:.4mm}
+.ft__page{font-family:BarlowC;font-weight:700;font-style:italic;font-size:20pt;color:var(--maroon);opacity:.4;line-height:1}
+
+.grid--11{grid-template-columns:26mm repeat(10,1fr)}
+.grid--11 .stripe{grid-column:1/12}
+.grid--13{grid-template-columns:26mm repeat(12,1fr)}
+.grid--13 .stripe{grid-column:1/14}
+
+/* the two courses that unlock the rest of the degree */
+.startbox,.gatebox{
+  z-index:3;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:2.2mm;
+  padding:5mm 7mm;border-radius:2.6mm;
+  border:.7mm dashed var(--maroon);background:rgba(102,0,0,.05);
+}
+.startbox__h,.gatebox__h{display:flex;align-items:baseline;gap:3mm}
+.startbox__chip,.gatebox__chip{
+  font-family:DMSans;font-weight:700;font-size:6.4pt;color:#fff;background:var(--maroon);
+  padding:1mm 2.8mm;border-radius:9mm;letter-spacing:.09em;flex:none;
+}
+.startbox__codes,.gatebox__codes{font-family:DMSans;font-weight:700;font-size:13pt;color:var(--maroon);letter-spacing:.03em}
+.startbox__en,.gatebox__en{font-family:Aleo;font-weight:700;font-size:9.4pt;line-height:1.3;color:var(--ink)}
+.startbox__ar,.gatebox__ar{font-family:Tajawal;font-weight:500;font-size:9.4pt;line-height:1.55;color:#554C4A;direction:rtl;text-align:right}
+
+/* a choice group that keeps its cards together as one block */
+.subgrid{display:grid;gap:var(--gap);z-index:3}
+.subgrid--4{grid-template-columns:repeat(4,1fr)}
+.tipbox{font-family:Aleo;font-size:7.8pt;line-height:1.34;color:var(--ink)}
+.tipbox .ar{display:block;font-family:Tajawal;font-size:7.8pt;color:#554C4A;direction:rtl;text-align:right;margin-top:.8mm;line-height:1.5}
+.tipbox b{color:var(--maroon)}
+
+/* When a page has fewer rows than the sheet can hold, let the bands grow and
+   centre their cards, rather than leaving big voids between them. */
+.grid--roomy{grid-auto-rows:minmax(40mm,auto);align-content:space-between}
+/* cards keep their edges aligned across a row; only the text centres */
+.grid--roomy .crd__body{justify-content:center}
+.grid--roomy .subgrid{align-self:center}
+
+/* a signpost off the page — where this ladder hands you over to your major */
+.nextstep{
+  position:relative;z-index:3;display:flex;align-items:center;gap:5mm;
+  margin-top:3.2mm;padding:3.6mm 5mm;border-radius:2.4mm;
+  background:rgba(102,0,0,.07);border-left:1.4mm solid var(--maroon);
+}
+.nextstep__n{
+  font-family:DMSans;font-weight:700;font-size:6.4pt;color:#fff;background:var(--maroon);
+  padding:1mm 2.8mm;border-radius:9mm;letter-spacing:.09em;flex:none;
+}
+.nextstep__en{font-family:Aleo;font-weight:700;font-size:8.4pt;line-height:1.35;color:var(--ink);flex:1}
+.nextstep__ar{font-family:Tajawal;font-weight:500;font-size:8.4pt;line-height:1.5;color:#554C4A;direction:rtl;text-align:right;flex:1}
+.grid--snug{grid-auto-rows:minmax(40mm,auto);align-content:space-between}
+.grid--snug .crd__body{justify-content:center}
+
+/* a canvas that stacks the map and the captions underneath it, so nothing
+   is ever pushed out over the footer */
+.canvas--stack{display:flex;flex-direction:column;min-height:0}
+.canvas--stack > .grid{height:auto;flex:1;min-height:0}
+
+/* ---------- subject streams ---------- */
+/* Each colour owns a block of columns, so a chain runs straight down one
+   column and no arrow has to cross the sheet. */
+.stag{
+  z-index:3;display:flex;flex-direction:column;gap:.5mm;justify-content:flex-end;
+  padding:0 1.4mm 1.6mm;border-bottom:.9mm solid var(--cat);
+}
+.stag__en{font-family:Aleo;font-weight:700;font-size:8.4pt;line-height:1.12;color:var(--cat)}
+.stag__ar{font-family:Cairo;font-weight:700;font-size:8pt;line-height:1.15;color:var(--cat);direction:rtl;opacity:.9}
+
+/* several cards sharing one cell of the grid */
+.cell{display:grid;gap:var(--gap);z-index:3}
+.cell--1{grid-template-columns:1fr}
+.cell--2{grid-template-columns:repeat(2,1fr)}
+
+/* a prerequisite that lives in a different colour column: a tag, not a line */
+.needs{margin-top:2mm;display:flex;flex-wrap:wrap;gap:1.2mm}
+.need{
+  display:inline-flex;align-items:center;gap:1.4mm;
+  background:rgba(0,0,0,.05);border-radius:9mm;padding:.8mm 2.2mm .8mm 1.4mm;
+}
+.need__sw{width:2.5mm;height:2.5mm;border-radius:.6mm;background:var(--nc);flex:none}
+.need__c{
+  font-family:DMSans;font-weight:700;font-size:6.4pt;color:#3F3836;
+  font-variant-numeric:tabular-nums;letter-spacing:.02em;line-height:1;
+}
+.key__tag{
+  display:inline-flex;align-items:center;gap:1.2mm;background:rgba(0,0,0,.05);
+  border-radius:9mm;padding:.7mm 1.8mm .7mm 1.2mm;flex:none;
+}
+.key__tag i{width:2.2mm;height:2.2mm;border-radius:.5mm;background:var(--c-econ);display:block}
+.key__tag b{font-family:DMSans;font-weight:700;font-size:5.8pt;color:#3F3836}
+
+/* a quiet line where a level genuinely has nothing else in it */
+.levelnote{
+  z-index:3;align-self:center;display:flex;flex-direction:column;gap:1.4mm;
+  padding:4mm 5mm;border-left:.8mm solid var(--rule);
+}
+.levelnote__en{font-family:Aleo;font-size:7.8pt;line-height:1.35;color:var(--ink-soft)}
+.levelnote__ar{font-family:Tajawal;font-size:7.8pt;line-height:1.55;color:var(--ink-soft);direction:rtl;text-align:right}
+
+/* a caption under a band number, for the level you actually begin at */
+.band__tag{
+  margin-top:1.6mm;font-family:DMSans;font-weight:700;font-size:4.9pt;
+  letter-spacing:.07em;color:var(--band-ink);line-height:1.35;text-align:center;opacity:.95;
+}
+.band__tag span{display:block;font-family:Tajawal;font-weight:700;letter-spacing:0;font-size:5.6pt}
+
+/* ---------- the courses that unlock a major ---------- */
+/* They live on the General Courses page, so they are drawn as visitors: same
+   shape, lighter, dashed, and carrying the club mark. */
+.crd--gate{background:rgba(255,255,255,.62);border:.45mm dashed rgba(0,0,0,.28);box-shadow:none}
+.crd--gate .crd__top{opacity:.88}
+.crd__from{
+  margin-top:2mm;display:flex;align-items:center;gap:2.2mm;
+  padding-top:1.8mm;border-top:.25mm solid var(--rule);
+}
+.crd__from img{height:5.4mm;width:auto;display:block;flex:none}
+.crd__from span{font-family:DMSans;font-weight:500;font-size:5.9pt;line-height:1.3;color:var(--ink-soft)}
+.crd__from span b{display:block;font-family:Tajawal;font-weight:500;font-size:6.2pt;direction:rtl;text-align:right}
+.band--gate{--tint-strong:#CFC7C5;--band-ink:#3F3836}
+.band__mark{width:15mm;height:auto;display:block;margin:1.6mm 0 1.2mm}
+.gatelead{
+  z-index:3;align-self:center;display:flex;flex-direction:column;gap:1.4mm;
+  padding:3.4mm 5mm;border-left:.8mm solid var(--rule);
+}
+.gatelead__h{font-family:Aleo;font-weight:700;font-size:8.6pt;color:var(--ink);line-height:1.25}
+.gatelead__ha{font-family:Cairo;font-weight:700;font-size:8.2pt;color:var(--ink);direction:rtl;text-align:right;line-height:1.3}
+.gatelead__en{font-family:Aleo;font-size:7.4pt;line-height:1.35;color:var(--ink-soft)}
+.gatelead__ar{font-family:Tajawal;font-size:7.4pt;line-height:1.55;color:var(--ink-soft);direction:rtl;text-align:right}
+
+/* a course on the General page that is the doorway into a major */
+.crd__opens{
+  margin-top:2mm;display:flex;align-items:center;gap:2mm;
+  padding:1.4mm 1.6mm;border-radius:1.2mm;gap:1.6mm;
+  background:rgba(102,0,0,.075);border-left:.7mm solid var(--maroon);
+}
+.crd__opens img{height:4.2mm;width:auto;display:block;flex:none}
+.crd__opens span{font-family:DMSans;font-weight:700;font-size:5.8pt;line-height:1.25;color:var(--maroon);min-width:0}
+.crd__opens span b{
+  display:block;font-family:Tajawal;font-weight:500;font-size:6pt;line-height:1.4;
+  direction:rtl;text-align:right;color:#6B3A3A;
+}
+
+/* a course drawn on a major map that is really a college course */
+.crd__flag{
+  margin-top:1.6mm;padding:1.1mm 1.5mm;border-radius:1.2mm;
+  background:#FBF4E3;border-left:.7mm solid #C9A227;
+  font-family:DMSans;font-weight:500;font-size:5.7pt;line-height:1.28;color:#6B5A2A;
+}
+.crd__flag b{
+  display:block;font-family:Tajawal;font-weight:500;font-size:6pt;line-height:1.45;
+  direction:rtl;text-align:right;margin-top:.4mm;color:#6B5A2A;
+}
+
+/* ---------- elective pool cards ----------
+   These courses come from other faculties and their official name is the
+   Arabic one, so the Arabic leads and the English sits under it as a
+   translation. Every other page runs English first. */
+.crd--el .crd__body{padding:1.9mm 2.6mm 2.1mm}
+.crd__arname{font-family:Tajawal;font-weight:700;font-size:8.8pt;line-height:1.36;
+  direction:rtl;text-align:right;color:var(--ink)}
+.crd__tr{margin-top:1.2mm;font-family:Aleo;font-style:italic;font-size:7pt;line-height:1.24;color:#7D7270}
+.crd--dead{opacity:.62}
+.crd--dead .crd__top{background:repeating-linear-gradient(135deg,var(--cat) 0 2.2mm,rgba(0,0,0,.22) 2.2mm 4.4mm)}
+.crd__warn{font-family:DMSans;font-weight:700;font-size:6.2pt;color:#fff;
+  background:rgba(0,0,0,.3);border-radius:9mm;padding:.7mm 2mm;letter-spacing:.06em}
+
+/* a choice group: its heading, then its cards */
+.gwrap{display:flex;flex-direction:column;gap:2mm;z-index:3;min-width:0}
+.gtag{display:flex;align-items:baseline;gap:3mm;padding:0 1mm .4mm}
+.gtag>span:nth-child(2){flex:1;min-width:0}
+.gtag__n{font-family:DMSans;font-weight:700;font-size:6pt;color:#fff;background:var(--cat);
+  padding:.9mm 2.4mm;border-radius:9mm;letter-spacing:.09em;flex:none}
+.gtag__en{font-family:Aleo;font-weight:700;font-size:9.6pt;line-height:1.1;color:var(--cat)}
+.gtag__ar{font-family:Cairo;font-weight:700;font-size:9.2pt;direction:rtl;line-height:1.15;color:var(--cat)}
+.gtag__sub{display:block;font-family:DMSans;font-weight:500;font-size:6.4pt;color:var(--ink-soft);letter-spacing:.02em}
+.freebox{
+  z-index:3;align-self:stretch;display:flex;flex-direction:column;justify-content:center;gap:2.4mm;
+  padding:3.6mm 6mm;border-radius:2.6mm;border:.7mm dashed var(--c-support);background:rgba(85,99,43,.06);
+}
+.freebox__en{font-family:Aleo;font-weight:700;font-size:9.4pt;line-height:1.35;color:var(--ink)}
+.freebox__ar{font-family:Tajawal;font-weight:500;font-size:9.4pt;line-height:1.55;color:#554C4A;direction:rtl;text-align:right}
+
+.gtag__count{
+  flex:none;text-align:right;font-family:DMSans;font-weight:700;font-size:6.6pt;
+  letter-spacing:.08em;color:var(--cat);line-height:1.25;
+}
+.gtag__count b{display:block;font-family:Tajawal;font-weight:700;font-size:7.4pt;
+  letter-spacing:0;direction:rtl;opacity:.8}
+
+/* ================================================================
+   Page 05 — Changing your major
+   Two boxes, one per kind of transfer. Every condition is one row:
+   the figure from the rule on the left, the rule in both languages
+   on the right. A reader ticks down the list.
+   ================================================================ */
+.tcols{display:grid;grid-template-columns:1fr 1fr;gap:6mm;flex:1;min-height:0}
+.tcol{
+  position:relative;z-index:3;display:flex;flex-direction:column;min-height:0;
+  border-radius:2.6mm;overflow:hidden;padding-bottom:5.5mm;
+  background:rgba(255,255,255,.74);border:.25mm solid var(--rule);
+  box-shadow:0 .4mm 1.6mm rgba(0,0,0,.06);
+}
+.tcol__h{background:var(--tc);color:#fff;padding:4.4mm 6mm 4.6mm;display:flex;flex-direction:column;gap:1.2mm}
+.tcol__tag{font-family:DMSans;font-weight:700;font-size:6.2pt;letter-spacing:.16em;opacity:.78;line-height:1}
+.tcol__en{font-family:BarlowC;font-weight:700;font-style:italic;font-size:26pt;line-height:1.14;letter-spacing:.005em}
+.tcol__ar{font-family:Cairo;font-weight:700;font-size:16pt;line-height:1.78;direction:rtl;text-align:left}
+.tcol__sub{padding:3.2mm 6mm 0;display:flex;flex-direction:column;gap:.8mm}
+.tcol__sub-en{font-family:Aleo;font-size:9.4pt;line-height:1.35;color:var(--ink-soft)}
+.tcol__sub-ar{font-family:Tajawal;font-size:9.4pt;line-height:1.55;color:var(--ink-soft);direction:rtl;text-align:right}
+
+.tlist{list-style:none;margin:0;padding:4.5mm 6mm 0;display:flex;flex:1;flex-direction:column;justify-content:space-evenly;gap:5mm}
+.trow{display:flex;gap:4mm;align-items:flex-start}
+.tchip{
+  flex:none;min-width:31mm;text-align:center;padding:2.4mm 2.8mm;border-radius:1.8mm;
+  background:var(--tc);color:#fff;font-family:DMSans;font-weight:700;font-size:15pt;
+  line-height:1;font-variant-numeric:tabular-nums;
+}
+.tchip--code{font-size:12.5pt;letter-spacing:.02em}
+.tchip--word{font-size:10.5pt;letter-spacing:.12em;padding:3.3mm 2.8mm}
+.trow__t{min-width:0;flex:1;display:flex;flex-direction:column;gap:.7mm}
+.trow__en{font-family:Aleo;font-weight:700;font-size:10pt;line-height:1.3;color:var(--ink)}
+.trow__ar{font-family:Tajawal;font-size:10pt;line-height:1.55;color:#554C4A;direction:rtl;text-align:right}
+
+/* the grade-point ladder: three tiers, not eight rows */
+.tgpa{padding:5mm 6mm 0;display:flex;flex-direction:column;gap:1.6mm}
+.tgpa__en{font-family:Aleo;font-weight:700;font-size:10pt;line-height:1.3;color:var(--ink)}
+.tgpa__ar{font-family:Tajawal;font-size:10pt;line-height:1.55;color:#554C4A;direction:rtl;text-align:right;margin-bottom:.8mm}
+.tier{display:flex;align-items:center;gap:4mm;border-radius:1.8mm;padding:3.8mm 3.6mm;background:var(--tint)}
+.tier__g{
+  flex:none;width:26mm;display:flex;flex-direction:column;align-items:center;
+  font-family:DMSans;font-weight:700;font-size:20pt;color:var(--maroon);line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.tier__g span{font-family:DMSans;font-weight:700;font-size:6pt;letter-spacing:.11em;color:#8C6B6B;margin-top:1.2mm}
+.tier__m{flex:1;min-width:0;display:grid;grid-template-columns:repeat(2,1fr);gap:2.2mm 4mm}
+.maj{display:flex;align-items:center;gap:2.2mm;min-width:0}
+.maj__c{
+  flex:none;font-family:DMSans;font-weight:700;font-size:8.6pt;color:#fff;background:#9C7B7B;
+  border-radius:9mm;padding:1mm 2.4mm;line-height:1;font-variant-numeric:tabular-nums;
+}
+.maj--ours .maj__c{background:var(--maroon)}
+.maj__t{min-width:0;flex:1}
+.maj__en{display:block;font-family:Aleo;font-weight:700;font-size:8.8pt;line-height:1.18;color:var(--ink)}
+.maj__ar{display:block;font-family:Tajawal;font-size:8.8pt;line-height:1.4;color:#554C4A;direction:rtl;text-align:right}
+
+/* the three courses two of which an outside student must have passed */
+.tpick{padding:5mm 6mm 0;display:flex;flex-direction:column;gap:3mm}
+.tpick__cards .crd{min-height:40mm}
+.tpick__cards{display:grid;grid-template-columns:repeat(3,1fr);gap:3mm}
+.crd__fix b{
+  display:block;font-family:Tajawal;font-weight:500;font-size:6.2pt;line-height:1.45;
+  direction:rtl;text-align:right;margin-top:.4mm;color:#8A4A00;
+}
+.tend{
+  margin:4mm 6mm 0;padding:3.6mm 4.4mm;border-radius:1.8mm;display:flex;flex-direction:column;gap:.8mm;
+  background:rgba(102,0,0,.07);border-left:1.2mm solid var(--maroon);
+}
+.tend__en{font-family:Aleo;font-weight:700;font-size:9.4pt;line-height:1.3;color:var(--ink)}
+.tend__ar{font-family:Tajawal;font-size:9.4pt;line-height:1.5;color:#554C4A;direction:rtl;text-align:right}
+
+/* rail panel: the two numbers this club's readers actually need */
+.mine{display:flex;flex-direction:column;gap:2.4mm}
+.mine__row{display:flex;align-items:center;gap:2.8mm}
+.mine__row img{height:13mm;width:auto;display:block;flex:none}
+.mine__c{
+  flex:none;font-family:DMSans;font-weight:700;font-size:11pt;color:#fff;background:var(--maroon);
+  border-radius:1.4mm;padding:1.3mm 2.2mm;line-height:1;font-variant-numeric:tabular-nums;
+}
+.mine__t{min-width:0;flex:1}
+.mine__en{display:block;font-family:Aleo;font-weight:700;font-size:8pt;line-height:1.2;color:var(--ink)}
+.mine__ar{display:block;font-family:Tajawal;font-size:8pt;line-height:1.45;color:#554C4A;direction:rtl;text-align:right}
+.mine__foot{font-family:DMSans;font-size:6.4pt;color:var(--ink-soft);line-height:1.35;margin-top:.6mm}
+.mine__foot b{display:block;font-family:Tajawal;font-weight:400;font-size:6.6pt;direction:rtl;text-align:right;line-height:1.45}
+
+/* ================================================================
+   Page 06 — Important numbers
+   ================================================================ */
+.nstack{display:flex;flex-direction:column;gap:5mm;flex:1;min-height:0}
+.anat{
+  z-index:3;background:rgba(255,255,255,.82);border:.25mm solid var(--rule);
+  border-left:1.4mm solid var(--maroon);border-radius:2.6mm;padding:4.6mm 6mm 5mm;
+  display:flex;flex-direction:column;gap:3.4mm;
+}
+.anat__h{display:flex;align-items:baseline;gap:5mm;flex-wrap:wrap}
+.anat__h-en{font-family:Aleo;font-weight:700;font-size:11pt;color:var(--maroon);line-height:1.4}
+.anat__h-ar{font-family:Cairo;font-weight:700;font-size:10.5pt;color:var(--maroon);direction:rtl;line-height:1.7}
+.anat__name{font-family:DMSans;font-size:7.4pt;color:var(--ink-soft);line-height:1.3}
+.anat__parts{display:flex;gap:4mm;align-items:stretch}
+.apart{flex:var(--f) 1 0;min-width:0;display:flex;flex-direction:column;gap:2.2mm}
+.apart__d{
+  font-family:DMSans;font-weight:700;font-size:46pt;line-height:1;color:#fff;background:var(--cat);
+  border-radius:2.4mm;padding:6.5mm 0;text-align:center;letter-spacing:.07em;font-variant-numeric:tabular-nums;
+}
+.apart__l{font-family:DMSans;font-weight:700;font-size:7pt;letter-spacing:.1em;color:var(--ink-soft)}
+.apart__la{font-family:Tajawal;font-size:7.6pt;color:var(--ink-soft);direction:rtl;text-align:right;line-height:1.4}
+.apart__v{font-family:Aleo;font-weight:700;font-size:10.6pt;line-height:1.25;color:var(--ink);margin-top:.8mm}
+.apart__va{font-family:Tajawal;font-weight:500;font-size:10.6pt;line-height:1.5;color:#554C4A;direction:rtl;text-align:right}
+.anat__foot{display:flex;flex-direction:column;gap:.6mm}
+.anat__foot span{font-family:DMSans;font-size:7pt;color:var(--ink-soft);line-height:1.35}
+.anat__foot span:last-child{font-family:Tajawal;font-size:7.2pt;direction:rtl;text-align:right;line-height:1.5}
+
+.nboxes{display:grid;grid-template-columns:1fr 1.18fr 1.18fr;gap:5mm;flex:1;min-height:0;align-items:stretch}
+.nbox{
+  z-index:3;min-width:0;display:flex;flex-direction:column;gap:2.4mm;
+  background:rgba(255,255,255,.82);border:.25mm solid var(--rule);
+  border-left:1.4mm solid var(--nc);border-radius:2.6mm;padding:4.2mm 4.8mm 4.6mm;
+}
+.nbox__h{font-family:Aleo;font-weight:700;font-size:11pt;color:var(--nc);line-height:1.2}
+.nbox__ha{font-family:Cairo;font-weight:700;font-size:10.4pt;color:var(--nc);direction:rtl;text-align:right;line-height:1.7;margin-top:-2.8mm}
+.nbox__s{font-family:DMSans;font-size:7.2pt;color:var(--ink-soft);line-height:1.35}
+.nbox__sa{font-family:Tajawal;font-size:7.4pt;color:var(--ink-soft);direction:rtl;text-align:right;line-height:1.45;margin-top:-2mm}
+.nbox__rows{display:flex;flex:1;flex-direction:column;justify-content:space-between;gap:2.8mm;margin-top:1.6mm;padding-bottom:.8mm}
+.nrow{display:flex;align-items:center;gap:3mm;min-width:0}
+.nrow__d{
+  flex:none;min-width:19mm;text-align:center;font-family:DMSans;font-weight:700;font-size:13pt;
+  color:#fff;background:#9A8F8D;border-radius:1.5mm;padding:2mm 1.8mm;line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.nrow--ours .nrow__d{background:var(--maroon)}
+.nrow__t{min-width:0;flex:1}
+.nrow__en{display:block;font-family:Aleo;font-weight:700;font-size:9.4pt;line-height:1.2;color:var(--ink)}
+.nrow__ar{display:block;font-family:Tajawal;font-size:9.4pt;line-height:1.45;color:#554C4A;direction:rtl;text-align:right}
+.nrow__mark{height:7.6mm;width:auto;display:block;flex:none}
+
+.exs{z-index:3;display:grid;grid-template-columns:repeat(3,1fr);gap:5mm}
+.ex{background:rgba(102,0,0,.06);border-radius:2mm;padding:3.2mm 4.2mm;display:flex;flex-direction:column;gap:1mm}
+.ex__c{font-family:DMSans;font-weight:700;font-size:15pt;color:var(--maroon);letter-spacing:.07em;line-height:1;font-variant-numeric:tabular-nums}
+.ex__en{font-family:Aleo;font-size:8.2pt;line-height:1.35;color:var(--ink)}
+.ex__ar{font-family:Tajawal;font-size:8.2pt;line-height:1.5;color:#554C4A;direction:rtl;text-align:right}
+
+/* rail panel: major number vs department number */
+.jobs{display:flex;flex-direction:column;gap:2.4mm}
+.job{display:flex;gap:2.8mm;align-items:flex-start}
+.job__d{
+  flex:none;font-family:DMSans;font-weight:700;font-size:10pt;color:#fff;background:var(--maroon);
+  border-radius:1.3mm;padding:1.3mm 2mm;line-height:1;font-variant-numeric:tabular-nums;
+}
+.jobs__foot{font-family:DMSans;font-size:6.4pt;color:var(--ink-soft);line-height:1.35;margin-top:.4mm}
+.jobs__foot b{display:block;font-family:Tajawal;font-weight:400;font-size:6.6pt;direction:rtl;text-align:right;line-height:1.45}

@@ -1,0 +1,2172 @@
+{
+ "_README": "ISOM دليل الطالب — course data. EDIT THIS FILE, then run `node build.js && node render.js mis`. Fields: code (7-digit portal number), short, en, ar, cr (credits), cat (core|elective|analytics|appdev|support), row (which semester band it sits in), col (grid column start), span, pre (prerequisite codes), role (entry|option), note (grey footnote).",
+ "_sources": {
+  "chart_mis": "cba.ku.edu.kw MIS New Major Plan, uploaded 2025-11",
+  "portal": "portal.ku.edu.kw Course Catalog, read 2026-09-20",
+  "policy": "Where chart and portal disagree the CHART wins; the portal title prints as a grey footnote.",
+  "club": "Group structure (entry course + pick 2 of 3, one path only) and the supporting-course requirement confirmed by ISOM Club, Sept 2026.",
+  "general": "portal.ku.edu.kw Course Catalog Details, every course read individually 2026-09-20"
+ },
+ "mis": {
+  "title_en": "Management Information Systems",
+  "title_ar": "نظم المعلومات الإدارية",
+  "rules": [
+   [
+    "Take every red course. You cannot skip one.",
+    "جميع المقررات الحمراء إجبارية، لا يمكن تخطي أي منها."
+   ],
+   [
+    "Pick ONE path — green or blue. Not both.",
+    "اختر مساراً واحداً فقط — الأخضر أو الأزرق، وليس كليهما."
+   ],
+   [
+    "In your path: take the first course, then pick 2 of the 3 under it.",
+    "في مسارك: ادرس المقرر الأول، ثم اختر مقررين من الثلاثة تحته."
+   ],
+   [
+    "Pick 1 yellow elective.",
+    "اختر مقرراً واحداً من المقررات الصفراء."
+   ],
+   [
+    "Take both grey supporting courses.",
+    "ادرس المقررين الرماديين المساندين، كلاهما إجباري."
+   ]
+  ],
+  "bands": [
+   {
+    "id": "s2",
+    "n": "2",
+    "label": "Semester",
+    "ar": "الفصل"
+   },
+   {
+    "id": "s3",
+    "n": "3",
+    "label": "Semester",
+    "ar": "الفصل"
+   },
+   {
+    "id": "s4",
+    "n": "4",
+    "label": "Semester",
+    "ar": "الفصل"
+   },
+   {
+    "id": "s5",
+    "n": "5",
+    "label": "Semester",
+    "ar": "الفصل"
+   },
+   {
+    "id": "s67",
+    "n": "6–7",
+    "label": "Semester",
+    "ar": "الفصل"
+   },
+   {
+    "id": "s8",
+    "n": "8",
+    "label": "Semester",
+    "ar": "الفصل"
+   }
+  ],
+  "courses": [
+   {
+    "code": "1013130",
+    "short": "ISOM 130",
+    "en": "Business Information & Technology",
+    "ar": "معلومات وتقنيات إدارة الأعمال",
+    "cr": 3,
+    "cat": "core",
+    "row": 1,
+    "col": 5,
+    "span": 2,
+    "pre": [
+     "0410091",
+     "9988106"
+    ],
+    "flag": {
+     "en": "College course — counts in the 36, not the 27.",
+     "ar": "مقرر كلية — ضمن الـ٣٦ وحدة لا الـ٢٧."
+    }
+   },
+   {
+    "code": "1013230",
+    "short": "ISOM 230",
+    "en": "Business Problem Solving & Programming",
+    "ar": "حل المشاكل التجارية والبرمجة",
+    "cr": 3,
+    "cat": "core",
+    "row": 2,
+    "col": 5,
+    "span": 1,
+    "pre": [
+     "1013130"
+    ]
+   },
+   {
+    "code": "1013240",
+    "short": "ISOM 240",
+    "en": "Introduction to Information Systems",
+    "ar": "مقدمة في نظم المعلومات",
+    "cr": 3,
+    "cat": "core",
+    "row": 2,
+    "col": 6,
+    "span": 1,
+    "pre": [
+     "1013130"
+    ],
+    "flag": {
+     "en": "College course — counts in the 36, not the 27.",
+     "ar": "مقرر كلية — ضمن الـ٣٦ وحدة لا الـ٢٧."
+    }
+   },
+   {
+    "code": "1013331",
+    "short": "ISOM 331",
+    "en": "Systems Analysis & Design",
+    "ar": "تحليل وتصميم النظم",
+    "cr": 3,
+    "cat": "core",
+    "row": 3,
+    "col": 5,
+    "span": 1,
+    "pre": [
+     "1013230",
+     "1013240"
+    ],
+    "note": "Portal title: Info. Systems Development Methods"
+   },
+   {
+    "code": "1013337",
+    "short": "ISOM 337",
+    "en": "Enterprise Architecture, Systems & Technologies",
+    "ar": "الهيكلة التنظيمية والمعلوماتية والتقنية لمنظمة الأعمال",
+    "cr": 3,
+    "cat": "core",
+    "row": 3,
+    "col": 6,
+    "span": 1,
+    "pre": [
+     "1013230",
+     "1013240"
+    ]
+   },
+   {
+    "code": "1013340",
+    "short": "ISOM 340",
+    "en": "Business Analytics for Decision Making",
+    "ar": "تحليل الأعمال لاتخاذ القرارات",
+    "cr": 3,
+    "cat": "analytics",
+    "role": "entry",
+    "row": 4,
+    "col": 2,
+    "span": 3,
+    "pre": [
+     "1013331"
+    ]
+   },
+   {
+    "code": "1013434",
+    "short": "ISOM 434",
+    "en": "Data & Information Management",
+    "ar": "إدارة البيانات والمعلومات",
+    "cr": 3,
+    "cat": "core",
+    "row": 4,
+    "col": 5,
+    "span": 2,
+    "pre": [
+     "1013331"
+    ]
+   },
+   {
+    "code": "1013350",
+    "short": "ISOM 350",
+    "en": "Advanced Programming",
+    "ar": "تطوير تطبيقات الأعمال",
+    "cr": 3,
+    "cat": "appdev",
+    "role": "entry",
+    "row": 4,
+    "col": 7,
+    "span": 3,
+    "pre": [
+     "1013230",
+     "1013240"
+    ],
+    "note": "Portal title: Business Application Development"
+   },
+   {
+    "code": "1013440",
+    "short": "ISOM 440",
+    "en": "Business Data Mining",
+    "ar": "التنقيب في بيانات الأعمال",
+    "cr": 3,
+    "cat": "analytics",
+    "role": "option",
+    "row": 5,
+    "col": 2,
+    "span": 1,
+    "pre": [
+     "1013340"
+    ]
+   },
+   {
+    "code": "1013441",
+    "short": "ISOM 441",
+    "en": "Big Data Management & Analytics",
+    "ar": "تحليل وإدارة البيانات الضخمة",
+    "cr": 3,
+    "cat": "analytics",
+    "role": "option",
+    "row": 5,
+    "col": 3,
+    "span": 1,
+    "pre": [
+     "1013340"
+    ],
+    "note": "Portal's English title for this course is corrupted; its Arabic entry is correct"
+   },
+   {
+    "code": "1013442",
+    "short": "ISOM 442",
+    "en": "Business Data Visualization",
+    "ar": "عرض بيانات الأعمال",
+    "cr": 3,
+    "cat": "analytics",
+    "role": "option",
+    "row": 5,
+    "col": 4,
+    "span": 1,
+    "pre": [
+     "1013340"
+    ]
+   },
+   {
+    "code": "1013452",
+    "short": "ISOM 452",
+    "en": "Web Application Development",
+    "ar": "تطوير تطبيقات شبكة الإنترنت",
+    "cr": 3,
+    "cat": "appdev",
+    "role": "option",
+    "row": 5,
+    "col": 7,
+    "span": 1,
+    "pre": [
+     "1013350"
+    ]
+   },
+   {
+    "code": "1013453",
+    "short": "ISOM 453",
+    "en": "Mobile Application Development",
+    "ar": "تطوير تطبيقات الأجهزة المتنقلة",
+    "cr": 3,
+    "cat": "appdev",
+    "role": "option",
+    "row": 5,
+    "col": 8,
+    "span": 1,
+    "pre": [
+     "1013350"
+    ]
+   },
+   {
+    "code": "1013454",
+    "short": "ISOM 454",
+    "en": "Human Computer Interaction",
+    "ar": "واجهة التفاعل بين الإنسان والحاسوب",
+    "cr": 3,
+    "cat": "appdev",
+    "role": "option",
+    "row": 5,
+    "col": 9,
+    "span": 1,
+    "pre": [
+     "1013350"
+    ],
+    "note": "Portal title: Human-Computer Interface"
+   },
+   {
+    "code": "1013472",
+    "short": "ISOM 472",
+    "en": "Information Systems Project",
+    "ar": "مشروع في نظم المعلومات",
+    "cr": 3,
+    "cat": "core",
+    "row": 6,
+    "col": 5,
+    "span": 2,
+    "pre": [
+     "1013434"
+    ],
+    "capstone": true,
+    "note": "Portal still lists the retired 1013433 as its prerequisite — flag to the department"
+   }
+  ],
+  "electives": [
+   {
+    "code": "1013351",
+    "short": "ISOM 351",
+    "en": "Introduction to Electronic Commerce",
+    "ar": "مقدمة في التجارة الإلكترونية",
+    "cr": 3,
+    "cat": "elective",
+    "pre": [
+     "1013240"
+    ]
+   },
+   {
+    "code": "1013451",
+    "short": "ISOM 451",
+    "en": "Social Issues in Information Systems",
+    "ar": "القضايا الاجتماعية في نظم المعلومات",
+    "cr": 3,
+    "cat": "elective",
+    "pre": [
+     "1013230",
+     "1013240"
+    ]
+   },
+   {
+    "code": "1013480",
+    "short": "ISOM 480",
+    "en": "Internship in Information Systems",
+    "ar": "تدريب ميداني في نظم المعلومات",
+    "cr": 3,
+    "cat": "elective",
+    "pre": [
+     "1013331",
+     "1013337"
+    ]
+   },
+   {
+    "code": "1013492",
+    "short": "ISOM 492",
+    "en": "Special Topics in Information Systems",
+    "ar": "مواضيع خاصة في نظم المعلومات",
+    "cr": 3,
+    "cat": "elective",
+    "pre": [
+     "1013331",
+     "1013337"
+    ]
+   }
+  ],
+  "support": [
+   {
+    "code": "1013316",
+    "short": "ISOM 316",
+    "en": "Logistics & Supply Chain Management",
+    "ar": "إدارة سلسلة الإمدادات والخدمات اللوجستية",
+    "cr": 3,
+    "cat": "support",
+    "pre": []
+   },
+   {
+    "code": "1011430",
+    "short": "MRKT 430",
+    "en": "Internet Marketing",
+    "ar": "التسويق عبر الإنترنت",
+    "cr": 3,
+    "cat": "support",
+    "pre": []
+   }
+  ],
+  "groups": {
+   "analytics": {
+    "en": "Analytics Path",
+    "ar": "مسار تحليل الأعمال",
+    "sub_en": "Take the top course, then pick 2 of the 3 below",
+    "sub_ar": "ادرس المقرر الأعلى ثم اختر مقررين من الثلاثة"
+   },
+   "appdev": {
+    "en": "App Development Path",
+    "ar": "مسار تطوير التطبيقات",
+    "sub_en": "Take the top course, then pick 2 of the 3 below",
+    "sub_ar": "ادرس المقرر الأعلى ثم اختر مقررين من الثلاثة"
+   }
+  },
+  "notes": [
+   {
+    "en": "Every number on this sheet is the number you type into the registration system.",
+    "ar": "كل رقم في هذه الورقة هو الرقم الذي تُدخله في نظام التسجيل."
+   },
+   {
+    "en": "Take your three path courses from ONE path only. Never mix the two paths.",
+    "ar": "ادرس مقررات مسارك الثلاثة من مسار واحد فقط، ولا تخلط بين المسارين."
+   },
+   {
+    "en": "Prerequisites here come from the registration system — they are what actually lets you register.",
+    "ar": "المتطلبات السابقة هنا مأخوذة من نظام التسجيل، وهي ما يسمح لك بالتسجيل فعلياً."
+   },
+   {
+    "en": "Always check your own plan in the portal before you register each semester.",
+    "ar": "راجع خطتك الدراسية في النظام قبل التسجيل في كل فصل."
+   }
+  ],
+  "ladder_note_en": "Kuwait University’s plan puts these courses in semesters 2 to 8. They are shown here as levels, in that same order.",
+  "ladder_note_ar": "خطة الجامعة تضع هذه المقررات في الفصول من ٢ إلى ٨، وهي معروضة هنا كمستويات بالترتيب نفسه.",
+  "gateway": {
+   "en": "Before you can start this major",
+   "ar": "قبل أن تبدأ هذا التخصص",
+   "note_en": "These two are on the General Courses page. Pass them and the first red course below opens.",
+   "note_ar": "هذان المقرران في صفحة المقررات العامة. باجتيازهما يُفتح أول مقرر أحمر تحتهما.",
+   "courses": [
+    {
+     "code": "0410091",
+     "en": "Pre-Calculus",
+     "ar": "ما قبل التفاضل والتكامل",
+     "cr": null,
+     "cat": "math",
+     "col": 4,
+     "span": 3,
+     "gate": true
+    },
+    {
+     "code": "9988106",
+     "en": "English — Module 2",
+     "ar": "اللغة الإنجليزية — المستوى الثاني",
+     "cr": null,
+     "cat": "lang",
+     "col": 7,
+     "span": 3,
+     "gate": true
+    }
+   ],
+   "wires": [
+    {
+     "s": "0410091",
+     "t": "1013130"
+    },
+    {
+     "s": "9988106",
+     "t": "1013130"
+    }
+   ],
+   "lead": [
+    2,
+    2
+   ]
+  }
+ },
+ "oscm": {
+  "title_en": "Operations and Supply Chain Management",
+  "title_ar": "إدارة العمليات وسلسلة الإمدادات",
+  "ladder_note_en": "Kuwait University’s plan for this major does not print semester numbers, so these are levels in prerequisite order.",
+  "ladder_note_ar": "خطة الجامعة لهذا التخصص لا تتضمن أرقام الفصول، لذلك رُتبت هنا كمستويات حسب المتطلبات السابقة.",
+  "rules": [
+   [
+    "Take every red course. You cannot skip one.",
+    "جميع المقررات الحمراء إجبارية، لا يمكن تخطي أي منها."
+   ],
+   [
+    "Pick 3 purple courses — 9 credits.",
+    "اختر ٣ مقررات بنفسجية — ٩ وحدات."
+   ],
+   [
+    "Pick 2 green courses — 6 credits.",
+    "اختر مقررين أخضرين — ٦ وحدات."
+   ],
+   [
+    "Finish your major with the project.",
+    "أنهِ تخصصك بمشروع التخرج."
+   ],
+   [
+    "Some courses need another course first. The card tells you.",
+    "بعض المقررات تتطلب مقرراً سابقاً، والبطاقة توضح ذلك."
+   ]
+  ],
+  "bands": [
+   {
+    "r": 1,
+    "l": "Level",
+    "n": "1",
+    "ar": "المستوى"
+   },
+   {
+    "r": 2,
+    "l": "Level",
+    "n": "2",
+    "ar": "المستوى"
+   },
+   {
+    "r": 3,
+    "l": "Level",
+    "n": "3",
+    "ar": "المستوى"
+   }
+  ],
+  "core": [
+   {
+    "code": "1013205",
+    "short": "ISOM 205",
+    "en": "Introduction to Modeling & Decision Making",
+    "ar": "مقدمة في النمذجة وصناعة القرار",
+    "cr": 3,
+    "cat": "core",
+    "row": 1,
+    "col": 3,
+    "span": 3,
+    "pre": [
+     "1013110"
+    ],
+    "flag": {
+     "en": "College course — counts in the 36, not the 27.",
+     "ar": "مقرر كلية — ضمن الـ٣٦ وحدة لا الـ٢٧."
+    }
+   },
+   {
+    "code": "1013210",
+    "short": "ISOM 210",
+    "en": "Introduction to Operations & Supply Chain Management",
+    "ar": "مقدمة في إدارة العمليات وسلسلة الإمدادات",
+    "cr": 3,
+    "cat": "core",
+    "row": 1,
+    "col": 8,
+    "span": 3,
+    "pre": [
+     "1011201"
+    ],
+    "note": "Portal title: Prin. of Production & Operations Management · needs 1011201 first",
+    "flag": {
+     "en": "College course — counts in the 36, not the 27.",
+     "ar": "مقرر كلية — ضمن الـ٣٦ وحدة لا الـ٢٧."
+    }
+   },
+   {
+    "code": "1013316",
+    "short": "ISOM 316",
+    "en": "Logistics & Supply Chain Management",
+    "ar": "إدارة سلسلة الإمدادات والخدمات اللوجستية",
+    "cr": 3,
+    "cat": "core",
+    "row": 2,
+    "col": 10,
+    "span": 2,
+    "pre": [
+     "1013210"
+    ]
+   },
+   {
+    "code": "1013310",
+    "short": "ISOM 310",
+    "en": "Production Planning & Scheduling",
+    "ar": "التخطيط والجدولة لعمليات الإنتاج",
+    "cr": 3,
+    "cat": "core",
+    "row": 2,
+    "col": 2,
+    "span": 2,
+    "pre": [
+     "1013205",
+     "1013210"
+    ]
+   },
+   {
+    "code": "1013321",
+    "short": "ISOM 321",
+    "en": "Procurement and Supply Management",
+    "ar": "إدارة المشتريات والتوريد",
+    "cr": 3,
+    "cat": "core",
+    "row": 2,
+    "col": 4,
+    "span": 2,
+    "pre": [
+     "1013205",
+     "1013210"
+    ],
+    "note": "The portal row for this course has no title — search it by number"
+   },
+   {
+    "code": "1013415",
+    "short": "ISOM 415",
+    "en": "Project Management",
+    "ar": "إدارة المشروعات",
+    "cr": 3,
+    "cat": "core",
+    "row": 2,
+    "col": 8,
+    "span": 2,
+    "pre": [],
+    "note": "No prerequisite in the registration system"
+   },
+   {
+    "code": "1013410",
+    "short": "ISOM 410",
+    "en": "Quality Management",
+    "ar": "إدارة الجودة",
+    "cr": 3,
+    "cat": "core",
+    "row": 2,
+    "col": 6,
+    "span": 2,
+    "pre": [
+     "1013205",
+     "1013210"
+    ],
+    "note": "Portal English title: Quality & Productivity Management"
+   },
+   {
+    "code": "1013473",
+    "short": "ISOM 473",
+    "en": "Project in Operations & Supply Chain Management",
+    "ar": "مشروع في إدارة العمليات وسلسلة الإمدادات",
+    "cr": 3,
+    "cat": "core",
+    "row": 3,
+    "col": 5,
+    "span": 4,
+    "pre": [
+     "1013316",
+     "1013310",
+     "1013321",
+     "1013415",
+     "1013410"
+    ],
+    "capstone": true
+   }
+  ],
+  "electives": [
+   {
+    "code": "1013450",
+    "short": "ISOM 450",
+    "en": "Energy & Petroleum Supply Chain",
+    "ar": "سلسلة إمدادات الطاقة والنفط",
+    "cr": 3,
+    "cat": "elective",
+    "need": [
+     "After 1013316",
+     "بعد 1013316"
+    ],
+    "note": "Portal lists this course number as 1013455"
+   },
+   {
+    "code": "1013420",
+    "short": "ISOM 420",
+    "en": "Operations & Supply Chain Analytics",
+    "ar": "تحليلات العمليات وسلسلة الإمدادات",
+    "cr": 3,
+    "cat": "elective",
+    "need": [
+     "After 1013316 and 1013220",
+     "بعد 1013316 و 1013220"
+    ]
+   },
+   {
+    "code": "1013485",
+    "short": "ISOM 485",
+    "en": "Transportation Management",
+    "ar": "إدارة النقل",
+    "cr": 3,
+    "cat": "elective",
+    "need": [
+     "After 1013316",
+     "بعد 1013316"
+    ],
+    "note": "Not listed in the portal — check with the department"
+   },
+   {
+    "code": "1013493",
+    "short": "ISOM 493",
+    "en": "Special Topics in OSCM",
+    "ar": "مواضيع خاصة في إدارة العمليات وسلسلة الإمدادات",
+    "cr": 3,
+    "cat": "elective",
+    "need": [
+     "After 1013205 and 1013210",
+     "بعد 1013205 و 1013210"
+    ]
+   },
+   {
+    "code": "1013412",
+    "short": "ISOM 412",
+    "en": "Service Operations Management",
+    "ar": "تطبيقات إدارة العمليات في مجالات تقديم الخدمات",
+    "cr": 3,
+    "cat": "elective",
+    "need": [
+     "After 1013210",
+     "بعد 1013210"
+    ]
+   },
+   {
+    "code": "1013425",
+    "short": "ISOM 425",
+    "en": "Simulation of Supply Chain Processes",
+    "ar": "محاكاة عمليات سلسلة الإمدادات",
+    "cr": 3,
+    "cat": "elective",
+    "need": [
+     "After 1013210 and 1013220",
+     "بعد 1013210 و 1013220"
+    ]
+   },
+   {
+    "code": "1013470",
+    "short": "ISOM 470",
+    "en": "Healthcare Operations Management",
+    "ar": "إدارة عمليات الرعاية الصحية",
+    "cr": 3,
+    "cat": "elective",
+    "need": [
+     "After 1013210",
+     "بعد 1013210"
+    ]
+   },
+   {
+    "code": "1013481",
+    "short": "ISOM 481",
+    "en": "Internship in OSCM",
+    "ar": "تدريب ميداني في إدارة العمليات وسلسلة الإمدادات",
+    "cr": 3,
+    "cat": "elective",
+    "need": [
+     "After 90 credits",
+     "بعد ٩٠ وحدة"
+    ]
+   }
+  ],
+  "technical": [
+   {
+    "code": "1013351",
+    "short": "ISOM 351",
+    "en": "Introduction to E-Commerce",
+    "ar": "مقدمة في التجارة الإلكترونية",
+    "cr": 3,
+    "cat": "technical"
+   },
+   {
+    "code": "1013340",
+    "short": "ISOM 340",
+    "en": "Business Analytics for Managers",
+    "ar": "تحليل الأعمال لاتخاذ القرارات",
+    "cr": 3,
+    "cat": "technical",
+    "note": "Portal title: Business Analytics for Decision Making"
+   },
+   {
+    "code": "1011310",
+    "short": "MGMT 310",
+    "en": "Entrepreneurship",
+    "ar": "ريادة الأعمال وإدارة المشروعات الصغيرة",
+    "cr": 3,
+    "cat": "technical"
+   },
+   {
+    "code": "1011322",
+    "short": "MRKT 322",
+    "en": "Consumer Behavior",
+    "ar": "سلوك المستهلك",
+    "cr": 3,
+    "cat": "technical"
+   },
+   {
+    "code": "1020416",
+    "short": "ACCT 416",
+    "en": "Cost & Managerial Accounting",
+    "ar": "التكاليف والمحاسبة الإدارية",
+    "cr": 3,
+    "cat": "technical"
+   }
+  ],
+  "notes": [
+   {
+    "en": "Every number on this sheet is the number you type into the registration system.",
+    "ar": "كل رقم في هذه الورقة هو الرقم الذي تُدخله في نظام التسجيل."
+   },
+   {
+    "en": "You need 9 credits of purple electives and 6 credits of green ones. That is 5 courses in total.",
+    "ar": "تحتاج ٩ وحدات من المقررات البنفسجية و ٦ وحدات من الخضراء، أي ٥ مقررات في المجموع."
+   },
+   {
+    "en": "Prerequisites here come from the registration system — they are what actually lets you register.",
+    "ar": "المتطلبات السابقة هنا مأخوذة من نظام التسجيل، وهي ما يسمح لك بالتسجيل فعلياً."
+   },
+   {
+    "en": "Always check your own plan in the portal before you register each semester.",
+    "ar": "راجع خطتك الدراسية في النظام قبل التسجيل في كل فصل."
+   }
+  ],
+  "gateway": {
+   "en": "Before you can start this major",
+   "ar": "قبل أن تبدأ هذا التخصص",
+   "note_en": "These two are on the General Courses page. Each one opens the red course directly below it.",
+   "note_ar": "هذان المقرران في صفحة المقررات العامة، وكل منهما يفتح المقرر الأحمر الذي تحته مباشرة.",
+   "courses": [
+    {
+     "code": "1013110",
+     "en": "Mathematics for Business",
+     "ar": "الرياضيات للعلوم التجارية",
+     "cr": 3,
+     "cat": "math",
+     "col": 3,
+     "span": 3,
+     "gate": true
+    },
+    {
+     "code": "1011201",
+     "en": "Principles of Management",
+     "ar": "مبادئ الإدارة",
+     "cr": 3,
+     "cat": "biz",
+     "col": 8,
+     "span": 3,
+     "gate": true
+    }
+   ],
+   "wires": [
+    {
+     "s": "1013110",
+     "t": "1013205"
+    },
+    {
+     "s": "1011201",
+     "t": "1013210"
+    }
+   ],
+   "lead": [
+    6,
+    2
+   ]
+  }
+ },
+ "general": {
+  "title_en": "General & College Courses",
+  "title_ar": "المقررات العامة ومقررات الكلية",
+  "ladder_note_en": "Follow the line out of a course to see what it opens. Card colours group the courses by subject.",
+  "ladder_note_ar": "اتبع الخط الخارج من أي مقرر لترى ما يفتحه. وألوان البطاقات تجمع المقررات حسب موضوعها.",
+  "next": {
+   "en": "Your major does not wait for this whole page. 1013130 opens the Management Information Systems ladder; 1013205 and 1013210 open the Operations & Supply Chain ladder.",
+   "ar": "لا ينتظر تخصصك إنهاء هذه الصفحة كاملة. مقرر 1013130 يفتح مسار نظم المعلومات الإدارية، ومقررا 1013205 و 1013210 يفتحان مسار إدارة العمليات وسلسلة الإمدادات."
+  },
+  "rules": [
+   [
+    "Every course here comes before your major.",
+    "كل مقرر هنا يأتي قبل مقررات التخصص."
+   ],
+   [
+    "Follow the lines down. A line means: this one, then that one.",
+    "اتبع الخطوط إلى أسفل. الخط يعني: هذا أولاً ثم ذاك."
+   ],
+   [
+    "A course opens only when every line pointing into it is finished.",
+    "لا يُفتح أي مقرر إلا بعد إنهاء كل مقرر يشير إليه سهم."
+   ],
+   [
+    "Your placement test decides where you start.",
+    "اختبار تحديد المستوى يحدد نقطة بدايتك."
+   ]
+  ],
+  "bands": [
+   {
+    "r": 1,
+    "l": "Level",
+    "n": "1",
+    "ar": "المستوى",
+    "tag": 1
+   },
+   {
+    "r": 2,
+    "l": "Level",
+    "n": "2",
+    "ar": "المستوى"
+   },
+   {
+    "r": 3,
+    "l": "Level",
+    "n": "3",
+    "ar": "المستوى"
+   },
+   {
+    "r": 4,
+    "l": "Level",
+    "n": "4",
+    "ar": "المستوى"
+   },
+   {
+    "r": 5,
+    "l": "Level",
+    "n": "5",
+    "ar": "المستوى"
+   }
+  ],
+  "levelnote": {
+   "en": "Only three courses sit at this level. Everything else on this page can be finished earlier.",
+   "ar": "ثلاثة مقررات فقط في هذا المستوى، وبقية مقررات هذه الصفحة يمكن إنهاؤها قبله."
+  },
+  "courses": [
+   {
+    "code": "9988096",
+    "en": "English — Module 1",
+    "ar": "اللغة الإنجليزية — المستوى الأول",
+    "cr": null,
+    "cat": "lang",
+    "band": 1,
+    "col": 2,
+    "span": 1,
+    "pre": [],
+    "note": "Placement course"
+   },
+   {
+    "code": "0410091",
+    "en": "Pre-Calculus",
+    "ar": "ما قبل التفاضل والتكامل",
+    "cr": null,
+    "cat": "math",
+    "band": 1,
+    "col": 3,
+    "span": 1,
+    "pre": [],
+    "note": "Placement course — your placement test decides if you take it"
+   },
+   {
+    "code": "1060307",
+    "en": "Business, Ethics & Society",
+    "ar": "أخلاقيات منظمة الأعمال والمجتمع",
+    "cr": 3,
+    "cat": "biz",
+    "band": 1,
+    "col": 10,
+    "span": 4,
+    "pre": [],
+    "note": "No course needed first — take it in any year"
+   },
+   {
+    "code": "9988106",
+    "en": "English — Module 2",
+    "ar": "اللغة الإنجليزية — المستوى الثاني",
+    "cr": null,
+    "cat": "lang",
+    "band": 2,
+    "col": 2,
+    "span": 1,
+    "pre": [
+     "9988096"
+    ],
+    "note": "Placement course"
+   },
+   {
+    "code": "9988126",
+    "en": "Academic Writing & Research Skills",
+    "ar": "مهارات الكتابة الأكاديمية والبحث",
+    "cr": 3,
+    "cat": "lang",
+    "band": 3,
+    "col": 2,
+    "span": 1,
+    "pre": [
+     "9988106"
+    ],
+    "note": "9988107 English Foundation also opens this course"
+   },
+   {
+    "code": "1013130",
+    "en": "Business Information & Technology",
+    "ar": "معلومات وتقنيات إدارة الأعمال",
+    "cr": 3,
+    "cat": "core",
+    "band": 3,
+    "col": 3,
+    "span": 2,
+    "pre": [
+     "0410091",
+     "9988106"
+    ],
+    "opens": {
+     "en": "Opens MIS · 01",
+     "ar": "يفتح تخصص نظم المعلومات"
+    }
+   },
+   {
+    "code": "1013110",
+    "en": "Mathematics for Business",
+    "ar": "الرياضيات للعلوم التجارية",
+    "cr": 3,
+    "cat": "math",
+    "band": 3,
+    "col": 5,
+    "span": 2,
+    "pre": [
+     "0410091",
+     "9988106"
+    ]
+   },
+   {
+    "code": "1020111",
+    "en": "Accounting Principles (1)",
+    "ar": "مقدمة في المحاسبة المالية (١)",
+    "cr": 3,
+    "cat": "acct",
+    "band": 3,
+    "col": 7,
+    "span": 2,
+    "pre": [
+     "0410091",
+     "9988106"
+    ]
+   },
+   {
+    "code": "1011201",
+    "en": "Principles of Management",
+    "ar": "مبادئ الإدارة",
+    "cr": 3,
+    "cat": "biz",
+    "band": 3,
+    "col": 9,
+    "span": 2,
+    "pre": [
+     "0410091",
+     "9988106"
+    ]
+   },
+   {
+    "code": "1030120",
+    "en": "Principles of Microeconomics",
+    "ar": "مبادئ الاقتصاد الجزئي",
+    "cr": 3,
+    "cat": "econ",
+    "band": 3,
+    "col": 11,
+    "span": 3,
+    "pre": [
+     "0410091",
+     "9988106"
+    ],
+    "note": "Replaces the old number 1030110 — both count"
+   },
+   {
+    "code": "9988146",
+    "en": "Academic Oral Skills",
+    "ar": "المهارات الأكاديمية الشفهية",
+    "cr": 3,
+    "cat": "lang",
+    "band": 4,
+    "col": 2,
+    "span": 1,
+    "pre": [
+     "9988126"
+    ]
+   },
+   {
+    "code": "1011303",
+    "en": "Business Communication & Report Writing",
+    "ar": "الاتصالات الإدارية وكتابة التقارير",
+    "cr": 3,
+    "cat": "biz",
+    "band": 4,
+    "col": 3,
+    "span": 1,
+    "pre": [
+     "9988126"
+    ]
+   },
+   {
+    "code": "1013240",
+    "en": "Introduction to Information Systems",
+    "ar": "مقدمة في نظم المعلومات",
+    "cr": 3,
+    "cat": "core",
+    "band": 4,
+    "col": 4,
+    "span": 1,
+    "pre": [
+     "1013130"
+    ],
+    "opens": {
+     "en": "Also on MIS · 01",
+     "ar": "أيضاً في خريطة نظم المعلومات"
+    }
+   },
+   {
+    "code": "1013120",
+    "en": "Business Statistics (1)",
+    "ar": "الإحصاء للعلوم التجارية (١)",
+    "cr": 3,
+    "cat": "math",
+    "band": 4,
+    "col": 5,
+    "span": 1,
+    "pre": [
+     "1013110"
+    ],
+    "note": "0410101 Calculus (1) also opens it"
+   },
+   {
+    "code": "1013205",
+    "en": "Introduction to Modeling & Decision Making",
+    "ar": "مقدمة في النمذجة وصناعة القرار",
+    "cr": 3,
+    "cat": "core",
+    "band": 4,
+    "col": 6,
+    "span": 1,
+    "pre": [
+     "1013110"
+    ],
+    "opens": {
+     "en": "Opens OSCM · 02",
+     "ar": "يفتح تخصص العمليات"
+    }
+   },
+   {
+    "code": "1012220",
+    "en": "Principles of Financial Management",
+    "ar": "مبادئ الإدارة المالية",
+    "cr": 3,
+    "cat": "biz",
+    "band": 4,
+    "col": 7,
+    "span": 1,
+    "pre": [
+     "1013110",
+     "1020111"
+    ]
+   },
+   {
+    "code": "1020112",
+    "en": "Accounting Principles (2)",
+    "ar": "مقدمة في المحاسبة المالية (٢)",
+    "cr": 3,
+    "cat": "acct",
+    "band": 4,
+    "col": 8,
+    "span": 1,
+    "pre": [
+     "1020111"
+    ]
+   },
+   {
+    "code": "1020214",
+    "en": "Cost & Managerial Accounting",
+    "ar": "مقدمة في محاسبة التكاليف والإدارية",
+    "cr": 3,
+    "cat": "acct",
+    "band": 4,
+    "col": 9,
+    "span": 1,
+    "pre": [
+     "1020111"
+    ]
+   },
+   {
+    "code": "1013210",
+    "en": "Introduction to Operations & Supply Chain Management",
+    "ar": "مقدمة في إدارة العمليات وسلسلة الإمدادات",
+    "cr": 3,
+    "cat": "core",
+    "band": 4,
+    "col": 10,
+    "span": 1,
+    "pre": [
+     "1011201"
+    ],
+    "opens": {
+     "en": "Opens OSCM · 02",
+     "ar": "يفتح تخصص العمليات"
+    }
+   },
+   {
+    "code": "1011205",
+    "en": "Organizational Behaviour",
+    "ar": "السلوك التنظيمي",
+    "cr": 3,
+    "cat": "biz",
+    "band": 4,
+    "col": 11,
+    "span": 1,
+    "pre": [
+     "1011201"
+    ]
+   },
+   {
+    "code": "1011220",
+    "en": "Principles of Marketing",
+    "ar": "مبادئ التسويق",
+    "cr": 3,
+    "cat": "biz",
+    "band": 4,
+    "col": 12,
+    "span": 1,
+    "pre": [
+     "1030120"
+    ],
+    "note": "Portal names the old micro number 1030110 — 1030120 counts"
+   },
+   {
+    "code": "1030140",
+    "en": "Principles of Macroeconomics",
+    "ar": "مبادئ الاقتصاد الكلي",
+    "cr": 3,
+    "cat": "econ",
+    "band": 4,
+    "col": 13,
+    "span": 1,
+    "pre": [
+     "1030120"
+    ]
+   },
+   {
+    "code": "1013220",
+    "en": "Business Statistics (2)",
+    "ar": "الإحصاء للعلوم التجارية (٢)",
+    "cr": 3,
+    "cat": "math",
+    "band": 5,
+    "col": 5,
+    "span": 1,
+    "pre": [
+     "1013120"
+    ]
+   },
+   {
+    "code": "1011450",
+    "en": "Strategic Management",
+    "ar": "الإدارة الاستراتيجية",
+    "cr": 3,
+    "cat": "biz",
+    "band": 5,
+    "col": 6,
+    "span": 7,
+    "pre": [
+     "1011201",
+     "1011220",
+     "1012220",
+     "1013210"
+    ],
+    "capstone": true
+   },
+   {
+    "code": "1030240",
+    "en": "Money and Banking",
+    "ar": "النقود والبنوك",
+    "cr": 3,
+    "cat": "econ",
+    "band": 5,
+    "col": 13,
+    "span": 1,
+    "pre": [
+     "1030140"
+    ]
+   }
+  ],
+  "notes": [
+   {
+    "en": "Every number on this sheet is the number you type into the registration system.",
+    "ar": "كل رقم في هذه الورقة هو الرقم الذي تُدخله في نظام التسجيل."
+   },
+   {
+    "en": "Prerequisites here come from the registration system — they are what actually lets you register.",
+    "ar": "المتطلبات السابقة هنا مأخوذة من نظام التسجيل، وهي ما يسمح لك بالتسجيل فعلياً."
+   },
+   {
+    "en": "The registration system does not publish credit hours. Standard courses are 3 credits; the three placement courses depend on your placement result.",
+    "ar": "نظام التسجيل لا ينشر عدد الوحدات. المقررات الاعتيادية ٣ وحدات، أما مقررات تحديد المستوى الثلاثة فتعتمد على نتيجة اختبارك."
+   },
+   {
+    "en": "Always check your own plan in the portal before you register each semester.",
+    "ar": "راجع خطتك الدراسية في النظام قبل التسجيل في كل فصل."
+   }
+  ],
+  "levelnotes": [
+   {
+    "band": 1,
+    "col": 5,
+    "span": 5,
+    "en": "These need nothing before them. Start here.",
+    "ar": "هذه المقررات لا تتطلب أي مقرر قبلها. ابدأ من هنا."
+   },
+   {
+    "band": 2,
+    "col": 5,
+    "span": 5,
+    "en": "English Module 2 is the only course at this level — and almost everything below needs it first.",
+    "ar": "اللغة الإنجليزية ٢ هي المقرر الوحيد في هذا المستوى، ومعظم ما تحته يتطلبه أولاً."
+   },
+   {
+    "band": 5,
+    "col": 2,
+    "span": 3,
+    "en": "Only three courses sit this far down.",
+    "ar": "ثلاثة مقررات فقط في هذا المستوى."
+   }
+  ]
+ },
+ "electives": {
+  "title_en": "Elective Courses",
+  "title_ar": "المقررات الاختيارية",
+  "ladder_note_en": "Nine courses in total: the four red ones, one from each coloured group, and two of your own choice.",
+  "ladder_note_ar": "تسعة مقررات في المجموع: الأربعة الحمراء، ومقرر واحد من كل مجموعة ملونة، ومقرران بحرية اختيارك.",
+  "rules": [
+   [
+    "Take all four red courses. No choice there.",
+    "ادرس المقررات الأربعة الحمراء كلها، لا خيار فيها."
+   ],
+   [
+    "From each coloured group below, pick ONE course.",
+    "من كل مجموعة ملونة أدناه اختر مقرراً واحداً."
+   ],
+   [
+    "Then pick two more courses freely.",
+    "ثم اختر مقررين آخرين بحرية."
+   ],
+   [
+    "These come from other faculties, not from your college.",
+    "هذه المقررات من كليات أخرى، وليست من كليتك."
+   ]
+  ],
+  "groups": [
+   {
+    "cat": "core",
+    "l": "Take",
+    "n": "4",
+    "ar": "ادرسها",
+    "cols": 4,
+    "en": "Required electives",
+    "arname": "المقررات الاختيارية الإجبارية",
+    "sub_en": "All four. Everyone takes these.",
+    "sub_ar": "الأربعة كلها، يدرسها الجميع.",
+    "courses": [
+     {
+      "code": "0310101",
+      "ar": "مهارات الاتصال اللغوية",
+      "en": "Language Communication Skills",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0200110",
+      "ar": "قانون تجاري",
+      "en": "Commercial Law",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "1350101",
+      "ar": "علم نفس",
+      "en": "Psychology",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0310102",
+      "ar": "جماليات الأدب العربي",
+      "en": "Aesthetics of Arabic Literature",
+      "cr": false,
+      "cat": null
+     }
+    ]
+   },
+   {
+    "cat": "lang",
+    "l": "Pick",
+    "n": "1",
+    "ar": "اختر",
+    "cols": 5,
+    "en": "Group 1 — in place of Arab-Islamic civilisation history",
+    "arname": "المجموعة الأولى ـ المقررات البديلة لتاريخ الحضارة العربية الإسلامية",
+    "sub_en": "Choose one of these ten.",
+    "sub_ar": "اختر واحداً من هذه العشرة.",
+    "courses": [
+     {
+      "code": "0900102",
+      "ar": "الثقافة الإسلامية",
+      "en": "Islamic Culture",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0200105",
+      "ar": "حقوق الإنسان",
+      "en": "Human Rights",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0360108",
+      "ar": "الأخلاق والمجتمع الحديث",
+      "en": "Ethics and Modern Society",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0940145",
+      "ar": "الإسلام وقضايا العلم والتكنولوجيا",
+      "en": "Islam and Issues of Science and Technology",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0200102",
+      "ar": "الثقافة القانونية",
+      "en": "Legal Culture",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "1360103",
+      "ar": "حكومة وسياسة الكويت",
+      "en": "Government and Politics of Kuwait",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0200106",
+      "ar": "النظام الدستوري في الكويت",
+      "en": "The Constitutional System in Kuwait",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "1360108",
+      "ar": "ثقافة الحوار والسلم الاجتماعي",
+      "en": "Culture of Dialogue and Social Peace",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0940142",
+      "ar": "الإسلام والمجتمع الحديث",
+      "en": "Islam and Modern Society",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "1060104",
+      "ar": "الأخلاقيات العامة والخدمة العامة",
+      "en": "Public Ethics and Public Service",
+      "cr": false,
+      "cat": null
+     }
+    ]
+   },
+   {
+    "cat": "econ",
+    "l": "Pick",
+    "n": "1",
+    "ar": "اختر",
+    "cols": 4,
+    "en": "Group 2 — behavioural and social studies",
+    "arname": "المجموعة الثانية ـ دراسات سلوكية واجتماعية",
+    "sub_en": "Choose one of these seven.",
+    "sub_ar": "اختر واحداً من هذه السبعة.",
+    "courses": [
+     {
+      "code": "1360103",
+      "ar": "حكومة وسياسة الكويت",
+      "en": "Government and Politics of Kuwait",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "1370101",
+      "ar": "مدخل إلى علم الاجتماع",
+      "en": "Introduction to Sociology",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "1370171",
+      "ar": "مدخل إلى الأنثروبولوجيا",
+      "en": "Introduction to Anthropology",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0840102",
+      "ar": "الاقتصاد المنزلي",
+      "en": "Home Economics",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "1350205",
+      "ar": "علم النفس الاجتماعي",
+      "en": "Social Psychology",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0330101",
+      "ar": "التاريخ العربي الحديث",
+      "en": "Modern Arab History",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "1340101",
+      "ar": "الإنسان والبيئة",
+      "en": "Man and the Environment",
+      "cr": false,
+      "cat": null
+     }
+    ]
+   },
+   {
+    "cat": "math",
+    "l": "Pick",
+    "n": "1",
+    "ar": "اختر",
+    "cols": 7,
+    "en": "Group 3 — humanities, medical and biological sciences",
+    "arname": "المجموعة الثالثة ـ إنسانيات وعلوم طبية وبيولوجية",
+    "sub_en": "Choose one of these twenty.",
+    "sub_ar": "اختر واحداً من هذه العشرين.",
+    "courses": [
+     {
+      "code": "0360101",
+      "ar": "فلسفة العلوم",
+      "en": "Philosophy of Science",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0360102",
+      "ar": "المدخل إلى المنطق",
+      "en": "Introduction to Logic",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0360103",
+      "ar": "مبادئ الفلسفة",
+      "en": "Principles of Philosophy",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0360108",
+      "ar": "الأخلاق والمجتمع الحديث",
+      "en": "Ethics and Modern Society",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0900102",
+      "ar": "الثقافة الإسلامية",
+      "en": "Islamic Culture",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0200105",
+      "ar": "حقوق الإنسان",
+      "en": "Human Rights",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0650101",
+      "ar": "أساسيات البترول",
+      "en": "Fundamentals of Petroleum",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0420100",
+      "ar": "الكيمياء والحياة",
+      "en": "Chemistry and Life",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0430111",
+      "ar": "الطاقة والإنسان",
+      "en": "Energy and Man",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0490101",
+      "ar": "بيولوجي",
+      "en": "Biology",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0493111",
+      "ar": "مدخل إلى علوم الأحياء والطبيعة",
+      "en": "Introduction to Biological and Natural Sciences",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0493112",
+      "ar": "بيولوجيا الإنسان",
+      "en": "Human Biology",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0494105",
+      "ar": "صيانة البيئة",
+      "en": "Environmental Conservation",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0494261",
+      "ar": "مبادئ علم البيئة النباتية",
+      "en": "Principles of Plant Ecology",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0460101",
+      "ar": "جيولوجيا طبيعية",
+      "en": "Physical Geology",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0460102",
+      "ar": "جيولوجيا تاريخية",
+      "en": "Historical Geology",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0460111",
+      "ar": "الأرض والكون",
+      "en": "The Earth and the Universe",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0460112",
+      "ar": "موارد الأرض الطبيعية",
+      "en": "Earth’s Natural Resources",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0460113",
+      "ar": "الأرض المتغيرة",
+      "en": "The Changing Earth",
+      "cr": false,
+      "cat": null
+     },
+     {
+      "code": "0460227",
+      "ar": "جيولوجيا بيئية",
+      "en": "Environmental Geology",
+      "cr": false,
+      "cat": null
+     }
+    ]
+   }
+  ],
+  "free": {
+   "cat": "support",
+   "l": "Pick",
+   "n": "2",
+   "ar": "اختر",
+   "en": "Free electives",
+   "arname": "اختياري حر",
+   "body_en": "Two courses of your own choice, from anywhere in the university. There is no list — that is the point. Check with your advisor that the course counts before you register for it.",
+   "body_ar": "مقرران من اختيارك أنت، من أي مكان في الجامعة. لا توجد قائمة، وهذا هو المقصود. تأكد من مرشدك الأكاديمي أن المقرر يُحتسب قبل أن تسجّل فيه."
+  },
+  "notes": [
+   {
+    "en": "Every number on this sheet is the number you type into the registration system.",
+    "ar": "كل رقم في هذه الورقة هو الرقم الذي تُدخله في نظام التسجيل."
+   },
+   {
+    "en": "The grey English line is a translation, to help you. The Arabic name is the official one.",
+    "ar": "السطر الإنجليزي الرمادي ترجمة للمساعدة فقط، والاسم العربي هو الاسم الرسمي."
+   },
+   {
+    "en": "Four courses are printed in two groups, because they fit both. Ask your advisor which group to count it in.",
+    "ar": "أربعة مقررات مطبوعة في مجموعتين لأنها تصلح للاثنتين. اسأل مرشدك في أي مجموعة تحتسبها."
+   },
+   {
+    "en": "Not every course here is offered every semester. Check the schedule before you plan around one.",
+    "ar": "ليست كل المقررات هنا تُطرح كل فصل. راجع الجدول قبل أن تبني خطتك على مقرر معيّن."
+   }
+  ],
+  "_checked": "35 of the 37 numbers confirmed in portal.ku.edu.kw, 21 Sep 2026. 0460113 and 0494105 return no rows on an exact search."
+ },
+ "transfer": {
+  "title_en": "CHANGING YOUR MAJOR",
+  "title_ar": "شروط التحويل",
+  "meta": "In force for every cohort since the first semester of 2023 / 2024  ·  مطبّقة على جميع الدفعات منذ الفصل الأول 2023/2024",
+  "rules": [
+   [
+    "Already a student in this college and you want a different major? Yours is the left box.",
+    "أنت طالب في هذه الكلية وتريد تخصصاً آخر؟ صندوقك هو الأيسر."
+   ],
+   [
+    "Studying in another Kuwait University college and you want to move here? Yours is the right box.",
+    "تدرس في كلية أخرى بجامعة الكويت وتريد الانتقال إلينا؟ صندوقك هو الأيمن."
+   ],
+   [
+    "Work down your list line by line. Every single line must be true, not just most of them.",
+    "اقرأ قائمتك سطراً سطراً. يجب أن تتحقق كل الشروط، لا معظمها."
+   ]
+  ],
+  "warn": [
+   [
+    "You may change your major ONCE. One time, for your whole degree.",
+    "لا يحق للطالب تغيير التخصص إلا مرة واحدة طوال دراسته."
+   ],
+   [
+    "“C or better” is the rule’s own wording: a grade not less than C.",
+    "«بتقدير لا يقل عن C» هو نص القاعدة نفسها."
+   ],
+   [
+    "Your academic advisor and the registration office have the last word.",
+    "لمرشدك الأكاديمي وإدارة التسجيل القول الفصل."
+   ]
+  ],
+  "ours": {
+   "h_en": "Your major’s number",
+   "h_ar": "رقم تخصصك",
+   "rows": [
+    [
+     "1009",
+     "Management Information Systems",
+     "نظم المعلومات الإدارية"
+    ],
+    [
+     "1023",
+     "Operations & Supply Chain Management",
+     "إدارة العمليات وسلسلة الإمدادات"
+    ]
+   ],
+   "foot_en": "All eight majors are on page 06.",
+   "foot_ar": "التخصصات الثمانية كلها في صفحة 06."
+  },
+  "inside": {
+   "tag": "DAKHILI",
+   "h_en": "INSIDE THE COLLEGE",
+   "h_ar": "التحويل الداخلي",
+   "sub_en": "You are a College of Business Administration student and you want to move to a different major.",
+   "sub_ar": "أنت طالب في كلية العلوم الإدارية وتريد الانتقال إلى تخصص آخر.",
+   "rows": [
+    {
+     "chip": "30 – 50",
+     "en": "credits passed — no fewer than 30 and no more than 50.",
+     "ar": "وحدة دراسية مجتازة — لا تقل عن 30 ولا تزيد على 50."
+    },
+    {
+     "chip": "1013110",
+     "code": true,
+     "en": "Mathematics for Business, passed with C or better.",
+     "ar": "الرياضيات للعلوم التجارية، بتقدير لا يقل عن C."
+    },
+    {
+     "chip": "7",
+     "en": "courses from the shared college requirements, each one C or better.",
+     "ar": "مقررات من متطلبات الكلية المشتركة، كلٌّ منها بتقدير لا يقل عن C."
+    },
+    {
+     "chip": "2.00",
+     "en": "You must NOT be carrying a 2.00 grade-point warning.",
+     "ar": "ألا يكون على الطالب إنذار معدل 2.00."
+    }
+   ],
+   "tier_en": "And your overall grade-point average must reach the line for the major you want:",
+   "tier_ar": "وأن يبلغ معدلك التراكمي الحد الأدنى للتخصص الذي تريده:"
+  },
+  "tiers": [
+   {
+    "gpa": "2.67",
+    "majors": [
+     {
+      "code": "1008",
+      "en": "Accounting",
+      "ar": "المحاسبة"
+     }
+    ]
+   },
+   {
+    "gpa": "2.33",
+    "majors": [
+     {
+      "code": "1009",
+      "en": "Management Information Systems",
+      "ar": "نظم المعلومات الإدارية",
+      "ours": true
+     },
+     {
+      "code": "1023",
+      "en": "Operations & Supply Chain Management",
+      "ar": "إدارة العمليات وسلسلة الإمدادات",
+      "ours": true
+     },
+     {
+      "code": "1004",
+      "en": "Business Administration",
+      "ar": "إدارة الأعمال"
+     },
+     {
+      "code": "1006",
+      "en": "Marketing",
+      "ar": "التسويق"
+     },
+     {
+      "code": "1007",
+      "en": "Finance and Financial Institutions",
+      "ar": "التمويل والمنشآت المالية"
+     }
+    ]
+   },
+   {
+    "gpa": "2.00",
+    "majors": [
+     {
+      "code": "1032",
+      "en": "Economics",
+      "ar": "الاقتصاد"
+     },
+     {
+      "code": "1061",
+      "en": "Public Administration",
+      "ar": "الإدارة العامة"
+     }
+    ]
+   }
+  ],
+  "outside": {
+   "tag": "KHARIJI",
+   "h_en": "COMING FROM ANOTHER COLLEGE",
+   "h_ar": "التحويل الخارجي",
+   "sub_en": "You study in another Kuwait University college and you want to move into this one.",
+   "sub_ar": "أنت تدرس في كلية أخرى بجامعة الكويت وتريد الانتقال إلى هذه الكلية.",
+   "rows": [
+    {
+     "chip": "30 – 45",
+     "en": "credits passed — no fewer than 30 and no more than 45.",
+     "ar": "وحدة دراسية مجتازة — لا تقل عن 30 ولا تزيد على 45."
+    },
+    {
+     "chip": "2.67",
+     "en": "overall grade-point average on the day you hand in the transfer request.",
+     "ar": "المعدل العام يوم تقديم طلب التحويل — لا يقل عن 2.67."
+    },
+    {
+     "chip": "80%",
+     "en": "in the English aptitude test — or pass, at your own college, the course that matches this college’s English 106, with C or better.",
+     "ar": "في اختبار القدرات في اللغة الإنجليزية — أو اجتياز ما يعادل مقرر اللغة الإنجليزية 106 بكلية العلوم الإدارية بتقدير لا يقل عن C."
+    },
+    {
+     "chip": "PASS",
+     "word": true,
+     "en": "the maths aptitude test — or the course at your own college that matches this college’s preparatory Maths 091.",
+     "ar": "اختبار القدرات في الرياضيات — أو ما يعادل مقرر تمهيدي رياضيات 091 بكلية العلوم الإدارية."
+    }
+   ],
+   "pick_chip": "2 of 3",
+   "pick_en": "Pass two of these three courses — C or better in each one.",
+   "pick_ar": "اجتياز مقررين من المقررات الثلاثة التالية — بتقدير لا يقل عن C في كل منهما.",
+   "pick": [
+    {
+     "code": "1020111",
+     "cat": "acct"
+    },
+    {
+     "code": "1030120",
+     "cat": "econ",
+     "fix_en": "The transfer rule still prints the old number 1030110. The number you register with is 1030120.",
+     "fix_ar": "قاعدة التحويل ما زالت تذكر الرقم القديم 1030110، والرقم الذي تسجّل به هو 1030120 فقط."
+    },
+    {
+     "code": "1011201",
+     "cat": "biz"
+    }
+   ],
+   "end_en": "A student coming from outside is transferred straight into one of the college’s majors, not into the college in general.",
+   "end_ar": "يتم تحويل الطلبة من خارج كلية العلوم الإدارية إلى تخصصات الكلية مباشرةً."
+  },
+  "next_en": "Next page — the numbers that tell you which college teaches a course, which department, and which major is yours.",
+  "next_ar": "الصفحة التالية — الأرقام التي تدل على الكلية التي تدرّس المقرر، وعلى القسم، وعلى تخصصك.",
+  "notes": [
+   {
+    "en": "Every course number on this sheet is the number you type into the registration system.",
+    "ar": "كل رقم مقرر في هذه الورقة هو الرقم الذي تُدخله في نظام التسجيل."
+   },
+   {
+    "en": "English 106 and preparatory Maths 091 are short college numbers, not registration numbers. Ask the registration office which course matches them today.",
+    "ar": "اللغة الإنجليزية 106 وتمهيدي الرياضيات 091 رقمان مختصران للكلية وليسا رقمي تسجيل. اسأل إدارة التسجيل عن المقرر المقابل لهما اليوم."
+   },
+   {
+    "en": "The four-digit number beside each major is the number that names it. Page 06 explains it.",
+    "ar": "الرقم الرباعي بجانب كل تخصص هو الرقم الذي يدل عليه، وصفحة 06 تشرحه."
+   },
+   {
+    "en": "These are the college’s conditions. Your advisor and the registration office have the final word.",
+    "ar": "هذه شروط الكلية، ولمرشدك الأكاديمي وإدارة التسجيل القول الفصل."
+   }
+  ]
+ },
+ "numbers": {
+  "title_en": "IMPORTANT NUMBERS",
+  "title_ar": "أرقام مهمة",
+  "meta": "How to read any course number  ·  كيف تقرأ أي رقم مقرر",
+  "rules": [
+   [
+    "Read the first two digits. They are the college that teaches the course.",
+    "اقرأ أول رقمين: هما الكلية التي تُدرّس المقرر."
+   ],
+   [
+    "Read the first four. They are the department inside that college.",
+    "اقرأ أول أربعة أرقام: هي القسم داخل تلك الكلية."
+   ],
+   [
+    "The last three are the course itself.",
+    "الأرقام الثلاثة الأخيرة هي المقرر نفسه."
+   ]
+  ],
+  "jobs": {
+   "h_en": "Two numbers, two jobs",
+   "h_ar": "رقمان لكل منهما عمل",
+   "rows": [
+    [
+     "1009",
+     "Your major. It is the number that names your major on an official college form.",
+     "رقم تخصصك. يدل على «نظم المعلومات الإدارية» في الأوراق الرسمية."
+    ],
+    [
+     "1013",
+     "Your department. It starts every course number you will ever register for.",
+     "رقم قسمك. يبدأ به كل رقم مقرر ستسجّله."
+    ]
+   ],
+   "foot_en": "They are different numbers for different things. Never type a major number into the registration system.",
+   "foot_ar": "رقمان مختلفان لشيئين مختلفين. لا تُدخل رقم التخصص في نظام التسجيل أبداً."
+  },
+  "anat": {
+   "h_en": "One course number, taken apart",
+   "h_ar": "رقم مقرر واحد، مفكوك",
+   "code": "1013240",
+   "name_en": "Introduction to Information Systems",
+   "name_ar": "مقدمة في نظم المعلومات",
+   "parts": [
+    {
+     "d": "10",
+     "cat": "core",
+     "l_en": "The college that teaches it",
+     "v_en": "Business Administration",
+     "l_ar": "الكلية التي تُدرّسه",
+     "v_ar": "العلوم الإدارية"
+    },
+    {
+     "d": "13",
+     "cat": "appdev",
+     "l_en": "The department inside it",
+     "v_en": "Information Systems and Operations Management",
+     "l_ar": "القسم داخل الكلية",
+     "v_ar": "نظم المعلومات وإدارة العمليات"
+    },
+    {
+     "d": "240",
+     "cat": "analytics",
+     "l_en": "The course itself",
+     "v_en": "Introduction to Information Systems",
+     "l_ar": "المقرر نفسه",
+     "v_ar": "مقدمة في نظم المعلومات"
+    }
+   ],
+   "foot_en": "The registration system writes a department as all four digits together: 1013.",
+   "foot_ar": "يكتب نظام التسجيل رقم القسم بالأرقام الأربعة معاً: 1013."
+  },
+  "colleges": {
+   "h_en": "The first two digits — the college",
+   "h_ar": "أول رقمين — الكلية",
+   "sub_en": "Only the colleges whose courses appear in this guide.",
+   "sub_ar": "الكليات التي تظهر مقرراتها في هذا الدليل فقط.",
+   "rows": [
+    {
+     "d": "02",
+     "en": "Law",
+     "ar": "القانون"
+    },
+    {
+     "d": "03",
+     "en": "Arts",
+     "ar": "الآداب"
+    },
+    {
+     "d": "04",
+     "en": "Science",
+     "ar": "العلوم"
+    },
+    {
+     "d": "06",
+     "en": "Engineering & Petroleum",
+     "ar": "الهندسة والبترول"
+    },
+    {
+     "d": "08",
+     "en": "Education",
+     "ar": "التربية"
+    },
+    {
+     "d": "09",
+     "en": "Sharia & Islamic Studies",
+     "ar": "الشريعة والدراسات الإسلامية"
+    },
+    {
+     "d": "10",
+     "en": "Business Administration",
+     "ar": "العلوم الإدارية",
+     "ours": true
+    },
+    {
+     "d": "13",
+     "en": "Social Sciences",
+     "ar": "العلوم الاجتماعية"
+    },
+    {
+     "d": "99",
+     "en": "Language Center",
+     "ar": "مركز اللغات"
+    }
+   ]
+  },
+  "depts": {
+   "h_en": "The first four digits — the department",
+   "h_ar": "أول أربعة أرقام — القسم",
+   "sub_en": "Every department inside the College of Business Administration.",
+   "sub_ar": "أقسام كلية العلوم الإدارية كلها.",
+   "rows": [
+    {
+     "d": "1011",
+     "en": "Management and Marketing",
+     "ar": "الإدارة والتسويق"
+    },
+    {
+     "d": "1012",
+     "en": "Finance and Financial Institutions",
+     "ar": "التمويل والمنشآت المالية"
+    },
+    {
+     "d": "1013",
+     "en": "Information Systems and Operations Management",
+     "ar": "نظم المعلومات وإدارة العمليات",
+     "ours": true
+    },
+    {
+     "d": "1020",
+     "en": "Accounting",
+     "ar": "المحاسبة"
+    },
+    {
+     "d": "1030",
+     "en": "Economics",
+     "ar": "الاقتصاد"
+    },
+    {
+     "d": "1060",
+     "en": "Public Administration",
+     "ar": "الإدارة العامة"
+    }
+   ]
+  },
+  "majors": {
+   "h_en": "The major numbers",
+   "h_ar": "أرقام التخصصات",
+   "sub_en": "The number that names your major on college forms. It is not a course number.",
+   "sub_ar": "الرقم الذي يدل على تخصصك في أوراق الكلية. وهو ليس رقم مقرر.",
+   "rows": [
+    {
+     "d": "1004",
+     "en": "Business Administration",
+     "ar": "إدارة الأعمال"
+    },
+    {
+     "d": "1006",
+     "en": "Marketing",
+     "ar": "التسويق"
+    },
+    {
+     "d": "1007",
+     "en": "Finance and Financial Institutions",
+     "ar": "التمويل والمنشآت المالية"
+    },
+    {
+     "d": "1008",
+     "en": "Accounting",
+     "ar": "المحاسبة"
+    },
+    {
+     "d": "1009",
+     "en": "Management Information Systems",
+     "ar": "نظم المعلومات الإدارية",
+     "ours": true
+    },
+    {
+     "d": "1023",
+     "en": "Operations & Supply Chain Management",
+     "ar": "إدارة العمليات وسلسلة الإمدادات",
+     "ours": true
+    },
+    {
+     "d": "1032",
+     "en": "Economics",
+     "ar": "الاقتصاد"
+    },
+    {
+     "d": "1061",
+     "en": "Public Administration",
+     "ar": "الإدارة العامة"
+    }
+   ]
+  },
+  "examples": {
+   "h_en": "Read these three the same way",
+   "h_ar": "اقرأ هذه الثلاثة بالطريقة نفسها",
+   "rows": [
+    {
+     "code": "1013240",
+     "en": "10 Business Administration · 13 Information Systems and Operations Management · 240 the course.",
+     "ar": "10 العلوم الإدارية · 13 نظم المعلومات وإدارة العمليات · 240 المقرر."
+    },
+    {
+     "code": "0310101",
+     "en": "03 Arts — that is why the Arabic-language courses on the elective page start with 03.",
+     "ar": "03 الآداب — ولهذا تبدأ مقررات اللغة العربية في صفحة الاختيارية بـ 03."
+    },
+    {
+     "code": "9988106",
+     "en": "99 Language Center — the English modules are taught there, not by your college.",
+     "ar": "99 مركز اللغات — وحدات اللغة الإنجليزية تُدرّس هناك لا في كليتك."
+    }
+   ]
+  },
+  "next_en": "That is the whole guide. Keep it — every number in it is a number you will type.",
+  "next_ar": "بهذا ينتهي الدليل. احتفظ به — كل رقم فيه رقم ستُدخله بنفسك.",
+  "notes": [
+   {
+    "en": "The college and department numbers on this page come from the registration system’s own lists.",
+    "ar": "أرقام الكليات والأقسام في هذه الصفحة مأخوذة من قوائم نظام التسجيل نفسه."
+   },
+   {
+    "en": "Course numbers are always written in English digits, because that is how you type them.",
+    "ar": "أرقام المقررات تُكتب دائماً بالأرقام الإنجليزية، لأنها هكذا تُدخل في النظام."
+   },
+   {
+    "en": "A department can teach more than one major: 1013 teaches both 1009 and 1023.",
+    "ar": "القسم الواحد قد يدرّس أكثر من تخصص: القسم 1013 يدرّس التخصصين 1009 و1023."
+   },
+   {
+    "en": "Numbers change when the university changes them. Check the registration system before you rely on one.",
+    "ar": "الأرقام تتغير متى غيّرتها الجامعة. راجع نظام التسجيل قبل أن تعتمد على رقم."
+   }
+  ]
+ },
+ "site": {
+  "url": "https://isom-graduate.vercel.app",
+  "short": "isom-graduate.vercel.app",
+  "name_en": "WHEN DO I GRADUATE",
+  "name_ar": "متى أتخرج؟",
+  "line_en": "Scan it. Tick the courses you have passed on this very map, and it tells you what is left and the term you finish.",
+  "line_ar": "امسح الرمز. أشّر على المقررات التي اجتزتها على هذه الخريطة نفسها، فيخبرك بما بقي وبالفصل الذي تتخرج فيه."
+ }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "isom-graduate",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ISOM Club student guide 2026/2027 — the printed course maps, and the graduation planner built from them.",
+  "scripts": {
+    "qr": "cd guide && python3 mkqr.py",
+    "sheets": "cd guide && node build.js",
+    "render": "cd guide && for p in cover-b mis oscm general electives transfer numbers; do node render.js $p; done",
+    "verify": "cd guide && node verify.js && node align-check.js",
+    "planner": "cd app && node build-app.js",
+    "test": "cd app && node test.js && node rules.js && node rules2.js",
+    "deploy": "vercel deploy --prod"
+  },
+  "dependencies": {
+    "@fontsource/aleo": "^5.3.0",
+    "@fontsource/amiri": "^5.3.0",
+    "@fontsource/barlow-condensed": "^5.3.0",
+    "@fontsource/cairo": "^5.3.0",
+    "@fontsource/dm-sans": "^5.3.0",
+    "@fontsource/tajawal": "^5.3.0",
+    "playwright": "^1.63.0"
+  }
+}

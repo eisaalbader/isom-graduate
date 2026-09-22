@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>When Do I Graduate — متى أتخرج؟</title>
+<style>/*__PAGECSS__*/</style>
+<style>
+/* ===== the app around the sheet ===== */
+html,body{height:100%;margin:0;background:var(--bg);overscroll-behavior:none}
+body{font-family:DMSans,system-ui,sans-serif;color:var(--ink);
+  display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.arb{font-family:Tajawal,sans-serif;direction:rtl;text-align:left;display:block}
+
+/* header — the club mark, and nothing competing with it */
+.ap{flex:none;display:flex;align-items:center;gap:14px;padding:10px 16px;
+  background:#fff;border-bottom:1px solid var(--rule);box-shadow:0 1px 0 rgba(0,0,0,.02);z-index:30}
+.ap__logo{height:60px;width:auto;display:block;flex:none}
+.ap__t{flex:1;min-width:0;line-height:1.05}
+.ap__en{display:block;font-family:BarlowC,sans-serif;font-weight:700;font-style:italic;
+  font-size:25px;letter-spacing:.01em;color:var(--maroon)}
+.ap__ar{display:block;font-family:Cairo,sans-serif;font-weight:700;font-size:17px;
+  color:var(--maroon);direction:rtl;text-align:left;line-height:1.5}
+.ap__z{display:flex;gap:6px;flex:none}
+.z{width:38px;height:38px;border-radius:9px;border:1.5px solid var(--rule);background:#fff;
+  font-weight:700;font-size:17px;display:grid;place-items:center;color:var(--maroon);line-height:1}
+.z--w{width:auto;padding:0 12px;font-size:12.5px;letter-spacing:.06em}
+.z:active{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+.bar{flex:none;display:flex;gap:3px;padding:0 16px 8px;background:#fff}
+.bar i{height:4px;flex:1;border-radius:9px;background:#E6DFDE;transition:background .3s}
+.bar i.on{background:var(--maroon)}
+
+/* the stage that holds a sheet */
+#main{flex:1;min-height:0;display:flex;flex-direction:column;position:relative}
+.fade{opacity:0;transform:translateY(6px)}
+#slot{flex:1;min-height:0;display:flex;flex-direction:column;
+  transition:opacity .17s ease,transform .17s ease}
+.stage{flex:1;min-height:0;overflow:auto;background:#E9E5E4;
+  -webkit-overflow-scrolling:touch;position:relative}
+.sizer{position:relative}
+.stage .page{position:absolute;left:0;top:0;margin:0;transform-origin:0 0;
+  box-shadow:0 2px 14px rgba(0,0,0,.14)}
+.hint{flex:none;padding:7px 16px;font-size:12px;color:var(--ink-soft);background:#fff;
+  border-top:1px solid var(--rule);display:flex;gap:12px;align-items:center}
+.hint b{color:var(--maroon)}
+.hint .arb{font-size:12px;margin-left:auto}
+.free{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);
+  padding-left:14px;border-left:1px solid var(--rule)}
+.free .arb{margin:0 0 0 4px;font-size:12px}
+.fo{width:27px;height:27px;border-radius:7px;border:1.5px solid var(--rule);background:#fff;
+  font-weight:700;font-size:13px;color:var(--maroon);line-height:1}
+.fo.on{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+
+/* A sheet inside the app carries no university crest, and no second club mark:
+   the app's own header holds the club's, larger than the sheet ever prints it.
+   They are hidden rather than removed so the sheet's geometry — and the title's
+   centre line over the course columns — stays exactly as printed. */
+.stage .hd__crest,.stage .hd__club{visibility:hidden}
+/* no point showing a code for the site you are already standing on */
+.stage .ft__scan{display:none}
+
+/* ticking a course, right on the map */
+.stage .crd[data-code]{cursor:pointer;transition:box-shadow .12s,transform .08s}
+.stage .crd[data-code]:active{transform:scale(.99)}
+.stage .crd[data-code]::after{
+  content:'';position:absolute;right:2mm;bottom:2mm;width:5.2mm;height:5.2mm;z-index:5;
+  border-radius:1.2mm;border:.55mm solid rgba(0,0,0,.2);background:rgba(255,255,255,.75);
+}
+.stage .crd.is-done::after{
+  border-color:var(--cat,var(--maroon));background:var(--cat,var(--maroon));
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M1.4 6.3 L4.6 9.3 L10.6 2.6' fill='none' stroke='white' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-size:78%;background-position:center;background-repeat:no-repeat;
+}
+.stage .crd.is-done{box-shadow:0 0 0 .9mm var(--cat,var(--maroon)) inset,0 .4mm 1.4mm rgba(0,0,0,.12)}
+.stage .crd.is-done .crd__body{background:color-mix(in srgb,var(--cat,var(--maroon)) 15%,#fff)}
+.stage .crd.is-done .crd__en,.stage .crd.is-done .crd__arname{color:var(--cat,var(--maroon))}
+/* the two visiting cards on a major map are general courses — ticked elsewhere */
+.stage .crd--gate{pointer-events:none}
+.stage .crd--gate::after{display:none}
+/* closed off: this group already has its pick, or you chose the other path */
+.stage .crd.is-lock{pointer-events:none;opacity:.3;filter:grayscale(.7)}
+.stage .crd.is-lock::after{display:none}
+
+/* plain screens (major, pace, result) reuse the sheet's own language */
+.pan{flex:1;min-height:0;overflow:auto;padding:22px 16px 26px}
+.pan__in{max-width:1080px;margin:0 auto}
+.h{margin:0;font-family:Aleo,serif;font-weight:700;font-size:27px;line-height:1.2}
+.h-ar{font-family:Cairo,sans-serif;font-weight:700;font-size:20px;direction:rtl;text-align:left;
+  line-height:1.6;margin:2px 0 9px}
+.p{font-size:15px;line-height:1.45;color:var(--ink-soft);max-width:72ch}
+.p .arb{font-size:15px;line-height:1.75;margin-top:3px}
+.majs{display:grid;gap:14px;margin-top:20px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.maj{text-align:left;background:#fff;border:1px solid var(--rule);border-radius:14px;overflow:hidden;
+  box-shadow:0 1px 3px rgba(0,0,0,.08);transition:transform .12s,box-shadow .12s}
+.maj:active{transform:scale(.99)}
+.maj.on{box-shadow:0 0 0 3px var(--maroon) inset,0 1px 3px rgba(0,0,0,.08)}
+.maj__t{display:block;background:var(--maroon);color:#fff;padding:17px 19px}
+.maj__c{display:block;font-size:12px;letter-spacing:.15em;font-weight:700;opacity:.72}
+.maj__en{display:block;font-family:BarlowC,sans-serif;font-weight:700;font-style:italic;
+  font-size:27px;line-height:1.12;margin-top:3px}
+.maj__ar{display:block;font-family:Cairo,sans-serif;font-weight:700;font-size:19px;direction:rtl;
+  text-align:left;line-height:1.7}
+.maj__b{display:block;padding:14px 19px 17px;font-size:13.5px;line-height:1.45;color:var(--ink-soft)}
+.pace{display:grid;gap:16px;margin-top:20px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.bx{background:#fff;border:1px solid var(--rule);border-left:5px solid var(--maroon);
+  border-radius:12px;padding:16px 18px 18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.bx__h{font-family:Aleo,serif;font-weight:700;font-size:16px;color:var(--maroon)}
+.bx__ha{font-family:Cairo,sans-serif;font-weight:700;font-size:14.5px;color:var(--maroon);
+  direction:rtl;text-align:left;line-height:1.7;margin-bottom:11px}
+.opts{display:flex;gap:7px;flex-wrap:wrap}
+.opt{min-width:52px;padding:11px 13px;border-radius:9px;border:1.5px solid var(--rule);background:#fff;
+  font-weight:700;font-size:17px;font-variant-numeric:tabular-nums;line-height:1;transition:all .12s}
+.opt small{display:block;font-size:10px;font-weight:500;letter-spacing:.05em;color:var(--ink-faint);margin-top:3px}
+.opt.on{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+.opt.on small{color:rgba(255,255,255,.75)}
+.cap{margin-top:10px;font-size:12.5px;color:var(--ink-faint);line-height:1.45}
+.cap .arb{font-size:12.5px;line-height:1.7;margin-top:2px}
+.big{background:var(--maroon);color:#fff;border-radius:16px;padding:26px 24px;margin-top:20px;
+  display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.big__n{font-family:BarlowC,sans-serif;font-weight:700;font-style:italic;
+  font-size:64px;line-height:.92}
+.big__l{font-family:Aleo,serif;font-weight:700;font-size:15px;margin-top:6px}
+.big__la{display:block;font-family:Tajawal,sans-serif;font-size:15px;direction:rtl;text-align:left;
+  line-height:1.6;opacity:.85;margin-top:2px}
+.sum{margin-top:15px;font-size:13.5px;color:var(--ink-soft);line-height:1.5}
+.terms{display:grid;gap:11px;margin-top:18px;align-items:start;
+  grid-template-columns:repeat(auto-fill,minmax(262px,1fr))}
+.tm{background:#fff;border:1px solid var(--rule);border-radius:12px;overflow:hidden;
+  box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.tm--s{border-color:#C9A227}
+.tm__h{padding:9px 13px;background:#EFE9E8;display:flex;align-items:center;gap:8px}
+.tm--s .tm__h{background:#FBF4E3}
+.tm__n{font-family:Aleo,serif;font-weight:700;font-size:14.5px}
+.tm__a{font-family:Tajawal,sans-serif;font-size:13px;color:#554C4A;margin-left:auto;direction:rtl}
+.tm__b{padding:5px 13px 11px}
+.tm__c{padding:7px 0;border-bottom:1px solid #EFE9E8;display:flex;gap:9px;align-items:flex-start}
+.tm__c:last-child{border-bottom:0}
+.tm__code{font-weight:700;font-size:12px;color:#fff;background:var(--cat,var(--maroon));border-radius:5px;
+  padding:3px 6px;flex:none;font-variant-numeric:tabular-nums;line-height:1.25}
+.tm__x{display:block;min-width:0;flex:1}
+.tm__en{display:block;font-family:Aleo,serif;font-weight:700;font-size:12.5px;line-height:1.25}
+.tm__ar{display:block;font-family:Tajawal,sans-serif;font-size:12.5px;line-height:1.5;color:#554C4A;
+  direction:rtl;text-align:right}
+.tm__s{display:inline-block;margin-top:2px;font-size:10px;font-weight:700;letter-spacing:.07em;
+  color:#8A6A00;background:#FBF4E3;border-radius:6px;padding:1px 5px}
+.nt{margin-top:20px;padding:12px 15px;border-radius:9px;background:rgba(102,0,0,.06);
+  border-left:4px solid var(--maroon);font-size:13.5px;line-height:1.45}
+.nt .arb{font-size:13.5px;line-height:1.7;margin-top:3px;color:#554C4A}
+.ftr{margin-top:26px;padding-top:15px;border-top:1px solid var(--rule);font-size:11.5px;
+  color:var(--ink-faint);line-height:1.6}
+.ftr b{color:var(--ink-soft)}
+
+/* bottom bar */
+.nv{flex:none;display:flex;align-items:center;gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  background:#fff;border-top:1px solid var(--rule);z-index:30}
+.btn{padding:13px 22px;border-radius:10px;font-weight:700;font-size:15.5px;background:var(--maroon);
+  color:#fff;line-height:1.2;transition:opacity .12s}
+.btn:disabled{opacity:.3;cursor:default}
+.btn--g{background:#fff;color:var(--maroon);border:1.5px solid var(--rule)}
+.btn .arb{font-size:13.5px;font-weight:500;opacity:.85;line-height:1.5}
+.st{flex:1;min-width:0;font-size:13px;color:var(--ink-soft);line-height:1.3}
+.st b{color:var(--maroon);font-size:15px}
+.st .arb{font-size:12px;line-height:1.55}
+.all{font-weight:700;font-size:12px;letter-spacing:.04em;color:var(--maroon);border:1.5px solid var(--rule);
+  border-radius:9px;padding:9px 12px;line-height:1.3;background:#fff;white-space:nowrap;flex:none}
+.all:active{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+@media (max-width:640px){
+  .ap{gap:10px;padding:8px 12px}.ap__logo{height:46px}.ap__en{font-size:20px}.ap__ar{font-size:14px}
+  .z{width:34px;height:34px;font-size:15px}.z--w{padding:0 9px;font-size:11px}
+  .h{font-size:22px}.h-ar{font-size:17px}.big__n{font-size:50px}
+  .btn{padding:12px 15px;font-size:14.5px}.all{padding:8px 10px;font-size:11px}
+  .hint{font-size:11px}.hint .arb{font-size:11px}
+}
+</style>
+</head>
+<body>
+<header class="ap">
+  <img class="ap__logo" id="mark" alt="ISOM Club">
+  <div class="ap__t"><span class="ap__en">WHEN DO I GRADUATE</span><span class="ap__ar">متى أتخرج؟</span></div>
+  <div class="ap__z" id="zoom"></div>
+</header>
+<div class="bar" id="bar"></div>
+<main id="main"><div id="slot"></div></main>
+<nav class="nv" id="nv"></nav>
+
+<script id="PAGES" type="application/json">__PAGES__</script>
+<script id="PLAN" type="application/json">__PLAN__</script>
+<script id="ASSETS" type="application/json">__ASSETS__</script>
+<script>/*__WIREJS__*/</script>
+<script>
+const PG = JSON.parse(document.getElementById('PAGES').textContent);
+const P  = JSON.parse(document.getElementById('PLAN').textContent);
+const AS = JSON.parse(document.getElementById('ASSETS').textContent);
+document.getElementById('mark').src = AS['isom-logo.png'];
+
+const PW = 594 * 96 / 25.4, PH = 420 * 96 / 25.4;   /* the sheet, in CSS pixels */
+const S = { step:0, major:null, done:new Set(), freeDone:0, perTerm:5, summer:2, start:0, z:null };
+const STEPS = ['major','general','majormap','electives','pace','result'];
+const CO = c => P.courses[c] || {en:c, ar:'', cat:'core', pre:[]};
+const PRE = c => { const o = S.major && P.majors[S.major].pre_override; return (o&&o[c]) ? o[c] : (CO(c).pre||[]); };
+const phone = () => window.innerWidth < 760;
+
+/* ---------- what is still owed ---------- */
+function outstanding(){
+  const M = P.majors[S.major], need = [], open = [];
+  const used = new Set();
+  const all = (cs,w) => cs.forEach(c => { if(!S.done.has(c)) need.push({c,why:w}); });
+  const pick = (cs,n,w,cat,shared) => {
+    const got = cs.filter(c=>S.done.has(c) && !(shared && used.has(c))).slice(0,n);
+    if(shared) got.forEach(c=>used.add(c));
+    const left = n - got.length;
+    const pool = cs.filter(c=>!S.done.has(c));
+    for(let i=0;i<left && i<pool.length;i++) need.push({c:pool[i],why:w,sug:true});
+    if(left>pool.length) for(let i=0;i<left-pool.length;i++) open.push({why:w,cat});
+  };
+  all(P.general,'general');
+  all(P.electives.must,'elective');
+  P.electives.groups.forEach(g=>pick(g.codes,g.pick,'elective',g.cat,true));
+  for(let i=0;i<P.electives.free-S.freeDone;i++) open.push({why:'free',cat:'support'});
+  all(M.must,'major');
+  if(M.paths.length){
+    let best=M.paths[0], sc=-1;
+    M.paths.forEach(p=>{const s=(S.done.has(p.top)?2:0)+p.codes.filter(c=>S.done.has(c)).length; if(s>sc){sc=s;best=p;}});
+    all([best.top],'major'); pick(best.codes,best.pick,'major',best.cat);
+  }
+  M.choose.forEach(g=>pick(g.codes,g.pick,'major',g.cat));
+  pick(M.support.codes,M.support.pick,'support',M.support.cat);
+  return {need,open};
+}
+function totalSlots(){
+  const M=P.majors[S.major];
+  return P.general.length + P.electives.must.length + P.electives.groups.length + P.electives.free
+    + M.must.length + (M.paths.length ? 1+M.paths[0].pick : 0)
+    + M.choose.reduce((a,g)=>a+g.pick,0) + M.support.pick;
+}
+const TERMS = (()=>{const o=[];for(let y=2026;y<=2070;y++){
+  o.push({en:'Fall '+y,ar:'خريف '+y,cap:'n'});
+  o.push({en:'Spring '+(y+1),ar:'ربيع '+(y+1),cap:'n'});
+  o.push({en:'Summer '+(y+1),ar:'صيف '+(y+1),cap:'s'});}return o;})();
+
+function schedule(){
+  const {need,open} = outstanding();
+  const passed = new Set(S.done);
+  let pool = need.slice(), blank = open.slice();
+  const out = []; let ti = S.start, guard = 0;
+  while((pool.length||blank.length) && guard++ < 400){
+    const T = TERMS[ti++]; if(!T) break;
+    const cap = T.cap==='s' ? S.summer : S.perTerm;
+    if(cap < 1) continue;
+    const ready = pool.filter(x=>{
+      const c = CO(x.c);
+      if(c.after_credits && passed.size < Math.ceil(c.after_credits/3)) return false;
+      return PRE(x.c).every(p=>passed.has(p));
+    });
+    const put = ready.slice(0,cap);
+    while(put.length<cap && blank.length) put.push(blank.shift());
+    if(!put.length){ if(!pool.length) break; out.push({T,list:[],stuck:true}); break; }
+    put.forEach(x=>{ if(x.c){ passed.add(x.c); pool = pool.filter(y=>y!==x); } });
+    out.push({T,list:put});
+  }
+  return out;
+}
+
+/* ---------- the sheet on screen ---------- */
+const MAPOF = { general:'general', electives:'electives' };
+function mapName(){ const st=STEPS[S.step]; return st==='majormap' ? S.major : MAPOF[st]; }
+
+function fitZoom(){
+  const w = document.getElementById('main').clientWidth - (phone()?0:24);
+  const f = w / PW;
+  return phone() ? 0.9 : Math.min(1, Math.max(f, 0.46));
+}
+function applyZoom(){
+  const st = document.querySelector('.stage'); if(!st) return;
+  const pg = st.querySelector('.page'), sz = st.querySelector('.sizer');
+  pg.style.transform = 'scale('+S.z+')';
+  sz.style.width  = (PW*S.z)+'px';
+  sz.style.height = (PH*S.z)+'px';
+  const zb = document.getElementById('zoom');
+  const pct = zb.querySelector('.z--w'); if(pct) pct.textContent = Math.round(S.z*100)+'%';
+}
+/* Every "PICK 1", "PICK 3", "TAKE BOTH" printed on a sheet is a rule the app
+   now holds you to: once a group is full the rest of it locks, and choosing a
+   path closes the other one. Untick and they open again. */
+let GS = [];
+function groupsFor(map){
+  if(map === 'electives') return P.electives.groups.map(g => ({codes:g.codes, max:g.pick, shared:true}));
+  const M = P.majors[map]; if(!M) return [];
+  const out = [];
+  M.paths.forEach(p => out.push({codes:p.codes, max:p.pick}));
+  M.choose.forEach(g => out.push({codes:g.codes, max:g.pick}));
+  out.push({codes:M.support.codes, max:M.support.pick});
+  return out.filter(g => g.max < g.codes.length);      /* take-all needs no lock */
+}
+function tagGroups(){
+  const els = [...document.querySelectorAll('.stage .crd[data-code]')];
+  const taken = new Set();
+  GS.forEach((g, gi) => g.codes.forEach(code => {
+    const el = els.find(e => !taken.has(e) && e.dataset.code === code);
+    if(el){ taken.add(el); el.dataset.grp = gi; }
+  }));
+}
+/* a course that sits in two groups is credited to one of them, as the sheet's
+   own footnote says: it counts once */
+function fullness(){
+  const used = new Set();
+  return GS.map(g => {
+    const got = g.codes.filter(c => S.done.has(c) && !(g.shared && used.has(c))).slice(0, g.max);
+    if(g.shared) got.forEach(c => used.add(c));
+    return got.length >= g.max;
+  });
+}
+function deadPath(){
+  const M = S.major && P.majors[S.major];
+  if(mapName() !== S.major || !M || M.paths.length !== 2) return null;
+  const on = M.paths.map(p => [p.top].concat(p.codes).some(c => S.done.has(c)));
+  if(on[0] && !on[1]) return 1;
+  if(on[1] && !on[0]) return 0;
+  return null;
+}
+function applyLocks(){
+  const full = fullness(), dp = deadPath();
+  const M = S.major && P.majors[S.major];
+  const shut = dp === null ? [] : [M.paths[dp].top].concat(M.paths[dp].codes);
+  document.querySelectorAll('.stage .crd[data-code]').forEach(e => {
+    const c = e.dataset.code, done = S.done.has(c);
+    const gi = e.dataset.grp;
+    const lock = !done && ((gi !== undefined && full[+gi]) || shut.indexOf(c) >= 0);
+    e.classList.toggle('is-lock', lock);
+  });
+}
+const HT = {};
+function pageHtml(name){
+  if(HT[name]) return HT[name];
+  let h = PG[name].html;
+  for(const k in AS) h = h.split('@@'+k).join(AS[k]);
+  return (HT[name] = h);
+}
+function mountMap(name){
+  const slot = document.getElementById('slot');
+  const free = name === 'electives'
+    ? '<span class="free">Free electives already passed'+
+      [0,1,2].map(n=>'<button class="fo '+(S.freeDone===n?'on':'')+'" data-fr="'+n+'">'+n+'</button>').join('')+
+      '<b class="arb">الاختيارية الحرة المجتازة</b></span>'
+    : '';
+  slot.innerHTML =
+    '<div class="stage"><div class="sizer">'+pageHtml(name)+'</div></div>'+
+    '<div class="hint"><span>Tap a course to mark it <b>passed</b>. Drag the map to move around it.</span>'+
+    free+'<span class="arb">المس المقرر لتعليمه <b>مجتازاً</b>. اسحب الخريطة للتنقل فيها.</span></div>';
+  window.__WIRES__ = JSON.parse(PG[name].wires);
+  if(window.__drawWires) window.__drawWires();        /* drawn at true size, then scaled */
+  GS = groupsFor(name); tagGroups();
+  if(S.z == null) S.z = fitZoom();
+  applyZoom();
+  syncTicks();
+  /* open on the map itself, not on the sheet's margins */
+  const st = slot.querySelector('.stage');
+  const pg = st.querySelector('.page'), body = st.querySelector('.body');
+  if(pg && body){
+    const b = body.getBoundingClientRect(), p = pg.getBoundingClientRect();
+    st.scrollLeft = Math.max(0, (b.left - p.left) - 6);
+    st.scrollTop  = Math.max(0, (b.top  - p.top ) - 6);
+  }
+}
+function syncTicks(){
+  document.querySelectorAll('.stage .crd[data-code]').forEach(e=>{
+    e.classList.toggle('is-done', S.done.has(e.dataset.code));
+  });
+  applyLocks();
+  const n = document.getElementById('nv'); if(n) n.innerHTML = nav();
+}
+/* "Tick all" must obey the same rules as tapping: it fills a sheet the way a
+   student legally could, never both paths and never more than a group's pick. */
+function tickAllLegal(){
+  const map = mapName();
+  mapCodes().forEach(c=>S.done.delete(c));
+  if(map === 'general'){ mapCodes().forEach(c=>S.done.add(c)); return; }
+  const M = P.majors[S.major];
+  const skip = (map === S.major && M && M.paths.length === 2)
+    ? [M.paths[1].top].concat(M.paths[1].codes) : [];
+  document.querySelectorAll('.stage .crd[data-code]:not(.crd--gate)').forEach(e=>{
+    if(e.dataset.grp === undefined && skip.indexOf(e.dataset.code) < 0) S.done.add(e.dataset.code);
+  });
+  GS.forEach(g=>{
+    /* prefer a course that belongs to this group alone, so a shared one is
+       not spent here and left looking like an extra pick in its other group */
+    const others = new Set(GS.filter(x => x !== g).reduce((a,x)=>a.concat(x.codes), []));
+    const pool = g.codes.filter(c => skip.indexOf(c) < 0 && !S.done.has(c));
+    const pref = pool.filter(c => !others.has(c)).concat(pool.filter(c => others.has(c)));
+    pref.slice(0, g.max).forEach(c=>S.done.add(c));
+  });
+}
+function mapCodes(){
+  return [...document.querySelectorAll('.stage .crd[data-code]:not(.crd--gate)')]
+    .map(e=>e.dataset.code).filter((c,i,a)=>a.indexOf(c)===i);
+}
+
+/* ---------- plain screens ---------- */
+function screenMajor(){
+  return '<div class="pan"><div class="pan__in">'+
+   '<h1 class="h">Which major are you in?</h1><div class="h-ar">ما تخصصك؟</div>'+
+   '<div class="p">Pick one. The next screens are your own printed course map — the same one in the guide.'+
+   '<span class="arb">اختر تخصصك. الشاشات التالية هي خريطة مقرراتك المطبوعة نفسها الموجودة في الدليل.</span></div>'+
+   '<div class="majs">'+Object.keys(P.majors).map(k=>{const m=P.majors[k];
+     return '<button class="maj '+(S.major===k?'on':'')+'" data-m="'+k+'">'+
+       '<span class="maj__t"><span class="maj__c">MAJOR '+m.code+'</span>'+
+       '<span class="maj__en">'+m.en+'</span><span class="maj__ar">'+m.ar+'</span></span>'+
+       '<span class="maj__b">9 major courses, 2 supporting courses, and the 25 general and college courses everyone takes.'+
+       '<span class="arb">9 مقررات تخصص، ومقرران مساندان، و25 مقرراً عاماً ومقررات كلية يدرسها الجميع.</span></span></button>';
+   }).join('')+'</div></div></div>';
+}
+function screenPace(){
+  const o = outstanding(), left = o.need.length+o.open.length;
+  const row = (key,vals,cur,lbl) => vals.map(n=>
+    '<button class="opt '+(cur===n?'on':'')+'" data-'+key+'="'+n+'">'+n+
+    (lbl&&n===0?'<small>SKIP</small>':'')+'</button>').join('');
+  return '<div class="pan"><div class="pan__in">'+
+   '<h1 class="h">How fast do you want to go?</h1><div class="h-ar">بأي سرعة تريد أن تتقدم؟</div>'+
+   '<div class="p">You have <b>'+left+'</b> '+(left===1?'course':'courses')+' left. Set your pace and see the term you finish.'+
+   '<span class="arb">بقي لك '+left+' '+(left===1?'مقرر':'مقرراً')+'. حدّد سرعتك لترى الفصل الذي تتخرج فيه.</span></div>'+
+   '<div class="pace">'+
+    '<div class="bx"><div class="bx__h">Courses each normal semester</div><div class="bx__ha">عدد المقررات في الفصل العادي</div>'+
+      '<div class="opts">'+row('p',[1,2,3,4,5,6],S.perTerm)+'</div>'+
+      '<div class="cap">Six is the most the college lets you register for in a normal semester.'+
+      '<span class="arb">ستة مقررات هو الحد الأعلى المسموح به في الفصل العادي.</span></div></div>'+
+    '<div class="bx" style="border-left-color:#C9A227"><div class="bx__h">Courses each summer</div><div class="bx__ha">عدد المقررات في الفصل الصيفي</div>'+
+      '<div class="opts">'+row('s',[0,1,2,3],S.summer,1)+'</div>'+
+      '<div class="cap">Summer takes one course at the least and three at the most. Choose 0 to skip summers.'+
+      '<span class="arb">الفصل الصيفي مقرر واحد على الأقل وثلاثة على الأكثر. اختر 0 لتخطي الصيف.</span></div></div>'+
+    '<div class="bx" style="border-left-color:var(--c-lang)"><div class="bx__h">Start from</div><div class="bx__ha">ابدأ من</div>'+
+      '<div class="opts">'+[0,1,2,3].map(i=>'<button class="opt '+(S.start===i?'on':'')+'" data-t="'+i+'" style="min-width:auto;font-size:14px">'+
+        TERMS[i].en+'<small>'+TERMS[i].ar+'</small></button>').join('')+'</div>'+
+      '<div class="cap">The first semester you will register in.<span class="arb">أول فصل ستسجّل فيه.</span></div></div>'+
+   '</div></div></div>';
+}
+function screenResult(){
+  const pl = schedule(), o = outstanding();
+  const left = o.need.length+o.open.length, total = totalSlots(), got = total-left;
+  if(!left) return '<div class="pan"><div class="pan__in"><h1 class="h">You are done.</h1>'+
+    '<div class="h-ar">لقد أنهيت كل شيء.</div><div class="p">All '+total+' courses are ticked. Go and see your advisor about graduating.'+
+    '<span class="arb">جميع المقررات الـ'+total+' مكتملة. راجع مرشدك الأكاديمي بخصوص التخرج.</span></div></div></div>';
+  const last = pl.length ? pl[pl.length-1].T : TERMS[S.start];
+  const yrs = pl.filter(t=>t.T.cap==='n').length/2;
+  return '<div class="pan"><div class="pan__in">'+
+   '<h1 class="h">Here is what is left</h1><div class="h-ar">هذا ما بقي عليك</div>'+
+   '<div class="big">'+
+     '<div><div class="big__n">'+left+'</div><div class="big__l">courses left of '+total+
+       '<span class="big__la">مقرراً باقياً من '+total+'</span></div></div>'+
+     '<div><div class="big__n">'+pl.length+'</div><div class="big__l">semesters, summers included'+
+       '<span class="big__la">فصلاً دراسياً، بما فيها الصيف</span></div></div>'+
+     '<div><div class="big__n" style="font-size:42px">'+last.en+'</div><div class="big__l">is when you finish'+
+       '<span class="big__la">هو موعد تخرجك — '+last.ar+'</span></div></div>'+
+   '</div>'+
+   '<div class="sum">You have passed <b>'+got+'</b> of '+total+'. Taking '+S.perTerm+' a semester'+
+     (S.summer?' and '+S.summer+' each summer':' and skipping summers')+', that is about '+yrs.toFixed(1)+
+     ' more academic '+(yrs===1?'year':'years')+'.'+
+     '<span class="arb">اجتزت '+got+' من '+total+'. بدراسة '+S.perTerm+' في الفصل'+
+     (S.summer?' و'+S.summer+' في كل صيف':' وتخطي الصيف')+'، يتبقى نحو '+yrs.toFixed(1)+' سنة دراسية.</span></div>'+
+   '<div class="terms">'+pl.map(t=>'<div class="tm '+(t.T.cap==='s'?'tm--s':'')+'">'+
+     '<div class="tm__h"><span class="tm__n">'+t.T.en+'</span><span class="tm__a">'+t.T.ar+'</span></div>'+
+     '<div class="tm__b">'+t.list.map(x=>{
+       if(!x.c) return '<div class="tm__c"><span class="tm__code" style="--cat:var(--c-support)">FREE</span>'+
+         '<span class="tm__x"><span class="tm__en">Free elective — your own choice</span>'+
+         '<span class="tm__ar">مقرر اختياري حر — من اختيارك</span></span></div>';
+       const c = CO(x.c);
+       return '<div class="tm__c"><span class="tm__code" style="--cat:var(--c-'+c.cat+')">'+x.c+'</span>'+
+         '<span class="tm__x"><span class="tm__en">'+c.en+'</span><span class="tm__ar">'+c.ar+'</span>'+
+         (x.sug?'<span class="tm__s">SUGGESTED · مقترح</span>':'')+'</span></div>';
+     }).join('')+'</div></div>').join('')+'</div>'+
+   '<div class="nt">This plan follows the prerequisite lines drawn on your map, and assumes every course is offered in the term it lands in. Always check your own plan in the portal before you register.'+
+   '<span class="arb">يتبع هذا المخطط المتطلبات السابقة المرسومة على خريطتك، ويفترض أن كل مقرر يُطرح في الفصل الذي وُضع فيه. راجع خطتك في نظام التسجيل قبل كل تسجيل.</span></div>'+
+   '<div class="ftr"><b>ISOM Club</b> · Kuwait University · College of Business Administration<br>'+
+   'Built from the club\'s 2026 / 2027 student guide.'+
+   '<span class="arb">مبني على دليل الطالب 2026 / 2027 الصادر عن النادي.</span></div>'+
+   '</div></div>';
+}
+
+/* ---------- chrome ---------- */
+function nav(){
+  const st = STEPS[S.step], last = S.step===STEPS.length-1;
+  let mid = '';
+  if(st==='general'||st==='majormap'||st==='electives'){
+    const cs = mapCodes(), on = cs.filter(c=>S.done.has(c)).length;
+    const allOn = on>=cs.length && cs.length>0;
+    mid = '<span class="st"><b>'+on+'</b>'+(phone()?' / ':' of ')+cs.length+(phone()?'':' ticked')+
+      '<span class="arb">مؤشَّر عليها</span></span>'+
+      '<button class="all" data-all="'+(allOn?0:1)+'">'+(allOn?'Clear · امسح':'Tick all · حدد الكل')+'</button>';
+  } else if(st==='pace'){ const o=outstanding(); mid='<span class="st"><b>'+(o.need.length+o.open.length)+'</b> left<span class="arb">مقرراً باقياً</span></span>'; }
+  else mid = '<span class="st"></span>';
+  return (S.step?'<button class="btn btn--g" id="back">Back<span class="arb">رجوع</span></button>':'')+mid+
+    (last ? '<button class="btn btn--g" id="again">Start again<span class="arb">ابدأ من جديد</span></button>'
+          : '<button class="btn" id="next" '+((st==='major'&&!S.major)?'disabled':'')+'>'+
+            (S.step===4?'Show me':'Next')+'<span class="arb">'+(S.step===4?'أرني النتيجة':'التالي')+'</span></button>');
+}
+function zoomBar(){
+  const m = mapName();
+  document.getElementById('zoom').innerHTML = m
+    ? '<button class="z" data-z="-">−</button><button class="z z--w" data-z="fit">FIT</button><button class="z" data-z="+">+</button>'
+    : '';
+  if(m) applyZoom();
+}
+function paint(){
+  const st = STEPS[S.step], m = mapName();
+  if(m) mountMap(m);
+  else document.getElementById('slot').innerHTML =
+    st==='major' ? screenMajor() : st==='pace' ? screenPace() : screenResult();
+  document.getElementById('nv').innerHTML = nav();
+  document.getElementById('bar').innerHTML = STEPS.map((_,i)=>'<i class="'+(i<=S.step?'on':'')+'"></i>').join('');
+  zoomBar();
+}
+function render(go){
+  save();
+  const slot = document.getElementById('slot');
+  if(go===undefined){ paint(); return; }
+  slot.classList.add('fade');
+  setTimeout(()=>{ S.step = go; S.z = null; paint(); slot.classList.remove('fade'); }, 170);
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click', e=>{
+  const z = e.target.closest('[data-z]');
+  if(z){ const k=z.dataset.z;
+    S.z = k==='fit' ? fitZoom() : Math.min(1.6, Math.max(0.28, S.z + (k==='+'?0.12:-0.12)));
+    return applyZoom(); }
+  const crd = e.target.closest('.stage .crd[data-code]');
+  if(crd){ const c=crd.dataset.code;
+    S.done.has(c) ? S.done.delete(c) : S.done.add(c);
+    crd.classList.toggle('is-done', S.done.has(c)); save(); return syncTicks(); }
+  const fr = e.target.closest('[data-fr]');
+  if(fr){ S.freeDone = +fr.dataset.fr; save();
+    fr.parentNode.querySelectorAll('.fo').forEach(b=>b.classList.toggle('on', b===fr)); return; }
+  const a = e.target.closest('[data-all]');
+  if(a){ a.dataset.all==='1' ? tickAllLegal() : mapCodes().forEach(c=>S.done.delete(c));
+    save(); return syncTicks(); }
+  const t = e.target.closest('[data-m],[data-p],[data-s],[data-t],#next,#back,#again');
+  if(!t) return;
+  if(t.dataset.m){ S.major=t.dataset.m; return render(); }
+  if(t.dataset.p){ S.perTerm=+t.dataset.p; return render(); }
+  if(t.dataset.s){ S.summer=+t.dataset.s; return render(); }
+  if(t.dataset.t){ S.start=+t.dataset.t; return render(); }
+  if(t.id==='next') return render(S.step+1);
+  if(t.id==='back') return render(S.step-1);
+  if(t.id==='again'){ S.done=new Set(); S.freeDone=0; S.major=null; return render(0); }
+});
+let rz; addEventListener('resize', ()=>{ clearTimeout(rz); rz=setTimeout(()=>{ if(mapName()){ S.z=fitZoom(); applyZoom(); } },180); });
+
+/* ---------- remembered on this device only ---------- */
+const KEY='isom-graduate-v2';
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify({major:S.major,done:[...S.done],
+  freeDone:S.freeDone,perTerm:S.perTerm,summer:S.summer,start:S.start})); }catch(e){} }
+(function load(){ try{ const v=JSON.parse(localStorage.getItem(KEY)||'null'); if(!v) return;
+  if(v.major&&P.majors[v.major]) S.major=v.major;
+  if(Array.isArray(v.done)) S.done=new Set(v.done.filter(c=>P.courses[c]));
+  if(typeof v.freeDone==='number') S.freeDone=Math.min(2,Math.max(0,v.freeDone));
+  if(typeof v.perTerm==='number') S.perTerm=Math.min(6,Math.max(1,v.perTerm));
+  if(typeof v.summer==='number') S.summer=Math.min(3,Math.max(0,v.summer));
+  if(typeof v.start==='number') S.start=Math.min(3,Math.max(0,v.start));
+}catch(e){} })();
+
+if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>{ if(mapName()) { mountMap(mapName()); } });
+paint();
+</script>
+</body>
+</html>
