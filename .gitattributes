@@ -1,6 +1,6 @@
-﻿# The planner is assembled by inlining the guide's own CSS and markup, so a
-# line ending is a byte in the shipped file. Checking out CRLF on Windows and
-# LF elsewhere would make the same commit build two different sites. Everything
+# The planner is assembled by inlining the CSS and markup of the guide, so a
+# line ending is a byte in the shipped page. Checking out CRLF on Windows and
+# LF elsewhere would make one commit build two different sites. Everything
 # stays LF on disk on every machine.
 * text=auto eol=lf
 *.png binary
