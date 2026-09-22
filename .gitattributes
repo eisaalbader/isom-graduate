@@ -1,0 +1,9 @@
+﻿# The planner is assembled by inlining the guide's own CSS and markup, so a
+# line ending is a byte in the shipped file. Checking out CRLF on Windows and
+# LF elsewhere would make the same commit build two different sites. Everything
+# stays LF on disk on every machine.
+* text=auto eol=lf
+*.png binary
+*.pdf binary
+*.woff2 binary
+*.zip binary
