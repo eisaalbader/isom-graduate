@@ -58,6 +58,11 @@ cd guide && pdfunite dist/cover-b.pdf dist/mis.pdf dist/oscm.pdf dist/general.pd
 
 Publishing: `DEPLOY.md`. The Vercel project and the domain already exist.
 
+The repo lives at **https://github.com/eisaalbader/isom-graduate** (private) and
+on the club's machine at `C:\Users\user\Desktop\isom-guide\isom-graduate`,
+with `origin` set and `main` tracking it. Push from there; the sandbox has no
+access to it.
+
 ### A page ships only when all of these pass
 
 `verify.js` fails the build on any of: a course number that does not match the
