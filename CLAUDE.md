@@ -68,6 +68,25 @@ under 4.5:1 contrast. `align-check.js` holds the title's centre line over the
 course columns to 0.02 px. `qrcheck.py` rasterises each finished **PDF** at A2,
 A3 and A4 and decodes the code out of the printed page.
 
+### The same commit must build the same sheets anywhere
+
+The sheets are rendered by a real browser, and Chromium builds disagree with
+each other by a pixel or two on accumulated text height. That is enough to make
+a map clear its caption on one machine and land on it on another. Two rules keep
+one commit meaning one guide:
+
+- **Never hard-code a browser path.** The render and verify scripts read
+  `CHROMIUM_PATH`, fall back to a pinned sandbox build if it happens to be
+  there, and otherwise let Playwright use whatever `npm run setup` installed.
+- **Line endings stay LF everywhere** (`.gitattributes`). The planner inlines
+  the guide's CSS and markup, so a line ending is a byte in the shipped page; a
+  CRLF checkout would publish a different site from the same commit.
+
+Where a layout is tight, give it slack rather than tuning it to the machine you
+are on. Checked 23 Sep on Windows (Chromium 1243) and Linux (1194): all six
+sheets pass, the three maps share one centre line, and `public/index.html` comes
+out byte-identical on both — and out of a clean clone.
+
 **When you add a new component, add its class to `verify.js`'s selector lists**
 — the overflow list may hold containers, the overlap list must hold leaves only.
 A page that passes because nothing on it is selected has not been checked.
