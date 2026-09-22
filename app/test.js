@@ -1,7 +1,13 @@
 const { chromium } = require('playwright');
+const fs = require('fs');
+/* Playwright's Chromium: a pinned build in the cloud sandbox, whatever
+   `npx playwright install chromium` put down on a normal machine. */
+const PINNED = process.env.CHROMIUM_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const LAUNCH = { args: ['--no-sandbox', '--font-render-hinting=none'] };
+if (fs.existsSync(PINNED)) LAUNCH.executablePath = PINNED;
 const path = require('path');
 (async () => {
-  const b = await chromium.launch({ executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args:['--no-sandbox'] });
+  const b = await chromium.launch(LAUNCH);
   const p = await b.newPage({ viewport:{width:1440,height:960} });
   const errs=[]; p.on('pageerror',e=>errs.push(String(e)));
   await p.goto('file://'+path.join(__dirname,'..','public','index.html'), {waitUntil:'networkidle'});

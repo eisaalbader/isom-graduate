@@ -3,6 +3,11 @@
    node verify.js mis oscm                                            */
 const { chromium } = require('playwright');
 const fs = require('fs');
+/* Playwright's Chromium: a pinned build in the cloud sandbox, whatever
+   `npx playwright install chromium` put down on a normal machine. */
+const PINNED = process.env.CHROMIUM_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const LAUNCH = { args: ['--no-sandbox', '--font-render-hinting=none'] };
+if (fs.existsSync(PINNED)) LAUNCH.executablePath = PINNED;
 const path = require('path');
 const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/courses.json'), 'utf8'));
 
@@ -36,10 +41,7 @@ Object.keys(expected).forEach(k => expected[k].forEach(c => {
 }));
 
 (async () => {
-  const b = await chromium.launch({
-    executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
-    args: ['--no-sandbox'],
-  });
+  const b = await chromium.launch(LAUNCH);
   let fails = 0;
   for (const name of pages) {
     const p = await b.newPage({ viewport: { width: 2245, height: 1587 } });

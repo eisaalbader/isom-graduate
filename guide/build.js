@@ -190,7 +190,7 @@ function misPage() {
 
         <svg class="wires" id="wires"></svg>
       </div>
-      <div class="ladder-note" style="margin-top:2.5mm">
+      <div class="ladder-note" style="margin-top:1.8mm">
         <span>${esc(M.ladder_note_en)}</span><span>${esc(M.ladder_note_ar)}</span>
       </div>
     </div>
@@ -575,7 +575,7 @@ function oscmPage() {
         <div class="subgrid" style="grid-row:6;grid-column:2/12;grid-template-columns:repeat(5,1fr)">${T.map(c => card(c, '', false)).join('')}</div>
         <svg class="wires" id="wires"></svg>
       </div>
-      <div class="ladder-note" style="margin-top:2.5mm">
+      <div class="ladder-note" style="margin-top:1.8mm">
         <span>${esc(O.ladder_note_en)}</span><span>${esc(O.ladder_note_ar)}</span>
       </div>
     </div>
@@ -643,7 +643,7 @@ function generalPage() {
 
         <svg class="wires" id="wires"></svg>
       </div>
-      <div class="ladder-note" style="margin-top:2.5mm">
+      <div class="ladder-note" style="margin-top:1.8mm">
         <span>${esc(G.ladder_note_en)}</span><span>${esc(G.ladder_note_ar)}</span>
       </div>
       <div class="nextstep">
@@ -722,7 +722,7 @@ function electivesPage() {
           </div>
         </div>
       </div>
-      <div class="ladder-note" style="margin-top:2.5mm">
+      <div class="ladder-note" style="margin-top:1.8mm">
         <span>${esc(EL.ladder_note_en)}</span><span>${esc(EL.ladder_note_ar)}</span>
       </div>
     </div>

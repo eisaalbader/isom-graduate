@@ -383,7 +383,11 @@ body{background:#8a8a8a;font-family:DMSans,sans-serif;color:var(--ink);-webkit-f
 /* a canvas that stacks the map and the captions underneath it, so nothing
    is ever pushed out over the footer */
 .canvas--stack{display:flex;flex-direction:column;min-height:0}
-.canvas--stack > .grid{height:auto;flex:1;min-height:0}
+/* A map with a caption under it has to fit the grid AND the caption. Chromium
+   builds differ by a pixel or two in text height, so the row gap carries a
+   little slack: without it the last row lands on the caption on one machine
+   and clears it on another, and the sheet stops being reproducible. */
+.canvas--stack > .grid{height:auto;flex:1;min-height:0;row-gap:4.1mm}
 
 /* ---------- subject streams ---------- */
 /* Each colour owns a block of columns, so a chain runs straight down one

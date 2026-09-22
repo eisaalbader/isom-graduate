@@ -1,12 +1,18 @@
 /* Every page centres its title block on the COURSE COLUMNS, not on the sheet.
    node align-check.js [page ...]                                            */
 const { chromium } = require('playwright');
+const fs = require('fs');
+/* Playwright's Chromium: a pinned build in the cloud sandbox, whatever
+   `npx playwright install chromium` put down on a normal machine. */
+const PINNED = process.env.CHROMIUM_PATH || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+const LAUNCH = { args: ['--no-sandbox', '--font-render-hinting=none'] };
+if (fs.existsSync(PINNED)) LAUNCH.executablePath = PINNED;
 const path = require('path');
 const pages = process.argv.slice(2);
 if (!pages.length) pages.push('mis', 'oscm', 'general');
 
 (async () => {
-  const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--no-sandbox'] });
+  const b = await chromium.launch(LAUNCH);
   let worst = 0;
   for (const name of pages) {
     const p = await b.newPage({ viewport: { width: 2245, height: 1587 } });

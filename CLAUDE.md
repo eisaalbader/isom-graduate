@@ -37,6 +37,7 @@ guide's rendered pages, so the guide goes first.
 
 ```bash
 npm install                    # once
+npm run setup                  # once — downloads the Chromium that renders the PDFs
 cd guide && node build.js      # data -> dist/*.html
 cd guide && node render.js mis # one page -> dist/mis.pdf + .png
                                #   pages: cover-b mis oscm general electives transfer numbers
