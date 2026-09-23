@@ -74,6 +74,10 @@ idea, this file wins unless the club says otherwise.
 - **A wire never crosses text.** The router treats labels as obstacles: it drops the bus
   below them, steps around them, or — when the label sits squarely on the line — stops at
   its top edge and resumes at its bottom, making the label a station on the wire.
+- **A line into a path runs along the top edge of the path box, never inside it.** The club,
+  23 Sep 2026: "put the lines on the edge of the color box". The box overhangs its cards by
+  2.1mm at the top (4.5mm at the sides) and the path header carries 1.7mm of top padding, so
+  there is room above the box for the line; the router sets it 4px above the box's edge.
 - **Every wire ends in an arrowhead.** The arrowheads are `<path>`s inside `<defs><marker>`,
   so the stroke rule must be `.wires > path`, never `.wires path` — the blanket selector
   paints them `fill:none` and all the arrows vanish without any error. `verify.js` guards it.
