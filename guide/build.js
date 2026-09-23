@@ -224,6 +224,11 @@ function draw(){
     obs.push({x:r.left-gb.left-4,y:r.top-gb.top-4,w:r.width+8,h:r.height+8,code:null});});
   grid.querySelectorAll('.crd[data-code]').forEach(function(e){var r=e.getBoundingClientRect();
     obs.push({x:r.left-gb.left-3,y:r.top-gb.top-3,w:r.width+6,h:r.height+6,code:e.dataset.code});});
+  /* the coloured path boxes: a line that feeds a path runs along the top edge
+     of its box, never inside it */
+  var zones=[];
+  grid.querySelectorAll('.zone').forEach(function(e){var r=e.getBoundingClientRect();
+    zones.push({x:r.left-gb.left,y:r.top-gb.top,w:r.width});});
 
   var add=function(d,cls,a,col,key,srcs){var p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('class',cls);
     if(col)p.style.stroke=col;
@@ -359,6 +364,9 @@ function draw(){
     var x0=b.lo, x1=b.hi;
     var ends=b.srcs.concat(b.ts);
     var y=Math.min(mb+(mt-mb)/2, mb+13);
+    zones.forEach(function(z){
+      if(x1>z.x && x0<z.x+z.w && z.y>mb && z.y<mt) y=Math.min(y, Math.max(mb+4, z.y-4));
+    });
     for(var pass=0;pass<4;pass++){
       obs.forEach(function(o){
         if(o.code && ends.indexOf(o.code)>=0) return;
