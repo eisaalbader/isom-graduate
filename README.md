@@ -8,7 +8,7 @@ Two things live here, and they share one source of truth:
 | | |
 |---|---|
 | `guide/` | the seven printed sheets, A2 landscape |
-| `app/` + `public/` | **متى أتخرج؟ — When do I graduate**, the web planner |
+| `app/` + `public/` | **متى أتخرج؟ — When do I graduate**, the web planner, live at https://isom-graduate.vercel.app |
 
 The planner does not redraw the maps. It lifts the markup, the stylesheet, the
 wire router and the font files straight out of `guide/` at build time, so the
@@ -66,5 +66,6 @@ club says otherwise.
 
 ## Publishing
 
-See `DEPLOY.md`. The Vercel project and the domain already exist; the site
-needs one command.
+Live at https://isom-graduate.vercel.app, published by hand from the club's
+machine. A push to GitHub does not publish it. How to publish a change:
+`DEPLOY.md`.

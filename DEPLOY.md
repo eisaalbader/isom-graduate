@@ -1,51 +1,52 @@
 # Publishing the planner
 
-Everything is done except the last step, which needs a machine that can reach
-Vercel. The cloud session this was built in cannot: `api.vercel.com` is blocked
-by its egress policy, and the GitHub token it was given is scoped to repositories
-that were not configured, so it could neither push nor deploy.
+The planner is live at **https://isom-graduate.vercel.app**. It is published by
+hand from the club's machine with the Vercel CLI. **A push to GitHub does not
+publish anything**: the Vercel project is not connected to the repo.
 
-What **is** already done, on your Vercel account (team `eisaalbader`):
+## Where things are
 
-- the project **isom-graduate** exists
-- its production domain **isom-graduate.vercel.app** is reserved and verified
-- Vercel Authentication is **off**, so the page is public the moment it is live
-- that exact URL is what the QR code on all six sheets points to
+- Vercel project **isom-graduate**, team **eisa** (`eisaalbader`)
+- Production domain **isom-graduate.vercel.app**: the address the QR on all
+  six sheets encodes
+- Vercel Authentication and password protection are **off**, so the page is
+  public
+- Repo: https://github.com/eisaalbader/isom-graduate (private), cloned at
+  `C:\Users\user\Desktop\isom-guide\isom-graduate` with `origin` set and
+  `main` tracking it
 
-So the URL on the printed guide is already correct. It just needs content.
+Checked 23 Sep 2026: the last production deploy was that morning at 02:06
+Kuwait time. The live page, fetched back, is 709,032 bytes with MD5
+`663e8e4e1851de37279fd6325700feaa`, byte-identical to `public/index.html`
+built from a clean clone.
 
-## The one command
+## Publishing a change
+
+1. Build and check in the order in `CLAUDE.md`: the guide first, its checks,
+   then the planner and its tests. Nothing ships until they all pass.
+2. Commit and push from the club's machine.
+3. Deploy:
 
 ```powershell
 cd C:\Users\user\Desktop\isom-guide\isom-graduate
 npx vercel deploy --prod
 ```
 
-The first run asks you to sign in (it opens a browser) and then asks which
-project — pick **isom-graduate**, or answer the linking questions with:
+If it asks you to sign in, it opens a browser. If it asks which project:
+scope **eisa**, link to the existing project **isom-graduate**. `vercel.json`
+serves `public/` as a static site, so there is no build step on Vercel and it
+takes a few seconds. `deploy.ps1` runs the same command.
 
-- Set up and deploy? **yes**
-- Which scope? **eisa**
-- Link to existing project? **yes** → `isom-graduate`
-
-`vercel.json` already tells it to serve `public/` as a static site, so there is
-no build step and it takes a few seconds. When it finishes, open
-<https://isom-graduate.vercel.app> and scan the QR on page 1 to check it lands.
-
-## Putting it on GitHub
+4. Check that the live page is the build you meant to ship. The two hashes
+   must match:
 
 ```powershell
-cd C:\Users\user\Desktop\isom-guide\isom-graduate
-git init
-git add -A
-git commit -m "ISOM student guide 2026/2027 and the graduation planner"
-gh repo create isom-graduate --private --source=. --push
+curl.exe -s https://isom-graduate.vercel.app -o live.html
+certutil -hashfile live.html MD5
+certutil -hashfile public\index.html MD5
 ```
 
-(or make the repo on github.com and `git remote add origin ... ; git push -u origin main`)
-
-Connecting that repo to the Vercel project afterwards means every future push
-redeploys on its own.
+Then scan the QR on page 1 to check it lands.
 
 ## If you change the URL
 
@@ -58,4 +59,8 @@ npm run qr        # redraws the code and refuses to save one that will not scan
 npm run sheets
 npm run render
 npm run verify
+npm run planner
+npm test
 ```
+
+Run `qrcheck.py` on the new PDFs (command in `CLAUDE.md`), then publish as above.
