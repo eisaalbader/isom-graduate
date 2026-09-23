@@ -39,12 +39,14 @@ guide's rendered pages, so the guide goes first.
 npm install                    # once
 npm run setup                  # once — downloads the Chromium that renders the PDFs
 cd guide && node build.js      # data -> dist/*.html
+cd guide && node covers.js     # the cover, drawn from the same data
 cd guide && node render.js mis # one page -> dist/mis.pdf + .png
                                #   pages: cover-b mis oscm general electives transfer numbers
 cd guide && node verify.js     # every check below, all six sheets
 cd guide && node align-check.js
 cd guide && python3 mkqr.py    # only if the site URL changes
 cd guide && python3 qrcheck.py # decodes the QR back off the finished PDFs
+python3 app/sync-pre.py        # after changing a line on the MIS map
 cd app  && node build-app.js   # -> public/index.html
 node app/test.js app/rules.js app/rules2.js   # 22 checks on the planner
 ```
@@ -60,8 +62,8 @@ Publishing: `DEPLOY.md`. The Vercel project and the domain already exist.
 
 The repo lives at **https://github.com/eisaalbader/isom-graduate** (private) and
 on the club's machine at `C:\Users\user\Desktop\isom-guide\isom-graduate`,
-with `origin` set and `main` tracking it. Push from there; the sandbox has no
-access to it.
+with `origin` set and `main` tracking it. Push from there: a cloud session can
+clone it but not push to it (checked 23 Sep).
 
 ### A page ships only when all of these pass
 
@@ -152,6 +154,15 @@ nothing in the portal; the club chose to print them like any other course. The
 finding stays in the verification log, off the page. If you disagree, say so
 once and then do what the club asked.
 
+**The MIS paths open after 1013331 + 1013337.** Settled 23 Sep 2026, against the
+registration system, which asks for less: 1013340 needs 1013331, 1013350 needs
+1013230 + 1013240, 1013434 needs 1013331. One line from 1013331 + 1013337 feeds
+both paths and 1013434 (434 has to share it, or the lines cross), and it runs
+along the top edge of the green and blue boxes, never inside them. The planner
+enforces the same. So the MIS sheet does not carry the "prerequisites come from
+the registration system" note; OSCM and General still do. The finding is in
+the log, section T.
+
 ---
 
 ## The planner
@@ -172,7 +183,10 @@ stays open, as the electives page's own footnote says.
 Pace: 6 courses a semester at most, summer 1–3 or 0 to skip.
 
 `app/src/plan.json` is the degree model, generated from `courses.json`. If the
-degree structure changes, regenerate it — do not hand-edit both.
+degree structure changes, regenerate it — do not hand-edit both. There is no
+full generator in the repo: when a line on the MIS map changes,
+`python3 app/sync-pre.py` copies the map's prerequisites into it and prints
+what it changed.
 
 ---
 
@@ -182,15 +196,23 @@ Carried in `guide/verification-log.md`, unresolved:
 
 - **0460113** (الأرض المتغيرة) and **0494105** (صيانة البيئة) return no rows in
   the portal. Printed anyway, at the club's instruction.
-- **1013340** is printed needing 1013331 on the MIS page and needing nothing on
-  the OSCM page. 1013331 is MIS-only, so an OSCM student offered it could never
-  register. The planner follows whichever page the student is reading.
+- **1013340** is printed needing 1013331 + 1013337 on the MIS page and needing
+  nothing on the OSCM page. 1013331 is MIS-only, so an OSCM student offered it
+  could never register. The planner follows whichever page the student is
+  reading.
 - **1013485** Transportation Management is not listed in the portal.
 - Energy & Petroleum: the sheet says 1013450, the portal says 1013455.
 - **1013472** lists the retired 1013433 as its prerequisite.
 - **1013321** has no title in the portal; **1013441**'s English title is
   corrupted there; **1013415**'s Arabic field holds English.
 - Whether one course can satisfy two elective groups.
+
+Open in the guide itself:
+
+- The yellow PICK 1 row on MIS has no lines. Its four prerequisites are in
+  `courses.json` and the planner uses them (1013240 → 1013351, 1013230 +
+  1013240 → 1013451, 1013331 + 1013337 → 1013480 and 1013492), but none has been
+  read off the portal's Details screen. The club kept this layout on 23 Sep.
 
 ---
 

@@ -503,7 +503,7 @@ function footer(notes, pageNo) {
       <span style="color:var(--ink-faint)">Checked against the CBA major plan and the KU registration system, September 2026.</span></div>
     <div class="ft__changed">
       <h4>Good to know &nbsp;·&nbsp; <span style="font-family:Tajawal;direction:rtl;unicode-bidi:isolate">معلومات مهمة</span></h4>
-      <div class="ft__grid">${notes.map(c => `<div class="ft__item">${esc(c.en)}<span class="ar">${esc(c.ar)}</span></div>`).join('')}</div>
+      <div class="ft__grid" style="grid-template-columns:repeat(${notes.length},1fr)">${notes.map(c => `<div class="ft__item">${esc(c.en)}<span class="ar">${esc(c.ar)}</span></div>`).join('')}</div>
     </div>
     <div class="ft__page">${pageNo}</div>
   </footer>`;

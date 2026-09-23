@@ -603,3 +603,83 @@ the deploy notes and the readme are loaded as knowledge into a Claude project,
 **ISOM Student Guide & Planner**, with the settled rules written into its
 instructions — including that no one signs in to the KU portal on the club's
 behalf.
+
+---
+
+## T. MIS: the club's reading of what opens the paths — 23 Sep 2026
+
+### The decision
+
+Marking up the MIS PDF, the club drew 1013331 and 1013337 leading into both
+paths and said items were missing. Three versions were drawn and checked: A
+drew the four missing PICK 1 lines, B ran 1013331 + 1013337 into both paths,
+C did both. The club chose **B**. The registration system gates these courses differently (read
+20 Sep, "Prerequisite verification against the registration system"):
+
+| Course | Registration system | Printed from 23 Sep |
+|---|---|---|
+| 1013340 Business Analytics | 1013331 | 1013331 + 1013337 |
+| 1013350 Advanced Programming | 1013230 + 1013240 | 1013331 + 1013337 |
+| 1013434 Data & Information Mgmt | 1013331 | 1013331 + 1013337 |
+
+1013434 was not in the club's sketch. It has to share the line: with 434 on
+1013331 alone, the 331 line to 434 crosses the new 331 + 337 line
+(`verify.js`: `lines cross each other: 1013331 X 1013331|1013337`). This is
+the structure the club's earlier sheet drew. The finding stays here, off the
+page, as with 0460113 and 0494105 (section N).
+
+The MIS footer note "Prerequisites here come from the registration system —
+they are what actually lets you register" was removed at the club's
+instruction, since it is no longer true on that sheet. OSCM and General keep
+it. The MIS footer now spreads its three notes across the row.
+
+### The line runs along the top of the path boxes
+
+The club's second instruction: "put the lines on the edge of the color box".
+The 331 + 337 line had run 3 mm inside the green and blue boxes, parallel to
+their top borders. The boxes' top overhang went from 4.5 mm to 2.1 mm, the
+path headers took 1.7 mm of top padding so they keep their room inside the
+box, and the router now places a line that feeds a path box 4 px above that
+box's top edge. MIS vertical slack: 7.7 mm (was 9.4).
+
+### What else it changes
+
+- **Planner.** `app/src/plan.json` takes the same three prerequisite lists,
+  copied from `courses.json` by the new `app/sync-pre.py`. On `main` the
+  script finds nothing to change. A student who has passed 1013331 but not
+  1013337 now gets 1013340 and 1013434 one term later. OSCM's 1013340 still
+  needs nothing.
+- **Cover.** It is drawn from the same prerequisites: four curves added
+  (331→350, 337→340, 337→350, 337→434), two removed (230→350, 240→350). That
+  moved seven courses into the right-most column, and one curve ran behind the
+  Kuwait University crest. The two columns under the crest now start below
+  it. This also clears a curve that ran behind the crest on the cover that was
+  printed before (checked by sampling every curve against the crest's box:
+  1 hit before, 0 now).
+
+### Recorded, not printed
+
+The yellow PICK 1 row on MIS has no lines. Its four prerequisites are in
+`courses.json` and the planner schedules by them:
+
+- 1013240 → 1013351
+- 1013230 + 1013240 → 1013451
+- 1013331 + 1013337 → 1013480 and 1013492
+
+None of the four has been read off the portal's Course Catalog Details screen
+yet. Versions A and C drew them; the club kept the bottom-row layout.
+
+### Checks
+
+| | |
+|---|---|
+| `verify.js`, all six sheets | PASS |
+| `align-check.js` | 0.02 px spread |
+| `qrcheck.py` | all six sheets decode at A2, A3 and A4 |
+| planner | 22 checks pass, every scheduling scenario clean |
+| `public/index.html` | MD5 `147e854c7179eff377cdbc1954a23f8d`, 709,482 bytes |
+| sheets other than MIS and the cover | pixel-identical to `main` |
+
+Built and checked in a cloud session (Chromium 1194). A cloud session can
+clone the repo but cannot push it, so this goes live only once it is pushed
+and deployed from the club's machine.

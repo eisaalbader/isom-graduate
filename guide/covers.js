@@ -85,14 +85,16 @@ function constellation(W, H) {
   const rank = { g: 1, m: 0, o: 2 };
   Object.keys(cols).forEach(d => cols[d].sort((a, b) => rank[all[a].page] - rank[all[b].page] || a.localeCompare(b)));
 
+  /* The Kuwait University crest and its name sit in the top-right corner. The
+     columns that run under it keep their first course below it, so no line
+     ever passes behind the crest or through its name. */
   const pos = {};
   Object.keys(cols).forEach(d => {
     const list = cols[d], n = list.length;
+    const x = 0.30 * W + (+d / maxD) * 0.66 * W;
+    const spread = Math.min(0.94, 0.22 + n * 0.085, x > 0.84 * W ? 0.56 : 1);
     list.forEach((c, i) => {
-      pos[c] = {
-        x: 0.30 * W + (+d / maxD) * 0.66 * W,
-        y: H * (0.5 + (n === 1 ? 0 : (i / (n - 1) - 0.5)) * Math.min(0.94, 0.22 + n * 0.085)),
-      };
+      pos[c] = { x, y: H * (0.5 + (n === 1 ? 0 : (i / (n - 1) - 0.5)) * spread) };
     });
   });
 
