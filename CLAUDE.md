@@ -56,7 +56,12 @@ Then the booklet:
 ```bash
 cd guide && pdfunite dist/cover-b.pdf dist/mis.pdf dist/oscm.pdf dist/general.pdf \
   dist/electives.pdf dist/transfer.pdf dist/numbers.pdf dist/ISOM-student-guide-2026-2027.pdf
+cd guide && python3 phone.py   # the phone/iPad copy: pages flattened, QR kept sharp, links kept
 ```
+
+The print booklet is vector, about 6 MB. The phone copy is about 1.6 MB. It
+lays the QR back on top as the original image, so the code scans at any zoom,
+and tapping it opens the site.
 
 Publishing: `DEPLOY.md`. The Vercel project and the domain already exist.
 
