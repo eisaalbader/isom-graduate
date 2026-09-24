@@ -29,8 +29,9 @@ map on a phone is the map on the sheet. Fix a prerequisite line in
 
 Finished PDFs are in `pdf/`. `pdf/ISOM-student-guide-2026-2027.pdf` is all
 seven in order, for print. `pdf/ISOM-student-guide-2026-2027-phone.pdf` is the
-same booklet made light for a phone or iPad (`cd guide && python3 phone.py`);
-its QR still scans and tapping it opens the site.
+same booklet for a phone or iPad: the same vector pages at a third of the size,
+quicker to draw (`cd guide && node screen.js && python3 phone.py`). Its QR
+still scans and tapping it opens the site.
 
 ## Everything is checked
 

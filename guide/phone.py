@@ -1,67 +1,121 @@
 #!/usr/bin/env python3
-"""The phone and iPad copy of the booklet.
+"""The copy of the booklet students get on their phones and iPads.
 
-The print booklet is vector and heavy: every sheet carries its own fonts and
-images. This flattens each page to one JPEG, so the file is about a quarter
-of the size and opens fast, then lays the QR code back on top as the original
-lossless image, so the code stays sharp at any zoom, and copies the
-tap-to-open links across, so tapping the code opens the site.
+Built from the screen renders (`node screen.js`). Every page keeps its vector
+text and lines, laid out exactly as in the print booklet, so it stays sharp at
+any zoom; it just leaves out the parts that make a phone slow to draw a page
+(see screen.js). Then, in one file:
 
-    cd guide && python3 phone.py        # after the booklet is built
+- every picture that repeats from page to page (the crest, the logos, the
+  QR, the watermarks) is stored once instead of once per page;
+- the cover's colour wash, a soft gradient photographed by screen.js, is
+  stored as a full-colour JPEG, the one lossy step, on the one picture where
+  it cannot show;
+- every other picture is repacked losslessly (PNG row filters) and checked
+  pixel for pixel against what it was. The QR comes out exactly as it went in,
+  and its tap-to-open link comes through from the sheets unchanged;
+- the file is linearised, so it starts showing before it has fully
+  downloaded.
 
-Needs PyMuPDF and Pillow (pip install pymupdf pillow). pikepdf, if present,
-linearises the file so it starts showing before it has fully downloaded.
+    cd guide && node screen.js && python3 phone.py
+
+Needs PyMuPDF, pikepdf and Pillow (pip install pymupdf pikepdf pillow).
 """
 import io
 import os
+import struct
+
+import pikepdf
 import pymupdf
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-SRC = os.path.join(HERE, 'dist', 'ISOM-student-guide-2026-2027.pdf')
+PAGES = ['cover-b', 'mis', 'oscm', 'general', 'electives', 'transfer', 'numbers']
 OUT = os.path.join(HERE, 'dist', 'ISOM-student-guide-2026-2027-phone.pdf')
-QR = os.path.join(HERE, 'assets', 'qr.png')
-WIDTH, QUALITY = 2400, 55          # px across an A2 page; JPEG quality
 
-qr_bytes = open(QR, 'rb').read()
-qr_size = Image.open(QR).size
-
-src = pymupdf.open(SRC)
 out = pymupdf.open()
-qr_xref, qr_pages = 0, 0
-for pg in src:
-    z = WIDTH / pg.rect.width
-    pix = pg.get_pixmap(matrix=pymupdf.Matrix(z, z), alpha=False)
+for name in PAGES:
+    out.insert_pdf(pymupdf.open(os.path.join(HERE, 'dist', 'screen', name + '.pdf')))
+out.set_metadata({'title': 'ISOM Student Guide 2026/2027',
+                  'author': 'ISOM Club, Kuwait University',
+                  'subject': 'Phone and iPad edition'})
+out.save(OUT, garbage=4, deflate=True, clean=True)      # garbage=4: identical objects stored once
+pages = out.page_count
+out.close()
+
+
+def components(img):
+    cs = img.get('/ColorSpace')
+    if cs == '/DeviceGray':
+        return 1
+    if cs == '/DeviceRGB':
+        return 3
+    if isinstance(cs, pikepdf.Array) and cs[0] == '/ICCBased':
+        return int(cs[1].get('/N'))
+    return 0
+
+
+def png_rows(raw, w, h, n):
+    """The same pixels as a zlib stream of PNG-filtered rows (PDF /Predictor 15)."""
     buf = io.BytesIO()
-    Image.frombytes('RGB', (pix.width, pix.height), pix.samples).save(
-        buf, 'JPEG', quality=QUALITY, optimize=True, progressive=True, subsampling=2)
-    page = out.new_page(width=pg.rect.width, height=pg.rect.height)
-    page.insert_image(page.rect, stream=buf.getvalue())
+    Image.frombytes('L' if n == 1 else 'RGB', (w, h), raw).save(buf, 'PNG', optimize=True)
+    png, pos, idat = buf.getvalue(), 8, b''
+    while pos < len(png):
+        size, kind = struct.unpack('>I4s', png[pos:pos + 8])
+        if kind == b'IDAT':
+            idat += png[pos + 8:pos + 8 + size]
+        pos += 12 + size
+    return idat
 
-    # the QR, exactly where the sheet put it, as the original image
-    for img in pg.get_images(full=True):
-        if (img[2], img[3]) == qr_size:
-            for r in pg.get_image_rects(img[0]):
-                if qr_xref:
-                    page.insert_image(r, xref=qr_xref)
-                else:
-                    qr_xref = page.insert_image(r, stream=qr_bytes)
-                qr_pages += 1
 
-    for ln in pg.get_links():
-        if ln.get('kind') == pymupdf.LINK_URI:
-            page.insert_link({'kind': pymupdf.LINK_URI, 'from': ln['from'], 'uri': ln['uri']})
+def pictures(res, seen):
+    """Every picture a page draws, including inside its groups."""
+    for x in (res.get('/XObject') or {}).values() if res is not None else ():
+        if x.objgen in seen:
+            continue
+        seen.add(x.objgen)
+        if x.get('/Subtype') == '/Image':
+            yield x
+        elif x.get('/Subtype') == '/Form':
+            yield from pictures(x.get('/Resources'), seen)
 
-out.set_metadata({'title': 'ISOM Student Guide 2026/2027 (phone)',
-                  'author': 'ISOM Club, Kuwait University'})
-out.save(OUT, garbage=4, deflate=True)
 
-try:
-    import pikepdf
-    with pikepdf.open(OUT, allow_overwriting_input=True) as p:
-        p.save(OUT, linearize=True)
-except ImportError:
-    pass
+wash = repacked = saved = 0
+with pikepdf.open(OUT, allow_overwriting_input=True) as pdf:
+    # the cover's wash: the one opaque colour picture on the cover shaped like the page
+    box = pdf.pages[0].MediaBox
+    page_ratio = float(box[2] - box[0]) / float(box[3] - box[1])
+    wash_ids = {img.objgen for img in pictures(pdf.pages[0].Resources, set())
+                if components(img) == 3 and '/SMask' not in img
+                and abs(int(img.Width) / int(img.Height) - page_ratio) < 0.01}
+    for img in pdf.objects:
+        if not (isinstance(img, pikepdf.Stream) and img.get('/Subtype') == '/Image'):
+            continue
+        if img.get('/Filter') != '/FlateDecode' or '/DecodeParms' in img or img.get('/BitsPerComponent') != 8:
+            continue
+        n, w, h = components(img), int(img.Width), int(img.Height)
+        if n not in (1, 3):
+            continue
+        raw, before = img.read_bytes(), len(img.read_raw_bytes())
+        if img.objgen in wash_ids:
+            buf = io.BytesIO()
+            Image.frombytes('RGB', (w, h), raw).save(buf, 'JPEG', quality=92, subsampling=0, optimize=True)
+            img.write(buf.getvalue(), filter=pikepdf.Name.DCTDecode)
+            wash += 1
+            saved += before - len(buf.getvalue())
+            continue
+        packed = png_rows(raw, w, h, n)
+        if len(packed) >= before:
+            continue
+        img.write(packed, filter=pikepdf.Name.FlateDecode,
+                  decode_parms=pikepdf.Dictionary(Predictor=15, Colors=n, BitsPerComponent=8, Columns=w))
+        if img.read_bytes() != raw:                      # lossless, or it does not ship
+            raise SystemExit('repacking changed the pixels of a %dx%d picture' % (w, h))
+        repacked += 1
+        saved += before - len(packed)
+    if wash != 1:
+        raise SystemExit('expected exactly one cover wash to store as JPEG, found %d' % wash)
+    pdf.save(OUT, linearize=True)
 
-print('wrote %s: %d pages, QR on %d, %.1f MB' % (os.path.relpath(OUT, HERE), out.page_count, qr_pages,
-                                                  os.path.getsize(OUT) / 1e6))
+print('wrote %s: %d pages, %.2f MB  (wash as JPEG, %d pictures repacked losslessly, %.0f KB saved)'
+      % (os.path.relpath(OUT, HERE), pages, os.path.getsize(OUT) / 1e6, repacked, saved / 1024))

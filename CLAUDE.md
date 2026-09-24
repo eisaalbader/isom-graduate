@@ -56,12 +56,17 @@ Then the booklet:
 ```bash
 cd guide && pdfunite dist/cover-b.pdf dist/mis.pdf dist/oscm.pdf dist/general.pdf \
   dist/electives.pdf dist/transfer.pdf dist/numbers.pdf dist/ISOM-student-guide-2026-2027.pdf
-cd guide && python3 phone.py   # the phone/iPad copy: pages flattened, QR kept sharp, links kept
+cd guide && node screen.js && python3 phone.py   # the phone/iPad copy
 ```
 
-The print booklet is vector, about 6 MB. The phone copy is about 1.6 MB. It
-lays the QR back on top as the original image, so the code scans at any zoom,
-and tapping it opens the site.
+The print booklet is vector, about 6 MB. The phone copy is about 2 MB and
+just as sharp: the same vector pages, laid out exactly as in print, without
+what makes a phone slow to draw them (blurred card shadows, multiply blending,
+and the cover's see-through gradients, which it lays back as pictures). Its
+pages draw about twice as fast as print, the cover about four times. The QR is
+the same picture as in print, and tapping it opens the site. Keep it vector:
+the club turned down a flattened copy, pictures of the pages, on 24 Sep as too
+low quality.
 
 Publishing: `DEPLOY.md`. The Vercel project and the domain already exist.
 

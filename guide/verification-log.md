@@ -691,3 +691,38 @@ Pushed 24 Sep (`f5ebbf6..0e4ba57`). Deployed to production from that GitHub
 commit at 15:08 Kuwait time; the live page fetched back from
 https://isom-graduate.vercel.app is byte-identical to the build, and carries
 1013331 + 1013337 as the prerequisites of 1013340, 1013350 and 1013434.
+
+## U. The phone and iPad copy, rebuilt as vector — 24 Sep 2026
+
+The first phone copy was pictures of the pages, 1.6 MB. The club turned it
+down as too low quality. It is replaced by the same vector pages as the print
+booklet, built by `guide/screen.js` and `guide/phone.py`:
+
+- rendered the way `render.js` renders the sheets (same window, same pixel
+  density), with three things left out: the blurred card shadows (the
+  capstone keeps its maroon ring), multiply blending on the level stripes and
+  watermarks, and the cover's see-through gradients;
+- the cover's colour wash is laid back as a picture at half size, stored as a
+  full-colour JPEG; its veil as a plain rectangle plus a picture of the fade,
+  measured off the page column by column; its dots keep their see-through
+  fill without a transparency group each;
+- every other picture is repacked losslessly and checked pixel for pixel
+  before the file is written.
+
+### Checks
+
+| | |
+|---|---|
+| text, every span on all 7 pages (words, font, size, position to 0.01 pt) | identical to the print booklet |
+| stroked lines on all 7 pages (every wire, rule and curve) | identical to the print booklet |
+| every other vector shape | identical, except the card shadows it leaves out |
+| pixels, the six sheets, at 96 dpi | at most 15 levels of 255 apart, only at card edges where the shadows were |
+| pixels, the cover | at most 5 levels apart (the print file's last 0.1 mm column at the right edge aside) |
+| QR | the same picture as in print (pixel MD5 `d017171a…`). `qrcheck.py`'s test decodes it on all six sheets at A2, A3 and A4. Off the whole page on screen it decodes at iPad and iPad Pro width and on a phone held sideways; upright, a phone needs a zoom, as with the print file |
+| tap-to-open link | one on each sheet, to https://isom-graduate.vercel.app/, same place as in print |
+| the file | qpdf finds no errors; linearised; 177 fonts, all embedded; 2,023,434 bytes |
+| `verify.js`, `align-check.js` | all six sheets PASS, 0.02 px (sheets unchanged) |
+
+Drawing time at iPad width, same machine, MuPDF: all seven pages 0.56 s
+against 1.17 s for the print booklet, the cover 0.09 s against 0.39 s.
+Poppler, which is slower with transparency: the cover 0.5 s against 3.0 s.
