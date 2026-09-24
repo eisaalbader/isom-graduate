@@ -680,6 +680,14 @@ yet. Versions A and C drew them; the club kept the bottom-row layout.
 | `public/index.html` | MD5 `147e854c7179eff377cdbc1954a23f8d`, 709,482 bytes |
 | sheets other than MIS and the cover | pixel-identical to `main` |
 
-Built and checked in a cloud session (Chromium 1194). A cloud session can
-clone the repo but cannot push it, so this goes live only once it is pushed
-and deployed from the club's machine.
+Built and checked in a cloud session (Chromium 1194), then again on the
+club's machine (Windows, Chromium 1243) on 24 Sep before pushing:
+`verify.js` all six sheets PASS, `align-check.js` 0.02 px, `sync-pre.py`
+found nothing to change, `public/index.html` came out byte-identical
+(`147e854c…`, 709,482 bytes) and left `git status` clean, and the planner's
+22 checks and every scheduling scenario passed.
+
+Pushed 24 Sep (`f5ebbf6..0e4ba57`). Deployed to production from that GitHub
+commit at 15:08 Kuwait time; the live page fetched back from
+https://isom-graduate.vercel.app is byte-identical to the build, and carries
+1013331 + 1013337 as the prerequisites of 1013340, 1013350 and 1013434.

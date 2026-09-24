@@ -15,10 +15,16 @@ publish anything**: the Vercel project is not connected to the repo.
   `C:\Users\user\Desktop\isom-guide\isom-graduate` with `origin` set and
   `main` tracking it
 
-Checked 23 Sep 2026: the last production deploy was that morning at 02:06
-Kuwait time. The live page, fetched back, is 709,032 bytes with MD5
-`663e8e4e1851de37279fd6325700feaa`, byte-identical to `public/index.html`
-built from a clean clone.
+Checked 24 Sep 2026: production is commit `0e4ba57`, deployed at 15:08 Kuwait
+time from GitHub through the Vercel connection. The live page, fetched back,
+is 709,482 bytes with MD5 `147e854c7179eff377cdbc1954a23f8d`, byte-identical
+to `public/index.html` built on the club's machine and in a clean clone.
+
+That day the CLI on the club's machine answered `Error: Not authorized`: its
+sign-in had expired. Run `npx vercel login` (it opens a browser) before the
+next CLI deploy. The Vercel GitHub app can read the repo, so a production
+deployment can also be made straight from a commit on `main`, which is how
+0e4ba57 went out.
 
 ## Publishing a change
 
