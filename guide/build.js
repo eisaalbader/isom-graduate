@@ -440,10 +440,10 @@ const EXTRA_CSS = `
 .shape__row{display:grid;grid-template-columns:3.4mm 8mm 1fr;gap:2.4mm;align-items:baseline}
 .shape__sw{width:3.4mm;height:3.4mm;border-radius:.8mm;align-self:center}
 .shape__n{font-family:BarlowC;font-weight:700;font-size:15pt;color:var(--maroon);text-align:right;line-height:1}
-.shape__t{font-family:Aleo;font-weight:700;font-size:8pt;line-height:1.2;display:block}
+.shape__t{font-family:Aleo,Tajawal;font-weight:700;font-size:8pt;line-height:1.2;display:block}
 .shape__a{font-family:Tajawal;font-size:8pt;color:#554C4A;direction:rtl;text-align:right;display:block;line-height:1.4}
 .shape__bar{display:flex;height:2.6mm;border-radius:9mm;overflow:hidden;margin:2.4mm 0 1mm}
-.shape__tot{margin-top:2.2mm;padding-top:1.8mm;border-top:.25mm solid var(--rule);font-family:DMSans;font-size:7pt;color:var(--ink-soft);display:flex;justify-content:space-between}
+.shape__tot{margin-top:2.2mm;padding-top:1.8mm;border-top:.25mm solid var(--rule);font-family:DMSans,Tajawal;font-size:7pt;color:var(--ink-soft);display:flex;justify-content:space-between}
 .shape__tot b{color:var(--maroon);font-weight:700}
 `;
 

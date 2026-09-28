@@ -60,8 +60,9 @@ npm test          # the planner's scheduler and pick rules
 `npm run verify` fails the build on any of: a course number that does not match
 the data file, printed credits that disagree with it, anything spilling off the
 sheet, text clipped by its own box, two blocks overlapping, a wire crossing
-text, **two wires crossing each other**, an unpainted arrowhead, or card text
-under 4.5:1 contrast.
+text, **two wires crossing each other**, an unpainted arrowhead, card text
+under 4.5:1 contrast, or a glyph drawn in a font the page did not load (so the
+machine's own fonts can never reach the print).
 
 `guide/BASELINE.md` is the design contract. It was written down as the club
 settled each decision during review, and it wins over any new idea unless the

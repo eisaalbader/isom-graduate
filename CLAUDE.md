@@ -42,7 +42,7 @@ cd guide && node build.js      # data -> dist/*.html
 cd guide && node covers.js     # the cover, drawn from the same data
 cd guide && node render.js mis # one page -> dist/mis.pdf + .png
                                #   pages: cover-b mis oscm general electives transfer numbers
-cd guide && node verify.js     # every check below, all six sheets
+cd guide && node verify.js     # every check below, the cover and all six sheets
 cd guide && node align-check.js
 cd guide && python3 mkqr.py    # only if the site URL changes
 cd guide && python3 qrcheck.py # decodes the QR back off the finished PDFs
@@ -81,7 +81,8 @@ clone it but not push to it (checked 23 Sep).
 data file · printed credits that disagree with it · anything spilling off the
 sheet · text clipped by its own box · two blocks overlapping · a wire crossing
 text · **two wires crossing each other** · an unpainted arrowhead · card text
-under 4.5:1 contrast. `align-check.js` holds the title's centre line over the
+under 4.5:1 contrast · a glyph drawn in a font the page did not load.
+`align-check.js` holds the title's centre line over the
 course columns to 0.02 px. `qrcheck.py` rasterises each finished **PDF** at A2,
 A3 and A4 and decodes the code out of the printed page.
 
@@ -89,8 +90,8 @@ A3 and A4 and decodes the code out of the printed page.
 
 The sheets are rendered by a real browser, and Chromium builds disagree with
 each other by a pixel or two on accumulated text height. That is enough to make
-a map clear its caption on one machine and land on it on another. Two rules keep
-one commit meaning one guide:
+a map clear its caption on one machine and land on it on another. Three rules
+keep one commit meaning one guide:
 
 - **Never hard-code a browser path.** The render and verify scripts read
   `CHROMIUM_PATH`, fall back to a pinned sandbox build if it happens to be
@@ -98,6 +99,14 @@ one commit meaning one guide:
 - **Line endings stay LF everywhere** (`.gitattributes`). The planner inlines
   the guide's CSS and markup, so a line ending is a byte in the shipped page; a
   CRLF checkout would publish a different site from the same commit.
+- **Every glyph comes from the fonts the page loads, never the machine's.**
+  Cairo and Tajawal load both halves, Arabic and Latin, so a figure or a full
+  stop inside an Arabic line is Tajawal's own; every DM Sans and Aleo stack has
+  Tajawal behind it, for the Arabic inside English labels. Until 28 Sep the
+  Arabic fonts loaded only their Arabic half, and every "2.00", "1013205" and
+  "—" in an Arabic line printed in Liberation Serif (Times New Roman on
+  Windows). `verify.js` now asks the browser which font drew each glyph and
+  fails the page on any it did not load.
 
 Where a layout is tight, give it slack rather than tuning it to the machine you
 are on. Checked 23 Sep on Windows (Chromium 1243) and Linux (1194): all six
@@ -223,6 +232,12 @@ Open in the guide itself:
   `courses.json` and the planner uses them (1013240 → 1013351, 1013230 +
   1013240 → 1013451, 1013331 + 1013337 → 1013480 and 1013492), but none has been
   read off the portal's Details screen. The club kept this layout on 23 Sep.
+- The club mark. The only copy in the repo is 298 × 190 px: sharp enough in the
+  page headers (about 160 ppi at A2), soft on the cover, where it prints 116 mm
+  wide at about 65 ppi, and on the watermarks (30–60 ppi). Eisa is getting the
+  original file from the club (28 Sep). When it comes, replace
+  `guide/assets/isom-logo.png`, `isom-logo-white.png` and `isom-maroon.png`
+  from it, rebuild everything and re-run the checks.
 
 ---
 

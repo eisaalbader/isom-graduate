@@ -34,6 +34,11 @@ idea, this file wins unless the club says otherwise.
 - English: Aleo (names), Barlow Condensed Bold Italic (display), DM Sans (labels, numbers).
 - Arabic: Cairo (headings), Tajawal (body).
 - **Arabic and English are set at the same point size.** Always.
+- **Every glyph comes from these five families, never from the machine.** Cairo and
+  Tajawal load both halves, Arabic and Latin, so figures and punctuation inside an
+  Arabic line are Tajawal's own. Every DM Sans and Aleo stack has Tajawal behind it, so
+  Arabic inside an English label is Tajawal too. `verify.js` fails a page on any glyph
+  drawn in a font the page did not load.
 - English name on top, Arabic underneath. Never side by side except on cards wider than
   about half the sheet.
 
@@ -161,7 +166,8 @@ the sheet; the club's word for the result, twice, was "spaghetti".
 `verify.js` checks, per page: codes match `courses.json` exactly · printed credits match
 the data file · nothing spills off the sheet · no text is clipped by its own box · no wire
 crosses text · **no two lines cross each other** · **no two blocks sit on top of each
-other** · **arrowheads are actually painted** · all card text clears 4.5:1.
+other** · **arrowheads are actually painted** · all card text clears 4.5:1 · **every glyph
+is drawn in a font the page loads**. It covers the cover too.
 A page ships only when all three scripts pass.
 
 ## Figures and Arabic

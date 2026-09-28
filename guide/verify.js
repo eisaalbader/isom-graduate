@@ -12,7 +12,7 @@ const path = require('path');
 const data = JSON.parse(fs.readFileSync(path.join(__dirname, 'data/courses.json'), 'utf8'));
 
 const pages = process.argv.slice(2);
-if (!pages.length) pages.push('mis', 'oscm', 'general', 'electives', 'transfer', 'numbers');
+if (!pages.length) pages.push('cover-b', 'mis', 'oscm', 'general', 'electives', 'transfer', 'numbers');
 
 const expected = {
   mis: [...data.mis.courses, ...data.mis.electives, ...data.mis.support, ...data.mis.gateway.courses],
@@ -39,6 +39,36 @@ const creditOf = {};
 Object.keys(expected).forEach(k => expected[k].forEach(c => {
   creditOf[k + ':' + c.code] = (c.cr === false) ? '(none)' : ((c.cr == null) ? '\u2014' : c.cr + ' CR');
 }));
+
+/* Every glyph must come from a font the sheet loads itself. A character the
+   sheet's own fonts do not have falls through to whatever the machine has
+   (Liberation Serif in the cloud, Times New Roman on Windows): the page prints
+   in a face nobody chose, and one commit prints differently on two machines.
+   This is how "2.00" inside Arabic lines came to be set in Times. */
+async function systemFonts(p) {
+  await p.evaluate(() => document.fonts.ready);
+  const cdp = await p.context().newCDPSession(p);
+  await cdp.send('DOM.enable'); await cdp.send('CSS.enable');
+  const { root } = await cdp.send('DOM.getDocument', { depth: -1 });
+  const nodes = [];
+  (function walk(n) {
+    if (n.nodeType === 1 && (n.children || []).some(c => c.nodeType === 3 && c.nodeValue.trim())) nodes.push(n);
+    (n.pseudoElements || []).forEach(pe => nodes.push(pe));
+    (n.children || []).forEach(walk);
+  })(root);
+  const hits = {};
+  for (const n of nodes) {
+    let r;
+    try { r = await cdp.send('CSS.getPlatformFontsForNode', { nodeId: n.nodeId }); } catch (e) { continue; }
+    r.fonts.filter(f => !f.isCustomFont).forEach(f => {
+      const a = n.attributes || [], i = a.indexOf('class');
+      const k = f.familyName + ' in ' + (i >= 0 ? '.' + a[i + 1].split(' ')[0] : n.nodeName.toLowerCase());
+      hits[k] = (hits[k] || 0) + f.glyphCount;
+    });
+  }
+  await cdp.detach();
+  return Object.entries(hits).map(([k, v]) => v + ' glyph' + (v > 1 ? 's' : '') + ' in ' + k);
+}
 
 (async () => {
   const b = await chromium.launch(LAUNCH);
@@ -178,6 +208,8 @@ Object.keys(expected).forEach(k => expected[k].forEach(c => {
       return out;
     });
 
+    const sysFonts = await systemFonts(p);
+
     const isMap = !!expected[name];
     const exp = (expected[name] || []).map(c => c.code).sort();
     const got = r.codes.slice().sort();
@@ -203,6 +235,7 @@ Object.keys(expected).forEach(k => expected[k].forEach(c => {
     if (r.crossings.length) problems.push('lines cross each other: ' + r.crossings.join(' | '));
     if (r.collisions.length) problems.push('wire crosses text: ' + [...new Set(r.collisions)].join(' | '));
     if (r.lowContrast.length) problems.push('contrast under 4.5:1 — ' + r.lowContrast.join(' | '));
+    if (sysFonts.length) problems.push('drawn in a font the sheet does not load: ' + sysFonts.join(' | '));
 
     console.log('\n=== ' + name + ' === ' + r.codes.length + ' courses rendered');
     if (!problems.length) console.log('  PASS — all checks clean');

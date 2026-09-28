@@ -11,6 +11,14 @@ const PLAN   = fs.readFileSync(path.join(__dirname, 'src/plan.json'), 'utf8');
 
 /* --- the page CSS, with the printer's local fonts swapped for web ones --- */
 let css = fs.readFileSync(path.join(G, 'src/guide.css'), 'utf8');
+/* Cairo and Tajawal load in both halves, with the sheet's own unicode-ranges:
+   the Arabic half has no figures or Latin punctuation (see guide.css). */
+const range = half => {
+  const m = css.match(new RegExp('tajawal-' + half + '-400-normal\\.woff2[^}]*unicode-range:([^;}]+)'));
+  if (!m) { console.error('guide.css has no ' + half + ' unicode-range for Tajawal'); process.exit(1); }
+  return m[1];
+};
+const AR = range('arabic'), LA = range('latin');
 /* The printer's own font files, carried into the page. No outside request:
    the map on the phone is set in exactly the type the sheet is set in. */
 const FONTS = [
@@ -22,15 +30,21 @@ const FONTS = [
   ['DMSans',  400, 'normal', 'dm-sans/files/dm-sans-latin-400-normal.woff2'],
   ['DMSans',  500, 'normal', 'dm-sans/files/dm-sans-latin-500-normal.woff2'],
   ['DMSans',  700, 'normal', 'dm-sans/files/dm-sans-latin-700-normal.woff2'],
-  ['Cairo',   600, 'normal', 'cairo/files/cairo-arabic-600-normal.woff2'],
-  ['Cairo',   700, 'normal', 'cairo/files/cairo-arabic-700-normal.woff2'],
-  ['Tajawal', 400, 'normal', 'tajawal/files/tajawal-arabic-400-normal.woff2'],
-  ['Tajawal', 500, 'normal', 'tajawal/files/tajawal-arabic-500-normal.woff2'],
-  ['Tajawal', 700, 'normal', 'tajawal/files/tajawal-arabic-700-normal.woff2'],
+  ['Cairo',   600, 'normal', 'cairo/files/cairo-arabic-600-normal.woff2', AR],
+  ['Cairo',   600, 'normal', 'cairo/files/cairo-latin-600-normal.woff2', LA],
+  ['Cairo',   700, 'normal', 'cairo/files/cairo-arabic-700-normal.woff2', AR],
+  ['Cairo',   700, 'normal', 'cairo/files/cairo-latin-700-normal.woff2', LA],
+  ['Tajawal', 400, 'normal', 'tajawal/files/tajawal-arabic-400-normal.woff2', AR],
+  ['Tajawal', 400, 'normal', 'tajawal/files/tajawal-latin-400-normal.woff2', LA],
+  ['Tajawal', 500, 'normal', 'tajawal/files/tajawal-arabic-500-normal.woff2', AR],
+  ['Tajawal', 500, 'normal', 'tajawal/files/tajawal-latin-500-normal.woff2', LA],
+  ['Tajawal', 700, 'normal', 'tajawal/files/tajawal-arabic-700-normal.woff2', AR],
+  ['Tajawal', 700, 'normal', 'tajawal/files/tajawal-latin-700-normal.woff2', LA],
 ];
-const faces = FONTS.map(([fam, w, sty, f]) => {
+const faces = FONTS.map(([fam, w, sty, f, ur]) => {
   const b64 = fs.readFileSync(path.join(ROOT, 'node_modules/@fontsource', f)).toString('base64');
   return `@font-face{font-family:${fam};font-weight:${w};font-style:${sty};font-display:swap;` +
+         (ur ? `unicode-range:${ur};` : '') +
          `src:url(data:font/woff2;base64,${b64}) format('woff2')}`;
 }).join('\n');
 css = css.replace(/@font-face\{[^}]*\}\n?/g, '');
