@@ -3,60 +3,90 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>When Do I Graduate — متى أتخرج؟</title>
+<title>When do I graduate? متى أتخرج؟</title>
+<meta name="description" content="Tick the courses you have passed on your own course map, and see the term you graduate. أشّر على المقررات التي اجتزتها على خريطة مقرراتك، واعرف الفصل الذي تتخرج فيه.">
+<meta name="theme-color" content="#ffffff">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ISOM Club">
+<meta property="og:title" content="When do I graduate? متى أتخرج؟">
+<meta property="og:description" content="Tick the courses you have passed on your own course map, and see the term you graduate. أشّر على المقررات التي اجتزتها على خريطة مقرراتك، واعرف الفصل الذي تتخرج فيه.">
+<meta property="og:url" content="__SITEURL__/">
+<meta property="og:image" content="__SITEURL__/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ISOM Club: When do I graduate? متى أتخرج؟">
+<meta name="twitter:card" content="summary_large_image">
 <style>/*__PAGECSS__*/</style>
 <style>
-/* ===== the app around the sheet ===== */
-html,body{height:100%;margin:0;background:var(--bg);overscroll-behavior:none}
-body{font-family:DMSans,Tajawal,system-ui,sans-serif;color:var(--ink);
+/* ===== the app around the sheet =====
+   It speaks the printed guide's language: paper, maroon, the course card with
+   its coloured bar, and a maroon wash that deepens down the page. */
+:root{--a-ink:#2E2726;--a-ink2:#5E5553;--a-line:#DCD7D6;--a-paper:#F5F5F5}
+html,body{height:100%;margin:0;background:var(--a-paper);overscroll-behavior:none}
+body{font-family:DMSans,Tajawal,system-ui,sans-serif;color:var(--a-ink);
   display:flex;flex-direction:column;-webkit-font-smoothing:antialiased;
   -webkit-tap-highlight-color:transparent}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-.arb{font-family:Tajawal,sans-serif;direction:rtl;text-align:left;display:block}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+button:focus-visible{outline:3px solid var(--maroon);outline-offset:2px}
+/* Arabic sits under the English at the same size, aligned to its own side */
+.arb{font-family:Tajawal,sans-serif;direction:rtl;text-align:right;display:block}
 
-/* header — the club mark, and nothing competing with it */
-.ap{flex:none;display:flex;align-items:center;gap:14px;padding:10px 16px;
-  background:#fff;border-bottom:1px solid var(--rule);box-shadow:0 1px 0 rgba(0,0,0,.02);z-index:30}
-.ap__logo{height:60px;width:auto;display:block;flex:none}
-.ap__t{flex:1;min-width:0;line-height:1.05}
-.ap__en{display:block;font-family:BarlowC,sans-serif;font-weight:700;font-style:italic;
-  font-size:25px;letter-spacing:.01em;color:var(--maroon)}
-.ap__ar{display:block;font-family:Cairo,sans-serif;font-weight:700;font-size:17px;
-  color:var(--maroon);direction:rtl;text-align:left;line-height:1.5}
-.ap__z{display:flex;gap:6px;flex:none}
-.z{width:38px;height:38px;border-radius:9px;border:1.5px solid var(--rule);background:#fff;
-  font-weight:700;font-size:17px;display:grid;place-items:center;color:var(--maroon);line-height:1}
-.z--w{width:auto;padding:0 12px;font-size:12.5px;letter-spacing:.06em}
-.z:active{background:var(--maroon);color:#fff;border-color:var(--maroon)}
-.bar{flex:none;display:flex;gap:3px;padding:0 16px 8px;background:#fff}
-.bar i{height:4px;flex:1;border-radius:9px;background:#E6DFDE;transition:background .3s}
+/* header: the club mark, and the name of the screen you are on — set the way
+   the sheet sets its own title, English over Arabic on one centre line */
+.ap{flex:none;display:flex;align-items:center;gap:12px;padding:10px 16px 8px;background:#fff;z-index:30}
+.ap__logo{height:52px;width:auto;display:block;flex:none}
+.ap__t{flex:1;min-width:0;text-align:center}
+.ap__en{display:block;font-family:BarlowC,Cairo,sans-serif;font-weight:700;font-style:italic;
+  font-size:24px;line-height:1.05;color:var(--maroon);text-wrap:balance}
+.ap .ap__ar{font-family:Cairo,sans-serif;font-weight:700;font-size:24px;line-height:1.55;
+  color:var(--maroon);text-align:center;text-wrap:balance}
+.ap__sp{display:none;flex:none}
+.bar{flex:none;display:flex;gap:4px;padding:0 16px 10px;background:#fff;border-bottom:1px solid var(--a-line)}
+.bar i{height:4px;flex:1;border-radius:9px;background:#E6DFDE}
 .bar i.on{background:var(--maroon)}
 
-/* the stage that holds a sheet */
 #main{flex:1;min-height:0;display:flex;flex-direction:column;position:relative}
-.fade{opacity:0;transform:translateY(6px)}
-#slot{flex:1;min-height:0;display:flex;flex-direction:column;
-  transition:opacity .17s ease,transform .17s ease}
-.stage{flex:1;min-height:0;overflow:auto;background:#E9E5E4;
-  -webkit-overflow-scrolling:touch;position:relative}
+#slot{flex:1;min-height:0;display:flex;flex-direction:column;transition:opacity .17s ease}
+.fade{opacity:0}
+
+/* ---------- a sheet on screen ---------- */
+.chips{flex:none;display:flex;gap:8px;overflow-x:auto;padding:8px 16px;background:#fff;
+  border-bottom:1px solid var(--a-line);scrollbar-width:none;scroll-padding:0 16px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;min-height:48px;padding:5px 12px 4px;border-radius:10px;border:1.5px solid var(--a-line);
+  background:#fff;display:flex;align-items:center;gap:8px;text-align:left;line-height:1.2}
+.chip__sw{width:10px;height:28px;border-radius:3px;background:var(--sw,#E4CDCD);flex:none}
+.chip__t{display:block;font-weight:700;font-size:14px;color:var(--a-ink);white-space:nowrap}
+.chip__t .arb{font-weight:500;font-size:14px;line-height:1.5;color:var(--a-ink)}
+.chip.on{border-color:var(--maroon);box-shadow:0 0 0 1.5px var(--maroon) inset}
+.mapwrap{flex:1;min-height:0;position:relative;display:flex}
+.stage{flex:1;min-height:0;overflow:auto;background:#E9E5E4;-webkit-overflow-scrolling:touch;position:relative}
 .sizer{position:relative}
 .stage .page{position:absolute;left:0;top:0;margin:0;transform-origin:0 0;
   box-shadow:0 2px 14px rgba(0,0,0,.14)}
-.hint{flex:none;padding:7px 16px;font-size:12px;color:var(--ink-soft);background:#fff;
-  border-top:1px solid var(--rule);display:flex;gap:12px;align-items:center}
+.zm{position:absolute;right:14px;bottom:14px;display:flex;flex-direction:column;gap:8px;z-index:20}
+.zm button{width:48px;height:48px;border-radius:12px;background:#fff;border:1.5px solid var(--a-line);
+  box-shadow:0 1px 5px rgba(0,0,0,.18);font-weight:700;font-size:24px;line-height:1;color:var(--maroon);
+  display:grid;place-items:center}
+.zm button:active{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+.hint{flex:none;padding:8px 16px;font-size:14px;line-height:1.35;color:var(--a-ink2);background:#fff;
+  border-top:1px solid var(--a-line)}
 .hint b{color:var(--maroon)}
-.hint .arb{font-size:12px;margin-left:auto}
-.free{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-soft);
-  padding-left:14px;border-left:1px solid var(--rule)}
-.free .arb{margin:0 0 0 4px;font-size:12px}
-.fo{width:27px;height:27px;border-radius:7px;border:1.5px solid var(--rule);background:#fff;
-  font-weight:700;font-size:13px;color:var(--maroon);line-height:1}
+.hint .arb{font-size:14px;line-height:1.6}
+.free{flex:none;display:flex;align-items:center;gap:8px;padding:8px 16px;background:#fff;
+  border-top:1px solid var(--a-line)}
+.free__t{flex:1 1 auto;min-width:0;max-width:440px;font-weight:700;font-size:14px;line-height:1.3;color:var(--a-ink)}
+.free__t .arb{font-weight:500;font-size:14px;line-height:1.55}
+.fo{width:48px;height:48px;border-radius:10px;border:1.5px solid var(--a-line);background:#fff;flex:none;
+  font-weight:700;font-size:18px;color:var(--maroon);font-variant-numeric:tabular-nums}
 .fo.on{background:var(--maroon);color:#fff;border-color:var(--maroon)}
 
 /* A sheet inside the app carries no university crest, and no second club mark:
-   the app's own header holds the club's, larger than the sheet ever prints it.
-   They are hidden rather than removed so the sheet's geometry — and the title's
-   centre line over the course columns — stays exactly as printed. */
+   the app's own header holds the club's. They are hidden rather than removed so
+   the sheet's geometry — and the title's centre line over the course columns —
+   stays exactly as printed. */
 .stage .hd__crest,.stage .hd__club{visibility:hidden}
 /* no point showing a code for the site you are already standing on */
 .stage .ft__scan{display:none}
@@ -83,117 +113,179 @@ button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .stage .crd.is-lock{pointer-events:none;opacity:.3;filter:grayscale(.7)}
 .stage .crd.is-lock::after{display:none}
 
-/* plain screens (major, pace, result) reuse the sheet's own language */
-.pan{flex:1;min-height:0;overflow:auto;padding:22px 16px 26px}
-.pan__in{max-width:1080px;margin:0 auto}
-.h{margin:0;font-family:Aleo,Tajawal,serif;font-weight:700;font-size:27px;line-height:1.2}
-.h-ar{font-family:Cairo,sans-serif;font-weight:700;font-size:20px;direction:rtl;text-align:left;
-  line-height:1.6;margin:2px 0 9px}
-.p{font-size:15px;line-height:1.45;color:var(--ink-soft);max-width:72ch}
-.p .arb{font-size:15px;line-height:1.75;margin-top:3px}
-.majs{display:grid;gap:14px;margin-top:20px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-.maj{text-align:left;background:#fff;border:1px solid var(--rule);border-radius:14px;overflow:hidden;
-  box-shadow:0 1px 3px rgba(0,0,0,.08);transition:transform .12s,box-shadow .12s}
-.maj:active{transform:scale(.99)}
-.maj.on{box-shadow:0 0 0 3px var(--maroon) inset,0 1px 3px rgba(0,0,0,.08)}
-.maj__t{display:block;background:var(--maroon);color:#fff;padding:17px 19px}
-.maj__c{display:block;font-size:12px;letter-spacing:.15em;font-weight:700;opacity:.72}
-.maj__en{display:block;font-family:BarlowC,sans-serif;font-weight:700;font-style:italic;
-  font-size:27px;line-height:1.12;margin-top:3px}
-.maj__ar{display:block;font-family:Cairo,sans-serif;font-weight:700;font-size:19px;direction:rtl;
-  text-align:left;line-height:1.7}
-.maj__b{display:block;padding:14px 19px 17px;font-size:13.5px;line-height:1.45;color:var(--ink-soft)}
-.pace{display:grid;gap:16px;margin-top:20px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-.bx{background:#fff;border:1px solid var(--rule);border-left:5px solid var(--maroon);
-  border-radius:12px;padding:16px 18px 18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.bx__h{font-family:Aleo,Tajawal,serif;font-weight:700;font-size:16px;color:var(--maroon)}
-.bx__ha{font-family:Cairo,sans-serif;font-weight:700;font-size:14.5px;color:var(--maroon);
-  direction:rtl;text-align:left;line-height:1.7;margin-bottom:11px}
-.opts{display:flex;gap:7px;flex-wrap:wrap}
-.opt{min-width:52px;padding:11px 13px;border-radius:9px;border:1.5px solid var(--rule);background:#fff;
-  font-weight:700;font-size:17px;font-variant-numeric:tabular-nums;line-height:1;transition:all .12s}
-.opt small{display:block;font-size:10px;font-weight:500;letter-spacing:.05em;color:var(--ink-faint);margin-top:3px}
-.opt.on{background:var(--maroon);color:#fff;border-color:var(--maroon)}
-.opt.on small{color:rgba(255,255,255,.75)}
-.cap{margin-top:10px;font-size:12.5px;color:var(--ink-faint);line-height:1.45}
-.cap .arb{font-size:12.5px;line-height:1.7;margin-top:2px}
-.big{background:var(--maroon);color:#fff;border-radius:16px;padding:26px 24px;margin-top:20px;
-  display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
-.big__n{font-family:BarlowC,sans-serif;font-weight:700;font-style:italic;
-  font-size:64px;line-height:.92}
-.big__l{font-family:Aleo,Tajawal,serif;font-weight:700;font-size:15px;margin-top:6px}
-.big__la{display:block;font-family:Tajawal,sans-serif;font-size:15px;direction:rtl;text-align:left;
-  line-height:1.6;opacity:.85;margin-top:2px}
-.sum{margin-top:15px;font-size:13.5px;color:var(--ink-soft);line-height:1.5}
-.terms{display:grid;gap:11px;margin-top:18px;align-items:start;
-  grid-template-columns:repeat(auto-fill,minmax(262px,1fr))}
-.tm{background:#fff;border:1px solid var(--rule);border-radius:12px;overflow:hidden;
-  box-shadow:0 1px 3px rgba(0,0,0,.06)}
-.tm--s{border-color:#C9A227}
-.tm__h{padding:9px 13px;background:#EFE9E8;display:flex;align-items:center;gap:8px}
-.tm--s .tm__h{background:#FBF4E3}
-.tm__n{font-family:Aleo,Tajawal,serif;font-weight:700;font-size:14.5px}
-.tm__a{font-family:Tajawal,sans-serif;font-size:13px;color:#554C4A;margin-left:auto;direction:rtl}
-.tm__b{padding:5px 13px 11px}
-.tm__c{padding:7px 0;border-bottom:1px solid #EFE9E8;display:flex;gap:9px;align-items:flex-start}
-.tm__c:last-child{border-bottom:0}
-.tm__code{font-weight:700;font-size:12px;color:#fff;background:var(--cat,var(--maroon));border-radius:5px;
-  padding:3px 6px;flex:none;font-variant-numeric:tabular-nums;line-height:1.25}
-.tm__x{display:block;min-width:0;flex:1}
-.tm__en{display:block;font-family:Aleo,Tajawal,serif;font-weight:700;font-size:12.5px;line-height:1.25}
-.tm__ar{display:block;font-family:Tajawal,sans-serif;font-size:12.5px;line-height:1.5;color:#554C4A;
+/* ---------- plain screens ---------- */
+.pan{flex:1;min-height:0;overflow:auto;padding:22px 16px 28px;position:relative}
+.pan__in{max-width:960px;margin:0 auto;position:relative}
+.measure{max-width:620px}
+.h{margin:0;font-family:Aleo,Tajawal,serif;font-weight:700;font-size:26px;line-height:1.2;color:var(--a-ink);
+  text-wrap:balance}
+.h-ar{font-family:Cairo,sans-serif;font-weight:700;font-size:26px;direction:rtl;text-align:right;
+  line-height:1.6;margin:2px 0 10px;color:var(--a-ink)}
+.p{font-size:16px;line-height:1.5;color:var(--a-ink2);margin:0}
+.p b{color:var(--a-ink)}
+.p .arb{font-size:16px;line-height:1.75;margin-top:4px}
+
+/* first screen: the drawing from the printed cover. Every dot is a course and
+   every curve a prerequisite, from the same data file; it draws itself once,
+   left to right, in the order the courses are taken. */
+.hero{margin:-22px -16px 0}
+.net{display:block;width:100%;height:104px;pointer-events:none;
+  -webkit-mask-image:linear-gradient(180deg,#000 55%,transparent);mask-image:linear-gradient(180deg,#000 55%,transparent)}
+.net path{fill:none;stroke:#660000;stroke-width:3.4;stroke-opacity:.4;stroke-dasharray:1;stroke-dashoffset:0}
+.net.draw path{animation:draw 1.1s cubic-bezier(.35,.6,.25,1) both}
+.net.draw circle{animation:dot .5s ease-out both}
+@keyframes draw{from{stroke-dashoffset:1}to{stroke-dashoffset:0}}
+@keyframes dot{from{opacity:0}}
+.hero__t{padding:4px 16px 0}
+.wb{margin-top:18px;padding:14px 16px;border-radius:12px;background:#fff;
+  box-shadow:0 0 0 1.5px var(--maroon) inset}
+.wb__t{font-family:Aleo,Tajawal,serif;font-weight:700;font-size:17px;color:var(--maroon)}
+.wb__t .arb{font-family:Cairo,sans-serif;font-size:17px;line-height:1.6}
+.wb .p{margin-top:4px}
+.wb .btn{margin-top:12px}
+/* a major is drawn as the sheet draws a course: a coloured bar with its
+   number, and the long official name in both languages */
+.majs{display:grid;gap:12px;margin-top:20px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.mj{display:block;text-align:left;background:#fff;border-radius:10px;overflow:hidden;
+  box-shadow:0 0 0 1px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.06);transition:transform .12s}
+.mj:active{transform:scale(.99)}
+.mj__bar{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--maroon);
+  color:#fff;padding:8px 14px;font-weight:700;font-size:15px;line-height:1.4;font-variant-numeric:tabular-nums}
+.mj__bar .arb{font-weight:700;font-size:15px}
+.mj__body{display:block;padding:10px 14px 10px}
+.mj__en{display:block;font-family:BarlowC,Cairo,sans-serif;font-weight:700;font-style:italic;font-size:23px;
+  line-height:1.08;color:var(--maroon);text-wrap:balance}
+.mj .mj__ar{font-family:Cairo,sans-serif;font-weight:700;font-size:23px;line-height:1.55;color:var(--maroon);text-wrap:balance}
+.mj.on{box-shadow:0 0 0 3px var(--maroon),0 2px 8px rgba(102,0,0,.18)}
+.mj__tick{display:none;width:22px;height:22px;border-radius:6px;background:#fff;flex:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'><path d='M1.4 6.3 L4.6 9.3 L10.6 2.6' fill='none' stroke='%23660000' stroke-width='2.3' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-size:74%;background-position:center;background-repeat:no-repeat}
+.mj.on .mj__tick{display:block}
+
+/* pace: three plain questions, answered with one row of buttons each */
+.q{margin-top:26px;padding-top:18px;border-top:1px solid var(--a-line)}
+.q__h{margin:0;font-family:Aleo,Tajawal,serif;font-weight:700;font-size:18px;color:var(--a-ink)}
+.q__h .arb{font-family:Cairo,sans-serif;font-size:18px;line-height:1.6}
+.seg{display:flex;gap:8px;margin-top:10px}
+.seg button{flex:1;min-width:0;min-height:52px;border-radius:10px;border:1.5px solid var(--a-line);background:#fff;
+  font-weight:700;font-size:19px;color:var(--a-ink);font-variant-numeric:tabular-nums}
+.seg button.on{background:var(--maroon);border-color:var(--maroon);color:#fff}
+.seg--terms{display:grid;grid-template-columns:repeat(2,1fr)}
+.seg--terms button{font-size:15px;padding:6px 10px;line-height:1.3}
+.seg--terms .arb{text-align:center;font-weight:500;font-size:15px;line-height:1.5}
+.cap{margin:10px 0 0;font-size:15px;line-height:1.45;color:var(--a-ink2)}
+.cap .arb{font-size:15px;line-height:1.7;margin-top:2px}
+
+/* result: the answer first, then the plan drawn the way the sheet draws a map */
+.ans{margin-top:4px;background:#fff;border-radius:12px;overflow:hidden;
+  box-shadow:0 0 0 3px var(--maroon),0 3px 12px rgba(102,0,0,.14)}
+.ans__bar{display:flex;justify-content:space-between;gap:12px;background:var(--maroon);color:#fff;
+  padding:10px 16px;font-weight:700;font-size:16px}
+.ans__bar .arb{display:inline;font-weight:700;font-size:16px}
+.ans__body{padding:10px 16px 12px}
+.ans__en{font-family:BarlowC,Cairo,sans-serif;font-weight:700;font-style:italic;font-size:56px;line-height:1;
+  color:var(--maroon)}
+.ans__ar{font-family:Cairo,sans-serif;font-weight:700;font-size:56px;line-height:1.55;color:var(--maroon);
   direction:rtl;text-align:right}
-.tm__s{display:inline-block;margin-top:2px;font-size:10px;font-weight:700;letter-spacing:.07em;
-  color:#8A6A00;background:#FBF4E3;border-radius:6px;padding:1px 5px}
-.nt{margin-top:20px;padding:12px 15px;border-radius:9px;background:rgba(102,0,0,.06);
-  border-left:4px solid var(--maroon);font-size:13.5px;line-height:1.45}
-.nt .arb{font-size:13.5px;line-height:1.7;margin-top:3px;color:#554C4A}
-.ftr{margin-top:26px;padding-top:15px;border-top:1px solid var(--rule);font-size:11.5px;
-  color:var(--ink-faint);line-height:1.6}
-.ftr b{color:var(--ink-soft)}
+.sum{margin:16px 0 0}
+.plan{margin-top:22px;display:grid;gap:12px}
+.tb{border-radius:12px;padding:0 0 12px;background:rgba(102,0,0,calc(.03 + var(--k) * .09))}
+.tb__h{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:11px 14px 9px}
+.tb__en{font-family:Aleo,Tajawal,serif;font-weight:700;font-size:17px;color:var(--a-ink)}
+.tb__ar{font-family:Cairo,sans-serif;font-weight:700;font-size:17px;color:var(--a-ink);direction:rtl}
+.tb__cards{display:grid;gap:8px;padding:0 12px;grid-template-columns:1fr}
+.tb--cap{box-shadow:0 0 0 3px var(--maroon)}
+.tb--cap .tb__h{background:var(--maroon);border-radius:12px 12px 0 0;margin-bottom:12px}
+.tb--cap .tb__en,.tb--cap .tb__ar{color:#fff}
+.pc{background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.07)}
+.pc__bar{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--bar);
+  color:#fff;padding:5px 10px;font-weight:700;font-size:15px;line-height:1.35;font-variant-numeric:tabular-nums}
+.pc__bar .arb{font-weight:700;font-size:15px;line-height:1.35}
+.pc__body{display:block;padding:8px 10px 9px}
+.pc__en{display:block;font-family:Aleo,Tajawal,serif;font-weight:700;font-size:15px;line-height:1.3;color:var(--a-ink)}
+.pc .pc__ar{font-family:Tajawal,sans-serif;font-weight:500;font-size:15px;line-height:1.6;color:var(--a-ink2)}
+/* a course the plan chose for you: dashed, in the colour of its group, and
+   saying so in both languages */
+.pc--sug{box-shadow:none;outline:2px dashed var(--bar);outline-offset:-2px}
+.pc__tag{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 10px;padding:6px 0 8px;
+  border-top:1px dashed var(--a-line);font-size:14px;line-height:1.4;color:var(--a-ink2)}
+.pc__tag .arb{font-size:14px;line-height:1.4}
+.nt{margin:22px 0 0;padding:12px 14px;border-left:4px solid var(--maroon);background:#fff;border-radius:0 10px 10px 0;
+  font-size:15px;line-height:1.5;color:var(--a-ink)}
+.nt .arb{font-size:15px;line-height:1.7;margin-top:4px;color:var(--a-ink2)}
+.ftr{margin-top:26px;padding-top:14px;border-top:1px solid var(--a-line);font-size:14px;line-height:1.55;color:var(--a-ink2)}
+.ftr b{color:var(--a-ink)}
+.ftr .arb{font-size:14px;line-height:1.7}
 
 /* bottom bar */
-.nv{flex:none;display:flex;align-items:center;gap:10px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));
-  background:#fff;border-top:1px solid var(--rule);z-index:30}
-.btn{padding:13px 22px;border-radius:10px;font-weight:700;font-size:15.5px;background:var(--maroon);
-  color:#fff;line-height:1.2;transition:opacity .12s}
-.btn:disabled{opacity:.3;cursor:default}
-.btn--g{background:#fff;color:var(--maroon);border:1.5px solid var(--rule)}
-.btn .arb{font-size:13.5px;font-weight:500;opacity:.85;line-height:1.5}
-.st{flex:1;min-width:0;font-size:13px;color:var(--ink-soft);line-height:1.3}
-.st b{color:var(--maroon);font-size:15px}
-.st .arb{font-size:12px;line-height:1.55}
-.all{font-weight:700;font-size:12px;letter-spacing:.04em;color:var(--maroon);border:1.5px solid var(--rule);
-  border-radius:9px;padding:9px 12px;line-height:1.3;background:#fff;white-space:nowrap;flex:none}
-.all:active{background:var(--maroon);color:#fff;border-color:var(--maroon)}
-@media (max-width:640px){
-  .ap{gap:10px;padding:8px 12px}.ap__logo{height:46px}.ap__en{font-size:20px}.ap__ar{font-size:14px}
-  .z{width:34px;height:34px;font-size:15px}.z--w{padding:0 9px;font-size:11px}
-  .h{font-size:22px}.h-ar{font-size:17px}.big__n{font-size:50px}
-  .btn{padding:12px 15px;font-size:14.5px}.all{padding:8px 10px;font-size:11px}
-  .hint{font-size:11px}.hint .arb{font-size:11px}
+.nv{flex:none;display:flex;align-items:center;gap:8px;padding:10px 16px calc(10px + env(safe-area-inset-bottom));
+  background:#fff;border-top:1px solid var(--a-line);z-index:30}
+.btn{min-height:52px;padding:7px 18px;border-radius:10px;font-weight:700;font-size:15px;background:var(--maroon);
+  color:#fff;line-height:1.25;transition:opacity .12s;text-align:center;flex:none}
+.btn:disabled{opacity:.35;cursor:default}
+.btn--g{background:#fff;color:var(--maroon);box-shadow:0 0 0 1.5px var(--a-line) inset}
+.btn .arb{font-size:15px;font-weight:500;line-height:1.5;text-align:center}
+.st{flex:1;min-width:0;font-size:15px;color:var(--a-ink2);line-height:1.3;font-variant-numeric:tabular-nums}
+.st b{color:var(--maroon);font-size:17px}
+.st .arb{font-size:14px;line-height:1.5;text-align:left}
+
+@media (min-width:640px){
+  .tb__cards{grid-template-columns:repeat(2,1fr)}
+  .pan{padding:28px 24px 32px}
+  .hero{margin:-28px -24px 0}
+  .net{height:140px}
+  .hero__t{padding:4px 24px 0}
+}
+/* wide screens: the cover's own arrangement, words on the left and the
+   drawing on the right, and the title on one centre line as on the sheet */
+@media (min-width:900px){
+  .ap__sp{display:block;width:var(--lw,82px)}
+  .hero{margin:0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:24px}
+  .hero__t{padding:0;order:0}
+  .net{order:1;height:300px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 22%);mask-image:linear-gradient(90deg,transparent,#000 22%)}
+  .net path{stroke-width:2.2}
+  .h,.h-ar{font-size:34px}
+}
+@media (min-width:1000px){ .tb__cards{grid-template-columns:repeat(3,1fr)} }
+@media (max-width:400px){
+  .ap{padding:8px 12px 6px;gap:10px}.ap__logo{height:38px}
+  .ap__en,.ap .ap__ar{font-size:19px}
+  .bar{padding:0 12px 8px}
+  .btn{padding:7px 12px}
+  .nv{padding-left:12px;padding-right:12px;gap:6px}
+  .ans__en,.ans__ar{font-size:48px}
+}
+@media (prefers-reduced-motion:reduce){
+  #slot,.mj,.btn,.stage .crd[data-code]{transition:none}
+  .net.draw path,.net.draw circle{animation:none}
 }
 </style>
 </head>
 <body>
 <header class="ap">
   <img class="ap__logo" id="mark" alt="ISOM Club">
-  <div class="ap__t"><span class="ap__en">WHEN DO I GRADUATE</span><span class="ap__ar">متى أتخرج؟</span></div>
-  <div class="ap__z" id="zoom"></div>
+  <div class="ap__t" id="ttl"></div>
+  <i class="ap__sp" aria-hidden="true"></i>
 </header>
-<div class="bar" id="bar"></div>
+<div class="bar" id="bar" aria-hidden="true"></div>
 <main id="main"><div id="slot"></div></main>
 <nav class="nv" id="nv"></nav>
 
 <script id="PAGES" type="application/json">__PAGES__</script>
 <script id="PLAN" type="application/json">__PLAN__</script>
 <script id="ASSETS" type="application/json">__ASSETS__</script>
+<script id="NET" type="text/html">__NET__</script>
+<script id="NETS" type="text/html">__NETSTRIP__</script>
 <script>/*__WIREJS__*/</script>
 <script>
 const PG = JSON.parse(document.getElementById('PAGES').textContent);
 const P  = JSON.parse(document.getElementById('PLAN').textContent);
 const AS = JSON.parse(document.getElementById('ASSETS').textContent);
-document.getElementById('mark').src = AS['isom-logo.png'];
+{ const mk = document.getElementById('mark');
+  /* the empty space on the right matches the mark, so the title sits on the
+     page's centre line on a wide screen, as it does on the sheet */
+  mk.onload = () => document.documentElement.style.setProperty('--lw', (52 * mk.naturalWidth / mk.naturalHeight).toFixed(1) + 'px');
+  mk.src = AS['isom-logo.png']; }
 
 const PW = 594 * 96 / 25.4, PH = 420 * 96 / 25.4;   /* the sheet, in CSS pixels */
 const S = { step:0, major:null, done:new Set(), freeDone:0, perTerm:5, summer:2, start:0, z:null };
@@ -201,6 +293,18 @@ const STEPS = ['major','general','majormap','electives','pace','result'];
 const CO = c => P.courses[c] || {en:c, ar:'', cat:'core', pre:[]};
 const PRE = c => { const o = S.major && P.majors[S.major].pre_override; return (o&&o[c]) ? o[c] : (CO(c).pre||[]); };
 const phone = () => window.innerWidth < 760;
+/* Arabic markup: marked as Arabic for screen readers, right-aligned under the English */
+const AR = (t, cls) => '<span class="arb'+(cls?' '+cls:'')+'" lang="ar" dir="rtl">'+t+'</span>';
+/* Arabic counts agree with the number, the Latin figure stays a figure:
+   1 مقرر واحد · 2 مقرران · 3–10 مقررات · 11+ مقرراً */
+const arN = (n, one, two, few, many) =>
+  n === 1 ? one : n === 2 ? two : (n % 100 >= 3 && n % 100 <= 10) ? n+' '+few : n+' '+many;
+const arCourses = n => arN(n, 'مقرر واحد', 'مقرران', 'مقررات', 'مقرراً');
+/* a year count reads "2", not "2.0" */
+const yrsFmt = y => Number.isInteger(y) ? String(y) : y.toFixed(1);
+/* after "نحو": سنة واحدة · سنتين · 3–10 سنوات · 1.5 سنة */
+const arYears = y => !Number.isInteger(y) ? y.toFixed(1)+' سنة دراسية' : y === 1 ? 'سنة دراسية واحدة' :
+  y === 2 ? 'سنتين دراسيتين' : (y >= 3 && y <= 10) ? y+' سنوات دراسية' : y+' سنة دراسية';
 
 /* ---------- what is still owed ---------- */
 function outstanding(){
@@ -267,10 +371,12 @@ function schedule(){
 const MAPOF = { general:'general', electives:'electives' };
 function mapName(){ const st=STEPS[S.step]; return st==='majormap' ? S.major : MAPOF[st]; }
 
+/* On a phone the map opens large enough that a course name is 12px, and the
+   Level buttons do the travelling. On a wide screen the whole sheet fits. */
 function fitZoom(){
   const w = document.getElementById('main').clientWidth - (phone()?0:24);
   const f = w / PW;
-  return phone() ? 0.9 : Math.min(1, Math.max(f, 0.46));
+  return phone() ? 1.05 : Math.min(1, Math.max(f, 0.46));
 }
 function applyZoom(){
   const st = document.querySelector('.stage'); if(!st) return;
@@ -278,8 +384,6 @@ function applyZoom(){
   pg.style.transform = 'scale('+S.z+')';
   sz.style.width  = (PW*S.z)+'px';
   sz.style.height = (PH*S.z)+'px';
-  const zb = document.getElementById('zoom');
-  const pct = zb.querySelector('.z--w'); if(pct) pct.textContent = Math.round(S.z*100)+'%';
 }
 /* Every "PICK 1", "PICK 3", "TAKE BOTH" printed on a sheet is a rule the app
    now holds you to: once a group is full the rest of it locks, and choosing a
@@ -338,36 +442,140 @@ function pageHtml(name){
   for(const k in AS) h = h.split('@@'+k).join(AS[k]);
   return (HT[name] = h);
 }
+/* The sheet's own Arabic is marked as Arabic in place, so a screen reader
+   reads it in an Arabic voice. Nothing moves: an Arabic run inside an English
+   line is wrapped in a span, an all-Arabic element just gets the attribute. */
+const ARCH = '؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿';
+const IS_AR = new RegExp('['+ARCH+']'), IS_LAT = /[A-Za-z]/;
+const AR_RUN = new RegExp('['+ARCH+'](?:[\\s ‌-‏0-9.,:;()«»\\-–—·'+ARCH+']*['+ARCH+'])?','g');
+function markArabic(root){
+  const w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT), nodes = [];
+  while(w.nextNode()) nodes.push(w.currentNode);
+  nodes.forEach(t => {
+    const v = t.nodeValue, el = t.parentElement;
+    if(!el || !IS_AR.test(v) || el.closest('[lang="ar"],svg,script,style')) return;
+    const own = [...el.childNodes].filter(n => n.nodeType === 3 && n.nodeValue.trim());
+    if(!own.some(n => IS_LAT.test(n.nodeValue)) && el.children.length === 0){ el.setAttribute('lang','ar'); return; }
+    const frag = document.createDocumentFragment(); let last = 0;
+    v.replace(AR_RUN, (m, i) => {
+      if(i > last) frag.appendChild(document.createTextNode(v.slice(last, i)));
+      const s = document.createElement('span'); s.setAttribute('lang','ar'); s.textContent = m; frag.appendChild(s);
+      last = i + m.length; return m;
+    });
+    if(last < v.length) frag.appendChild(document.createTextNode(v.slice(last)));
+    t.replaceWith(frag);
+  });
+}
+let HINTED = false;
 function mountMap(name){
   const slot = document.getElementById('slot');
   const free = name === 'electives'
-    ? '<span class="free">Free electives already passed'+
-      [0,1,2].map(n=>'<button class="fo '+(S.freeDone===n?'on':'')+'" data-fr="'+n+'">'+n+'</button>').join('')+
-      '<b class="arb">الاختيارية الحرة المجتازة</b></span>'
+    ? '<div class="free"><span class="free__t">Free electives already passed'+AR('الاختيارية الحرة المجتازة')+'</span>'+
+      [0,1,2].map(n=>'<button class="fo '+(S.freeDone===n?'on':'')+'" data-fr="'+n+'" aria-pressed="'+(S.freeDone===n)+'">'+n+'</button>').join('')+
+      '</div>'
     : '';
+  const hint = HINTED ? '' :
+    '<div class="hint" id="hint">Tap a course to mark it <b>passed</b>. Drag the map to move around it.'+
+    AR('المس المقرر لتعليمه <b>مجتازاً</b>. اسحب الخريطة للتنقل فيها.')+'</div>';
   slot.innerHTML =
-    '<div class="stage"><div class="sizer">'+pageHtml(name)+'</div></div>'+
-    '<div class="hint"><span>Tap a course to mark it <b>passed</b>. Drag the map to move around it.</span>'+
-    free+'<span class="arb">المس المقرر لتعليمه <b>مجتازاً</b>. اسحب الخريطة للتنقل فيها.</span></div>';
+    '<div class="chips" id="chips" role="toolbar" aria-label="Jump to a level"></div>'+
+    '<div class="mapwrap"><div class="stage"><div class="sizer">'+pageHtml(name)+'</div></div>'+
+    '<div class="zm"><button data-z="+" aria-label="Zoom in">+</button><button data-z="-" aria-label="Zoom out">−</button></div></div>'+
+    hint+free;
+  const st = slot.querySelector('.stage');
+  markArabic(st);
   window.__WIRES__ = JSON.parse(PG[name].wires);
   if(window.__drawWires) window.__drawWires();        /* drawn at true size, then scaled */
   GS = groupsFor(name); tagGroups();
   if(S.z == null) S.z = fitZoom();
   applyZoom();
   syncTicks();
-  /* open on the map itself, not on the sheet's margins */
-  const st = slot.querySelector('.stage');
-  const pg = st.querySelector('.page'), body = st.querySelector('.body');
-  if(pg && body){
-    const b = body.getBoundingClientRect(), p = pg.getBoundingClientRect();
-    st.scrollLeft = Math.max(0, (b.left - p.left) - 6);
-    st.scrollTop  = Math.max(0, (b.top  - p.top ) - 6);
-  }
+  buildChips();
+  /* open on the courses — the first band of the map — not on the instructions */
+  jumpTo(0, false);
+  st.addEventListener('scroll', onStageScroll, {passive:true});
+}
+/* ---------- the Level buttons: the sheet's own rows, as buttons you can tap ----------
+   First the sheet's instructions, "What you must do", then one button per
+   row, named as the sheet names it: Level 1, Level 2 … Pick 1, Take 2. */
+let BANDS = [];
+const txtOf = (el, s) => { const e = el && el.querySelector(s); return e ? e.textContent.replace(/\s+/g,' ').trim() : ''; };
+function buildChips(){
+  const st = document.querySelector('.stage'), ch = document.getElementById('chips');
+  if(!st || !ch) return;
+  BANDS = [...st.querySelectorAll('.band')];
+  const rail = st.querySelector('.rail'), items = [];
+  if(rail) items.push('<button class="chip" data-band="rail"><span class="chip__t">'+
+    (txtOf(rail,'.panel__h') || 'What you must do')+AR(txtOf(rail,'.panel__h-ar') || 'ما الذي يجب عليك دراسته')+'</span></button>');
+  const wraps = [...st.querySelectorAll('.gwrap')];
+  BANDS.forEach((b, i) => {
+    const l = txtOf(b, '.band__l'), n = txtOf(b, '.band__n'), a = txtOf(b, '.band__ar');
+    let en = (l + (n ? ' ' + n : '')).trim(), ar = /^Level$/i.test(l) ? a + ' ' + n : a;
+    /* the electives page has four "Pick" rows: there a button carries the
+       group's own printed name, so the four are told apart */
+    const g = !/^(Level|Before)$/i.test(l) && wraps.find(w => w.style.gridRow && w.style.gridRow === b.style.gridRow);
+    if(g && txtOf(g,'.gtag__en')){
+      en = txtOf(g,'.gtag__en').split(/\s+[—–]\s+/)[0];
+      ar = txtOf(g,'.gtag__ar').split(/\s+[ـ—–]\s+/)[0] || ar;
+    }
+    const sw = b.style.getPropertyValue('--tint-strong') || (b.classList.contains('band--gate') ? '#D8D0CF' : '#E4CDCD');
+    items.push('<button class="chip" data-band="'+i+'" style="--sw:'+sw+'"><i class="chip__sw"></i>'+
+      '<span class="chip__t">'+en+AR(ar)+'</span></button>');
+  });
+  ch.innerHTML = items.join('');
+  markChip(0);
+}
+/* the leftmost course printed in a row */
+function firstCardIn(b){
+  const e = b.getBoundingClientRect(); let best = null, bx = Infinity;
+  document.querySelectorAll('.stage .crd').forEach(c => { const r = c.getBoundingClientRect(), cy = r.top + r.height/2;
+    if(cy >= e.top && cy <= e.bottom && r.left < bx){ bx = r.left; best = c; } });
+  return best;
+}
+function jumpTo(which, smooth){
+  const st = document.querySelector('.stage'); if(!st) return;
+  const el = which === 'rail' ? st.querySelector('.rail') : BANDS[+which] || st.querySelector('.band');
+  if(!el) return;
+  const e = el.getBoundingClientRect(), s = st.getBoundingClientRect();
+  let left = st.scrollLeft + (e.left - s.left) - 8;
+  const top = st.scrollTop + (e.top - s.top) - 8;
+  /* On a phone a row's label and its first course may be a screen apart
+     (the MIS map starts its courses near the middle). Then open on the
+     course: the button row above still says which level this is. */
+  if(which !== 'rail'){ const c = firstCardIn(el);
+    if(c){ const r = c.getBoundingClientRect(); if(r.right - e.left + 24 > st.clientWidth) left = st.scrollLeft + (r.left - s.left) - 12; } }
+  if(smooth === false){ st.scrollLeft = Math.max(0,left); st.scrollTop = Math.max(0,top); }
+  else st.scrollTo({left:Math.max(0,left), top:Math.max(0,top), behavior:'smooth'});
+  markChip(which);
+}
+function markChip(which){
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.band === String(which);
+    c.classList.toggle('on', on); c.setAttribute('aria-pressed', on);
+    if(on){ const ch = c.parentNode, r = c.offsetLeft - ch.offsetLeft;
+      if(r < ch.scrollLeft || r + c.offsetWidth > ch.scrollLeft + ch.clientWidth) ch.scrollLeft = Math.max(0, r - 16); }
+  });
+}
+let sraf = 0;
+function onStageScroll(){
+  if(sraf) return;
+  sraf = requestAnimationFrame(() => { sraf = 0;
+    const st = document.querySelector('.stage'); if(!st || !BANDS.length) return;
+    const s = st.getBoundingClientRect(), top = s.top + 40, rail = st.querySelector('.rail');
+    /* the instructions fill the left of the view: that is where you are */
+    let cur = 0;
+    if(rail && rail.getBoundingClientRect().right > s.left + st.clientWidth * .5) cur = 'rail';
+    else BANDS.forEach((b, i) => { if(b.getBoundingClientRect().top <= top) cur = i; });
+    const on = document.querySelector('.chip.on');
+    if(!on || on.dataset.band !== String(cur)) markChip(cur);
+  });
 }
 function syncTicks(){
   document.querySelectorAll('.stage .crd[data-code]').forEach(e=>{
     e.classList.toggle('is-done', S.done.has(e.dataset.code));
   });
+  document.querySelectorAll('.fo').forEach(b=>{ const on = +b.dataset.fr === S.freeDone;
+    b.classList.toggle('on', on); b.setAttribute('aria-pressed', on); });
   applyLocks();
   const n = document.getElementById('nv'); if(n) n.innerHTML = nav();
 }
@@ -392,114 +600,183 @@ function tickAllLegal(){
     pref.slice(0, g.max).forEach(c=>S.done.add(c));
   });
 }
+/* what the sheet on screen asks of you, and how much of it is still open */
+function mapNeeded(){
+  const map = mapName();
+  if(map === 'general') return P.general.length;
+  if(map === 'electives') return P.electives.must.length + P.electives.groups.reduce((a,g)=>a+g.pick,0) + P.electives.free;
+  const M = P.majors[S.major];
+  return M.must.length + (M.paths.length ? 1 + M.paths[0].pick : 0) + M.choose.reduce((a,g)=>a+g.pick,0) + M.support.pick;
+}
+function mapLeft(){
+  const map = mapName(), o = outstanding();
+  const mine = map === 'general' ? ['general'] : map === 'electives' ? ['elective','free'] : ['major','support'];
+  return o.need.concat(o.open).filter(x => mine.indexOf(x.why) >= 0).length;
+}
 function mapCodes(){
   return [...document.querySelectorAll('.stage .crd[data-code]:not(.crd--gate)')]
     .map(e=>e.dataset.code).filter((c,i,a)=>a.indexOf(c)===i);
 }
 
 /* ---------- plain screens ---------- */
+/* how many courses a whole degree is, for one major — the planner counts
+   courses, never credits */
+function slotsOf(k){ const s = S.major; S.major = k; const n = totalSlots(); S.major = s; return n; }
+/* the cover's drawing, cut to the screen: a strip on a phone, the cover's
+   right half on a wide screen. It draws itself once per visit. */
+let NET_DRAWN = false;
+function netSvg(){
+  const wide = window.innerWidth >= 900;
+  const vb = wide ? '480 60 1160 1070' : '480 0 1160 330';
+  let svg = document.getElementById(wide ? 'NET' : 'NETS').textContent
+    .replace(/<svg[^>]*>/, '<svg class="net'+(NET_DRAWN?'':' draw')+'" viewBox="'+vb+'" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">');
+  if(!NET_DRAWN){
+    /* each curve starts when the course it comes from has appeared, left to
+       right: prerequisites first, the way the degree is taken */
+    svg = svg.replace(/<path d="M([\d.]+),/g, (m, x) => '<path pathLength="1" style="animation-delay:'+(((+x)-500)/1110*1.1).toFixed(2)+'s" d="M'+x+',')
+             .replace(/<circle cx="([\d.]+)"/g, (m, x) => '<circle style="animation-delay:'+(((+x)-500)/1110*1.1+.15).toFixed(2)+'s" cx="'+x+'"');
+    NET_DRAWN = true;
+  } else svg = svg.replace(/<path /g, '<path pathLength="1" ');
+  return svg.replace(/ r="([\d.]+)"/g, (m, r) => ' r="'+(r * (wide ? 1.25 : 1.5)).toFixed(1)+'"');
+}
 function screenMajor(){
-  return '<div class="pan"><div class="pan__in">'+
-   '<h1 class="h">Which major are you in?</h1><div class="h-ar">ما تخصصك؟</div>'+
-   '<div class="p">Pick one. The next screens are your own printed course map — the same one in the guide.'+
-   '<span class="arb">اختر تخصصك. الشاشات التالية هي خريطة مقرراتك المطبوعة نفسها الموجودة في الدليل.</span></div>'+
-   '<div class="majs">'+Object.keys(P.majors).map(k=>{const m=P.majors[k];
-     return '<button class="maj '+(S.major===k?'on':'')+'" data-m="'+k+'">'+
-       '<span class="maj__t"><span class="maj__c">MAJOR '+m.code+'</span>'+
-       '<span class="maj__en">'+m.en+'</span><span class="maj__ar">'+m.ar+'</span></span>'+
-       '<span class="maj__b">9 major courses, 2 supporting courses, and the 25 general and college courses everyone takes.'+
-       '<span class="arb">9 مقررات تخصص، ومقرران مساندان، و25 مقرراً عاماً ومقررات كلية يدرسها الجميع.</span></span></button>';
+  const back = S.resume && S.major && (S.done.size || S.resume > 0);
+  const passed = S.done.size;
+  const sizes = [...new Set(Object.keys(P.majors).map(slotsOf))];
+  const whole = sizes.length === 1
+    ? 'Your whole degree is <b>'+sizes[0]+'</b> courses. '
+    : '';
+  const wholeAr = sizes.length === 1 ? 'درجتك كاملة '+arCourses(sizes[0])+'. ' : '';
+  return '<div class="pan"><div class="pan__in"><section class="hero">'+netSvg()+
+   '<div class="hero__t"><div class="measure">'+
+   '<h1 class="h">Which major are you in?</h1>'+AR('ما تخصصك؟','h-ar')+
+   '<p class="p">'+whole+'Tick the ones you have passed, and see the term you graduate.'+
+   AR(wholeAr+'أشّر على ما اجتزته منها، واعرف الفصل الذي تتخرج فيه.')+'</p></div>'+
+   (back ? '<div class="wb measure"><div class="wb__t">Welcome back'+AR('أهلاً بعودتك')+'</div>'+
+     /* no full stop after the figure: in an Arabic line it lands on the
+        figure's left and "25." reads as ".25" */
+     '<p class="p">Your ticks are saved on this phone or computer. Courses passed: <b>'+passed+'</b>'+
+     AR('علاماتك محفوظة على هذا الجهاز. المقررات المجتازة: '+passed)+'</p>'+
+     '<button class="btn" id="resume">Continue where you left off'+AR('تابع من حيث توقفت')+'</button></div>' : '')+
+   '</div></section>'+
+   '<div class="majs">'+Object.keys(P.majors).map(k=>{const m=P.majors[k], on=S.major===k;
+     return '<button class="mj '+(on?'on':'')+'" data-m="'+k+'" aria-pressed="'+on+'">'+
+       '<span class="mj__bar"><span>Major '+m.code+'</span><i class="mj__tick"></i>'+AR('التخصص '+m.code)+'</span>'+
+       '<span class="mj__body"><span class="mj__en">'+m.en+'</span>'+AR(m.ar,'mj__ar')+
+       (sizes.length > 1 ? '<span class="p">'+slotsOf(k)+' courses'+AR(slotsOf(k)+' مقرراً')+'</span>' : '')+
+       '</span></button>';
    }).join('')+'</div></div></div>';
 }
 function screenPace(){
   const o = outstanding(), left = o.need.length+o.open.length;
-  const row = (key,vals,cur,lbl) => vals.map(n=>
-    '<button class="opt '+(cur===n?'on':'')+'" data-'+key+'="'+n+'">'+n+
-    (lbl&&n===0?'<small>SKIP</small>':'')+'</button>').join('');
-  return '<div class="pan"><div class="pan__in">'+
-   '<h1 class="h">How fast do you want to go?</h1><div class="h-ar">بأي سرعة تريد أن تتقدم؟</div>'+
-   '<div class="p">You have <b>'+left+'</b> '+(left===1?'course':'courses')+' left. Set your pace and see the term you finish.'+
-   '<span class="arb">بقي لك '+left+' '+(left===1?'مقرر':'مقرراً')+'. حدّد سرعتك لترى الفصل الذي تتخرج فيه.</span></div>'+
-   '<div class="pace">'+
-    '<div class="bx"><div class="bx__h">Courses each normal semester</div><div class="bx__ha">عدد المقررات في الفصل العادي</div>'+
-      '<div class="opts">'+row('p',[1,2,3,4,5,6],S.perTerm)+'</div>'+
-      '<div class="cap">Six is the most the college lets you register for in a normal semester.'+
-      '<span class="arb">ستة مقررات هو الحد الأعلى المسموح به في الفصل العادي.</span></div></div>'+
-    '<div class="bx" style="border-left-color:#C9A227"><div class="bx__h">Courses each summer</div><div class="bx__ha">عدد المقررات في الفصل الصيفي</div>'+
-      '<div class="opts">'+row('s',[0,1,2,3],S.summer,1)+'</div>'+
-      '<div class="cap">Summer takes one course at the least and three at the most. Choose 0 to skip summers.'+
-      '<span class="arb">الفصل الصيفي مقرر واحد على الأقل وثلاثة على الأكثر. اختر 0 لتخطي الصيف.</span></div></div>'+
-    '<div class="bx" style="border-left-color:var(--c-lang)"><div class="bx__h">Start from</div><div class="bx__ha">ابدأ من</div>'+
-      '<div class="opts">'+[0,1,2,3].map(i=>'<button class="opt '+(S.start===i?'on':'')+'" data-t="'+i+'" style="min-width:auto;font-size:14px">'+
-        TERMS[i].en+'<small>'+TERMS[i].ar+'</small></button>').join('')+'</div>'+
-      '<div class="cap">The first semester you will register in.<span class="arb">أول فصل ستسجّل فيه.</span></div></div>'+
+  const seg = (key,vals,cur) => '<div class="seg" role="radiogroup">'+vals.map(n=>
+    '<button class="'+(cur===n?'on':'')+'" data-'+key+'="'+n+'" role="radio" aria-checked="'+(cur===n)+'">'+n+'</button>').join('')+'</div>';
+  return '<div class="pan"><div class="pan__in"><div class="measure">'+
+   '<h1 class="h">How fast do you want to go?</h1>'+AR('بأي سرعة تريد أن تتقدم؟','h-ar')+
+   '<p class="p">You have <b>'+left+'</b> '+(left===1?'course':'courses')+' left. Set your pace and see the term you finish.'+
+   AR('بقي لك '+arCourses(left)+'. حدّد سرعتك لترى الفصل الذي تتخرج فيه.')+'</p>'+
+   '<section class="q"><h2 class="q__h">Courses each normal semester'+AR('عدد المقررات في الفصل العادي')+'</h2>'+
+     seg('p',[1,2,3,4,5,6],S.perTerm)+
+     '<p class="cap">Six is the most the college lets you register for in a normal semester.'+
+     AR('ستة مقررات هو الحد الأعلى المسموح به في الفصل العادي.')+'</p></section>'+
+   '<section class="q"><h2 class="q__h">Courses each summer'+AR('عدد المقررات في الفصل الصيفي')+'</h2>'+
+     seg('s',[0,1,2,3],S.summer)+
+     '<p class="cap">Summer takes one course at the least and three at the most. Choose 0 to skip summers.'+
+     AR('الفصل الصيفي مقرر واحد على الأقل وثلاثة على الأكثر. اختر 0 لتخطي الصيف.')+'</p></section>'+
+   '<section class="q"><h2 class="q__h">Start from'+AR('ابدأ من')+'</h2>'+
+     '<div class="seg seg--terms" role="radiogroup">'+[0,1,2,3].map(i=>'<button class="'+(S.start===i?'on':'')+'" data-t="'+i+'" role="radio" aria-checked="'+(S.start===i)+'">'+
+        TERMS[i].en+AR(TERMS[i].ar)+'</button>').join('')+'</div>'+
+     '<p class="cap">The first semester you will register in.'+AR('أول فصل ستسجّل فيه.')+'</p></section>'+
    '</div></div></div>';
+}
+/* A course bar keeps the sheet's colour for its kind of course. The one colour
+   too light to carry white type (the yellow "pick one") is taken a shade
+   darker here, on screen only, so its number stays readable. */
+const BAR = { elective:'#8F6316' };
+const barOf = cat => BAR[cat] || 'var(--c-'+cat+')';
+function card(x){
+  if(!x.c) return '<div class="pc" style="--bar:var(--c-support)"><div class="pc__bar"><span>Free elective</span>'+
+    AR('اختياري حر')+'</div><div class="pc__body"><span class="pc__en">Any course you choose, from anywhere in the university</span>'+
+    AR('أي مقرر تختاره، من أي مكان في الجامعة','pc__ar')+'</div></div>';
+  const c = CO(x.c);
+  return '<div class="pc '+(x.sug?'pc--sug':'')+'" style="--bar:'+barOf(c.cat)+'">'+
+    '<div class="pc__bar"><span>'+x.c+'</span></div>'+
+    '<div class="pc__body"><span class="pc__en">'+c.en+'</span>'+AR(c.ar,'pc__ar')+'</div>'+
+    (x.sug ? '<div class="pc__tag"><span>Suggested</span>'+AR('مقترح')+'</div>' : '')+'</div>';
 }
 function screenResult(){
   const pl = schedule(), o = outstanding();
   const left = o.need.length+o.open.length, total = totalSlots(), got = total-left;
-  if(!left) return '<div class="pan"><div class="pan__in"><h1 class="h">You are done.</h1>'+
-    '<div class="h-ar">لقد أنهيت كل شيء.</div><div class="p">All '+total+' courses are ticked. Go and see your advisor about graduating.'+
-    '<span class="arb">جميع المقررات الـ'+total+' مكتملة. راجع مرشدك الأكاديمي بخصوص التخرج.</span></div></div></div>';
+  if(!left) return '<div class="pan"><div class="pan__in measure"><h1 class="h">You are done.</h1>'+
+    AR('لقد أنهيت كل شيء.','h-ar')+'<p class="p">All '+total+' courses are ticked. Go and see your advisor about graduating.'+
+    AR('جميع المقررات الـ'+total+' مكتملة. راجع مرشدك الأكاديمي بخصوص التخرج.')+'</p></div></div>';
   const last = pl.length ? pl[pl.length-1].T : TERMS[S.start];
-  const yrs = pl.filter(t=>t.T.cap==='n').length/2;
+  const nNorm = pl.filter(t=>t.T.cap==='n').length, nSum = pl.length - nNorm;
+  const yrs = nNorm/2;
+  const anySug = pl.some(t => t.list.some(x => x.sug));
+  const n = pl.length;
+  /* "4 semesters and 1 summer", counted the way a student counts them */
+  const terms = [nNorm ? nNorm+' '+(nNorm===1?'semester':'semesters') : '',
+                 nSum ? nSum+' '+(nSum===1?'summer':'summers') : ''].filter(Boolean).join(' and ');
+  const termsAr = [nNorm ? arN(nNorm,'فصل عادي واحد','فصلان عاديان','فصول عادية','فصلاً عادياً') : '',
+                   nSum ? arN(nSum,'صيف واحد','صيفان','فصول صيفية','فصلاً صيفياً') : ''].filter(Boolean).join(' و');
+  const about = nNorm >= 2 ? ', about '+yrsFmt(yrs)+' academic '+(yrs===1?'year':'years') : '';
+  const aboutAr = nNorm >= 2 ? '، أي نحو '+arYears(yrs) : '';
   return '<div class="pan"><div class="pan__in">'+
-   '<h1 class="h">Here is what is left</h1><div class="h-ar">هذا ما بقي عليك</div>'+
-   '<div class="big">'+
-     '<div><div class="big__n">'+left+'</div><div class="big__l">courses left of '+total+
-       '<span class="big__la">مقرراً باقياً من '+total+'</span></div></div>'+
-     '<div><div class="big__n">'+pl.length+'</div><div class="big__l">semesters, summers included'+
-       '<span class="big__la">فصلاً دراسياً، بما فيها الصيف</span></div></div>'+
-     '<div><div class="big__n" style="font-size:42px">'+last.en+'</div><div class="big__l">is when you finish'+
-       '<span class="big__la">هو موعد تخرجك — '+last.ar+'</span></div></div>'+
-   '</div>'+
-   '<div class="sum">You have passed <b>'+got+'</b> of '+total+'. Taking '+S.perTerm+' a semester'+
-     (S.summer?' and '+S.summer+' each summer':' and skipping summers')+', that is about '+yrs.toFixed(1)+
-     ' more academic '+(yrs===1?'year':'years')+'.'+
-     '<span class="arb">اجتزت '+got+' من '+total+'. بدراسة '+S.perTerm+' في الفصل'+
-     (S.summer?' و'+S.summer+' في كل صيف':' وتخطي الصيف')+'، يتبقى نحو '+yrs.toFixed(1)+' سنة دراسية.</span></div>'+
-   '<div class="terms">'+pl.map(t=>'<div class="tm '+(t.T.cap==='s'?'tm--s':'')+'">'+
-     '<div class="tm__h"><span class="tm__n">'+t.T.en+'</span><span class="tm__a">'+t.T.ar+'</span></div>'+
-     '<div class="tm__b">'+t.list.map(x=>{
-       if(!x.c) return '<div class="tm__c"><span class="tm__code" style="--cat:var(--c-support)">FREE</span>'+
-         '<span class="tm__x"><span class="tm__en">Free elective — your own choice</span>'+
-         '<span class="tm__ar">مقرر اختياري حر — من اختيارك</span></span></div>';
-       const c = CO(x.c);
-       return '<div class="tm__c"><span class="tm__code" style="--cat:var(--c-'+c.cat+')">'+x.c+'</span>'+
-         '<span class="tm__x"><span class="tm__en">'+c.en+'</span><span class="tm__ar">'+c.ar+'</span>'+
-         (x.sug?'<span class="tm__s">SUGGESTED · مقترح</span>':'')+'</span></div>';
-     }).join('')+'</div></div>').join('')+'</div>'+
-   '<div class="nt">This plan follows the prerequisite lines drawn on your map, and assumes every course is offered in the term it lands in. Always check your own plan in the portal before you register.'+
-   '<span class="arb">يتبع هذا المخطط المتطلبات السابقة المرسومة على خريطتك، ويفترض أن كل مقرر يُطرح في الفصل الذي وُضع فيه. راجع خطتك في نظام التسجيل قبل كل تسجيل.</span></div>'+
-   '<div class="ftr"><b>ISOM Club</b> · Kuwait University · College of Business Administration<br>'+
-   'Built from the club\'s 2026 / 2027 student guide.'+
-   '<span class="arb">مبني على دليل الطالب 2026 / 2027 الصادر عن النادي.</span></div>'+
+   '<section class="ans measure" aria-label="Your graduation term">'+
+     '<div class="ans__bar"><span>You graduate in</span>'+AR('موعد تخرجك')+'</div>'+
+     '<div class="ans__body"><div class="ans__en">'+last.en+'</div>'+AR(last.ar,'ans__ar')+'</div></section>'+
+   '<p class="p sum measure">You have <b>'+left+'</b> of '+total+' courses left. At '+S.perTerm+' a semester'+
+     (S.summer?' and '+S.summer+' each summer':', skipping summers')+', that is '+terms+about+'.'+
+     AR('بقي لك '+left+' من '+total+' مقرراً. بدراسة '+S.perTerm+' في الفصل'+
+     (S.summer?' و'+S.summer+' في كل صيف':' وتخطي الصيف')+'، يبقى '+termsAr+aboutAr+'.')+'</p>'+
+   (anySug ? '<p class="cap measure">A dashed card is our suggestion. You can swap it for another course from the same group on your map.'+
+     AR('البطاقة ذات الإطار المتقطع اقتراح منا. يمكنك استبدالها بمقرر آخر من المجموعة نفسها على خريطتك.')+'</p>' : '')+
+   '<div class="plan">'+pl.map((t,i)=>{
+     const capst = i === n-1;
+     return '<section class="tb '+(capst?'tb--cap':'')+'" style="--k:'+(n>1?(i/(n-1)).toFixed(3):1)+'">'+
+       '<header class="tb__h"><span class="tb__en">'+t.T.en+(capst?' — you graduate':'')+'</span>'+
+       AR(t.T.ar+(capst?' — تتخرج':''),'tb__ar')+'</header>'+
+       '<div class="tb__cards">'+t.list.map(card).join('')+'</div></section>';
+   }).join('')+'</div>'+
+   '<p class="nt measure">This plan follows the prerequisite lines drawn on your map, and assumes every course is offered in the term it lands in. Always check your own plan in the portal before you register.'+
+   AR('يتبع هذا المخطط المتطلبات السابقة المرسومة على خريطتك، ويفترض أن كل مقرر يُطرح في الفصل الذي وُضع فيه. راجع خطتك في نظام التسجيل قبل كل تسجيل.')+'</p>'+
+   '<footer class="ftr measure"><b>ISOM Club</b>, Kuwait University, College of Business Administration. '+
+   'Built from the club\'s 2026/2027 student guide.'+
+   AR('<b>نادي نظم المعلومات وإدارة العمليات</b>، جامعة الكويت، كلية العلوم الإدارية. مبني على دليل الطالب 2026/2027 الصادر عن النادي.')+'</footer>'+
    '</div></div>';
 }
 
 /* ---------- chrome ---------- */
+const dec = s => { const t = document.createElement('textarea'); t.innerHTML = s || ''; return t.value; };
+function sheetTitle(n){
+  const h = PG[n].html;
+  return { en: dec((h.match(/class="hd__en">([^<]*)</) || [])[1]), ar: dec((h.match(/class="hd__ar">([^<]*)</) || [])[1]) };
+}
+function title(){
+  const st = STEPS[S.step];
+  if(st === 'major')  return {en:'When do I graduate?', ar:'متى أتخرج؟'};
+  if(st === 'pace')   return {en:'Your pace', ar:'سرعة دراستك'};
+  if(st === 'result') return {en:'Your plan', ar:'خطتك'};
+  return sheetTitle(mapName());
+}
 function nav(){
   const st = STEPS[S.step], last = S.step===STEPS.length-1;
   let mid = '';
   if(st==='general'||st==='majormap'||st==='electives'){
-    const cs = mapCodes(), on = cs.filter(c=>S.done.has(c)).length;
-    const allOn = on>=cs.length && cs.length>0;
-    mid = '<span class="st"><b>'+on+'</b>'+(phone()?' / ':' of ')+cs.length+(phone()?'':' ticked')+
-      '<span class="arb">مؤشَّر عليها</span></span>'+
-      '<button class="all" data-all="'+(allOn?0:1)+'">'+(allOn?'Clear · امسح':'Tick all · حدد الكل')+'</button>';
-  } else if(st==='pace'){ const o=outstanding(); mid='<span class="st"><b>'+(o.need.length+o.open.length)+'</b> left<span class="arb">مقرراً باقياً</span></span>'; }
+    /* counted against what this sheet asks of you — "3 / 9" on the electives,
+       not "3 / 37": a group you pick one from counts once */
+    const need = mapNeeded(), left = mapLeft(), on = need - left;
+    const allOn = left === 0;
+    mid = '<span class="st"><b>'+on+'</b> / '+need+AR('مجتاز')+'</span>'+
+      '<button class="btn btn--g" data-all="'+(allOn?0:1)+'">'+(allOn?'Clear'+AR('امسح'):'Tick all'+AR('حدد الكل'))+'</button>';
+  } else if(st==='pace'){ const o=outstanding(); mid='<span class="st"><b>'+(o.need.length+o.open.length)+'</b> left'+
+    AR('باقٍ')+'</span>'; }
   else mid = '<span class="st"></span>';
-  return (S.step?'<button class="btn btn--g" id="back">Back<span class="arb">رجوع</span></button>':'')+mid+
-    (last ? '<button class="btn btn--g" id="again">Start again<span class="arb">ابدأ من جديد</span></button>'
+  return (S.step?'<button class="btn btn--g" id="back">Back'+AR('رجوع')+'</button>':'')+mid+
+    (last ? '<button class="btn btn--g" id="again">Start again'+AR('ابدأ من جديد')+'</button>'
           : '<button class="btn" id="next" '+((st==='major'&&!S.major)?'disabled':'')+'>'+
-            (S.step===4?'Show me':'Next')+'<span class="arb">'+(S.step===4?'أرني النتيجة':'التالي')+'</span></button>');
-}
-function zoomBar(){
-  const m = mapName();
-  document.getElementById('zoom').innerHTML = m
-    ? '<button class="z" data-z="-">−</button><button class="z z--w" data-z="fit">FIT</button><button class="z" data-z="+">+</button>'
-    : '';
-  if(m) applyZoom();
+            (S.step===4?'Show me'+AR('أرني النتيجة'):'Next'+AR('التالي'))+'</button>');
 }
 function paint(){
   const st = STEPS[S.step], m = mapName();
@@ -507,49 +784,73 @@ function paint(){
   else document.getElementById('slot').innerHTML =
     st==='major' ? screenMajor() : st==='pace' ? screenPace() : screenResult();
   document.getElementById('nv').innerHTML = nav();
+  const t = title();
+  document.getElementById('ttl').innerHTML = '<span class="ap__en">'+t.en+'</span>'+AR(t.ar,'ap__ar');
   document.getElementById('bar').innerHTML = STEPS.map((_,i)=>'<i class="'+(i<=S.step?'on':'')+'"></i>').join('');
-  zoomBar();
+  markArabic(document.getElementById('slot'));
+}
+/* an answer on the same screen redraws it where you are, not back at the top */
+function repaint(){
+  const p = document.querySelector('.pan'), y = p ? p.scrollTop : 0;
+  render();
+  const q = document.querySelector('.pan'); if(q) q.scrollTop = y;
 }
 function render(go){
   save();
   const slot = document.getElementById('slot');
   if(go===undefined){ paint(); return; }
   slot.classList.add('fade');
-  setTimeout(()=>{ S.step = go; S.z = null; paint(); slot.classList.remove('fade'); }, 170);
+  setTimeout(()=>{ S.step = go; S.z = null; paint(); slot.classList.remove('fade');
+    const p = slot.querySelector('.pan'); if(p) p.scrollTop = 0; }, 170);
 }
 
 /* ---------- events ---------- */
 document.addEventListener('click', e=>{
   const z = e.target.closest('[data-z]');
-  if(z){ const k=z.dataset.z;
-    S.z = k==='fit' ? fitZoom() : Math.min(1.6, Math.max(0.28, S.z + (k==='+'?0.12:-0.12)));
-    return applyZoom(); }
+  if(z){ const st = document.querySelector('.stage'), old = S.z;
+    S.z = Math.min(1.6, Math.max(0.28, S.z + (z.dataset.z==='+'?0.15:-0.15)));
+    /* keep the middle of the view in the middle */
+    const cx = (st.scrollLeft + st.clientWidth/2) / old, cy = (st.scrollTop + st.clientHeight/2) / old;
+    applyZoom(); st.scrollLeft = cx*S.z - st.clientWidth/2; st.scrollTop = cy*S.z - st.clientHeight/2;
+    return; }
+  const chip = e.target.closest('[data-band]');
+  if(chip) return jumpTo(chip.dataset.band);
   const crd = e.target.closest('.stage .crd[data-code]');
   if(crd){ const c=crd.dataset.code;
     S.done.has(c) ? S.done.delete(c) : S.done.add(c);
-    crd.classList.toggle('is-done', S.done.has(c)); save(); return syncTicks(); }
+    crd.classList.toggle('is-done', S.done.has(c)); save();
+    if(!HINTED){ HINTED = true; const h = document.getElementById('hint'); if(h) h.remove(); }
+    return syncTicks(); }
   const fr = e.target.closest('[data-fr]');
-  if(fr){ S.freeDone = +fr.dataset.fr; save();
-    fr.parentNode.querySelectorAll('.fo').forEach(b=>b.classList.toggle('on', b===fr)); return; }
+  if(fr){ S.freeDone = +fr.dataset.fr; save(); return syncTicks(); }
   const a = e.target.closest('[data-all]');
-  if(a){ a.dataset.all==='1' ? tickAllLegal() : mapCodes().forEach(c=>S.done.delete(c));
+  if(a){ const el = mapName() === 'electives';
+    if(a.dataset.all==='1'){ tickAllLegal(); if(el) S.freeDone = P.electives.free; }
+    else { mapCodes().forEach(c=>S.done.delete(c)); if(el) S.freeDone = 0; }
     save(); return syncTicks(); }
-  const t = e.target.closest('[data-m],[data-p],[data-s],[data-t],#next,#back,#again');
+  const t = e.target.closest('[data-m],[data-p],[data-s],[data-t],#next,#back,#again,#resume');
   if(!t) return;
-  if(t.dataset.m){ S.major=t.dataset.m; return render(); }
-  if(t.dataset.p){ S.perTerm=+t.dataset.p; return render(); }
-  if(t.dataset.s){ S.summer=+t.dataset.s; return render(); }
-  if(t.dataset.t){ S.start=+t.dataset.t; return render(); }
+  if(t.dataset.m){ S.major=t.dataset.m; return repaint(); }
+  if(t.dataset.p){ S.perTerm=+t.dataset.p; return repaint(); }
+  if(t.dataset.s){ S.summer=+t.dataset.s; return repaint(); }
+  if(t.dataset.t){ S.start=+t.dataset.t; return repaint(); }
+  if(t.id==='resume'){ const go = Math.min(5, Math.max(1, S.resume || 5)); S.resume = 0; return render(go); }
   if(t.id==='next') return render(S.step+1);
   if(t.id==='back') return render(S.step-1);
-  if(t.id==='again'){ S.done=new Set(); S.freeDone=0; S.major=null; return render(0); }
+  if(t.id==='again'){ S.done=new Set(); S.freeDone=0; S.major=null; S.resume=0; return render(0); }
 });
-let rz; addEventListener('resize', ()=>{ clearTimeout(rz); rz=setTimeout(()=>{ if(mapName()){ S.z=fitZoom(); applyZoom(); } },180); });
+let rz, rzWide = window.innerWidth >= 900;
+addEventListener('resize', ()=>{ clearTimeout(rz); rz=setTimeout(()=>{
+  if(mapName()){ S.z=fitZoom(); applyZoom(); }
+  /* the first screen's drawing is cut for the screen's shape */
+  const wide = window.innerWidth >= 900;
+  if(wide !== rzWide && STEPS[S.step] === 'major') repaint();
+  rzWide = wide; },180); });
 
 /* ---------- remembered on this device only ---------- */
 const KEY='isom-graduate-v2';
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify({major:S.major,done:[...S.done],
-  freeDone:S.freeDone,perTerm:S.perTerm,summer:S.summer,start:S.start})); }catch(e){} }
+  freeDone:S.freeDone,perTerm:S.perTerm,summer:S.summer,start:S.start,step:S.step})); }catch(e){} }
 (function load(){ try{ const v=JSON.parse(localStorage.getItem(KEY)||'null'); if(!v) return;
   if(v.major&&P.majors[v.major]) S.major=v.major;
   if(Array.isArray(v.done)) S.done=new Set(v.done.filter(c=>P.courses[c]));
@@ -557,6 +858,7 @@ function save(){ try{ localStorage.setItem(KEY, JSON.stringify({major:S.major,do
   if(typeof v.perTerm==='number') S.perTerm=Math.min(6,Math.max(1,v.perTerm));
   if(typeof v.summer==='number') S.summer=Math.min(3,Math.max(0,v.summer));
   if(typeof v.start==='number') S.start=Math.min(3,Math.max(0,v.start));
+  if(typeof v.step==='number' && S.major) S.resume=Math.min(5,Math.max(0,v.step));
 }catch(e){} })();
 
 if(document.fonts && document.fonts.ready) document.fonts.ready.then(()=>{ if(mapName()) { mountMap(mapName()); } });

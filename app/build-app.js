@@ -103,7 +103,32 @@ const wireJs = (() => {
              'window.__drawWires=draw;');
 })();
 
-const shell = fs.readFileSync(path.join(__dirname, 'src/shell.html'), 'utf8');
+/* the site's own address, for the link preview, from the same data file the
+   printed QR code is made from */
+const SITE = JSON.parse(fs.readFileSync(path.join(G, 'data/courses.json'), 'utf8')).site.url.replace(/\/+$/, '');
+/* the cover's constellation — every dot a course, every curve a prerequisite —
+   lifted off the rendered cover, never redrawn here */
+const NET = (() => {
+  const f = path.join(G, 'dist', 'cover-b.html');
+  const m = fs.existsSync(f) && fs.readFileSync(f, 'utf8').match(/<svg class="cB__net"[\s\S]*?<\/svg>/);
+  if (!m) { console.error('run `cd guide && node covers.js` first — the first screen uses the cover\'s drawing'); process.exit(1); }
+  return m[0];
+})();
+
+/* …and the same drawing made again by the cover's own code, in the shape of a
+   phone's strip: the same courses and the same lines, only wider than tall */
+const NETSTRIP = (() => {
+  const src = fs.readFileSync(path.join(G, 'covers.js'), 'utf8');
+  const m = src.match(/function constellation\(W, H\) \{[\s\S]*?\n\}\n/);
+  if (!m) { console.error('covers.js has no constellation(W, H) — the first screen cannot be drawn'); process.exit(1); }
+  const data = JSON.parse(fs.readFileSync(path.join(G, 'data/courses.json'), 'utf8'));
+  return new Function('data', m[0] + '\nreturn constellation;')(data)(1680, 330).svg;
+})();
+
+const shell = fs.readFileSync(path.join(__dirname, 'src/shell.html'), 'utf8')
+  .split('__SITEURL__').join(SITE)
+  .replace('__NET__', () => NET)
+  .replace('__NETSTRIP__', () => NETSTRIP);
 const out = shell
   .replace('/*__PAGECSS__*/', css)
   .replace('__PAGES__', JSON.stringify(PAGES))

@@ -9,10 +9,11 @@
     "render": "cd guide && node render.js cover-b && node render.js mis && node render.js oscm && node render.js general && node render.js electives && node render.js transfer && node render.js numbers",
     "verify": "cd guide && node verify.js && node align-check.js",
     "planner": "cd app && node build-app.js",
-    "test": "cd app && node test.js && node rules.js && node rules2.js",
+    "test": "cd app && node test.js && node rules.js && node rules2.js && node ui.js",
     "deploy": "vercel deploy --prod",
     "setup": "npx playwright install chromium",
-    "booklet": "cd guide && pdfunite dist/cover-b.pdf dist/mis.pdf dist/oscm.pdf dist/general.pdf dist/electives.pdf dist/transfer.pdf dist/numbers.pdf dist/ISOM-student-guide-2026-2027.pdf"
+    "booklet": "cd guide && pdfunite dist/cover-b.pdf dist/mis.pdf dist/oscm.pdf dist/general.pdf dist/electives.pdf dist/transfer.pdf dist/numbers.pdf dist/ISOM-student-guide-2026-2027.pdf",
+    "icons": "node app/icons.js"
   },
   "dependencies": {
     "@fontsource/aleo": "^5.3.0",
