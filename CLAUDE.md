@@ -111,7 +111,9 @@ keep one commit meaning one guide:
 Where a layout is tight, give it slack rather than tuning it to the machine you
 are on. Checked 23 Sep on Windows (Chromium 1243) and Linux (1194): all six
 sheets pass, the three maps share one centre line, and `public/index.html` comes
-out byte-identical on both — and out of a clean clone.
+out byte-identical on both — and out of a clean clone. Checked again 28 Sep,
+after the font fix, on the same two: all seven pages pass, including the font
+check, and `public/index.html` is byte-identical (`447d93dd…`).
 
 **When you add a new component, add its class to `verify.js`'s selector lists**
 — the overflow list may hold containers, the overlap list must hold leaves only.

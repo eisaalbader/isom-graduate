@@ -779,7 +779,18 @@ What moved, measured against the same commit without the fix (Chromium 1194):
 | planner | 22 checks pass, every scheduling scenario clean. 0 glyphs in a system font through all six steps, both majors |
 | `public/index.html` | MD5 `447d93ddda5dab30f15063162c698add`, 795,574 bytes (+86 KB: the five Latin halves) |
 
-Built and checked in a cloud session (Chromium 1194).
+Built and checked in a cloud session (Chromium 1194), then again on the
+club's machine (Windows, Chromium 1243) on 28 Sep before pushing: `verify.js`
+all seven pages PASS including the font check, `align-check.js` 0.02 px,
+`public/index.html` came out byte-identical (`447d93dd…`, 795,574 bytes) and
+left `git status` clean, and the planner's 22 checks and every scheduling
+scenario passed.
+
+Pushed 28 Sep (`9c3c553..32437a4`, which also brings the vector phone copy,
+`8647231`, onto `main`). Deployed to production from that GitHub commit at
+23:29 Kuwait time. The live page fetched back from
+https://isom-graduate.vercel.app is byte-identical to the build, and through
+all six steps, both majors, none of its glyphs is drawn in a system font.
 
 Also found, open: the club mark. The only copy in the repo is 298 × 190 px.
 It prints at about 160 ppi in the page headers, 65 ppi on the cover (116 mm
