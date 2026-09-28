@@ -726,3 +726,62 @@ booklet, built by `guide/screen.js` and `guide/phone.py`:
 Drawing time at iPad width, same machine, MuPDF: all seven pages 0.56 s
 against 1.17 s for the print booklet, the cover 0.09 s against 0.39 s.
 Poppler, which is slower with transparency: the cover 0.5 s against 3.0 s.
+
+## V. Every glyph in a font the sheet loads — 28 Sep 2026
+
+Found while checking the final files for the club. No check caught it.
+
+The Arabic fonts were loaded from their Arabic-only files. Those carry no
+Latin figures and no Latin punctuation, so every figure and stop inside an
+Arabic line ("2.00", "30", "1013205", ".", ":", "—", "( )", "« »") was set
+in the printing machine's own serif: Liberation Serif in the cloud session
+that renders the PDFs, Times New Roman on Windows. Arabic words inside an
+English label (the header's "خريطة مقرراتك" on five sheets, the path and
+group subtitles, "بعد ذلك", "المعدل") fell through to DejaVu Sans, two of them
+as Type 3 glyphs. In the finished booklet: 643 glyphs on all seven pages. On
+the live site: 1,105 glyphs across the six steps, both majors.
+
+The fix:
+
+- `guide.css` loads both halves of Cairo (600, 700) and Tajawal (400, 500,
+  700), each with fontsource's own `unicode-range`;
+- every DM Sans and Aleo stack has Tajawal behind it, so Arabic inside an
+  English label is set in Tajawal. Latin text does not change: DM Sans and
+  Aleo cover it;
+- `app/build-app.js` loads the same halves, taking the ranges from
+  `guide.css`; the app shell's Aleo and DM Sans stacks get Tajawal too;
+- `verify.js` gains a check, "drawn in a font the sheet does not load": it
+  asks the browser which font drew every glyph on the page and fails on any
+  the page did not load. It now runs on the cover as well. Run against the
+  old sources it fails all seven pages; after the fix all seven pass.
+
+What moved, measured against the same commit without the fix (Chromium 1194):
+
+- the page structure is unchanged everywhere. Course cards move at most
+  1.0 px (electives) and 0.45 px (MIS), not at all on the other sheets;
+- the MIS wires keep their shape and move at most 0.56 px; every other
+  page's wires are identical;
+- on MIS the colour key is shorter, because its Arabic lines no longer wrap
+  on the wide serif dash, so "Your whole degree" sits 32 px (8.5 mm) higher
+  in the rail;
+- Tajawal's own dash is shorter than the serif em dash it replaces.
+
+### Checks
+
+| | |
+|---|---|
+| `verify.js`, the cover and all six sheets | PASS, including the new font check |
+| `align-check.js` | 0.02 px spread |
+| `qrcheck.py` | all six sheets decode at A2, A3 and A4 |
+| fonts in the PDFs | Aleo, Barlow Condensed, Cairo, DM Sans and Tajawal only. No Liberation, DejaVu or Type 3 |
+| print booklet | 7 pages A2, 252 fonts all embedded, 6,173,158 bytes, MD5 `5f59d16e…`. qpdf reports only pdfunite's usual trailer warning (object count), as before |
+| phone copy | text and every stroked line identical to print on all 7 pages; QR decodes at A2, A3 and A4 on all six sheets; tap link on all six; linearised; qpdf finds nothing; poppler's Type 3 warning is gone; 1,991,093 bytes, MD5 `19686927…` |
+| planner | 22 checks pass, every scheduling scenario clean. 0 glyphs in a system font through all six steps, both majors |
+| `public/index.html` | MD5 `447d93ddda5dab30f15063162c698add`, 795,574 bytes (+86 KB: the five Latin halves) |
+
+Built and checked in a cloud session (Chromium 1194).
+
+Also found, open: the club mark. The only copy in the repo is 298 × 190 px.
+It prints at about 160 ppi in the page headers, 65 ppi on the cover (116 mm
+wide) and 30–60 ppi as the watermarks, so it is soft on the cover at A2. Eisa
+is getting the original file from the club.
