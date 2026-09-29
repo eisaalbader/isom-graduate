@@ -796,3 +796,60 @@ Also found, open: the club mark. The only copy in the repo is 298 × 190 px.
 It prints at about 160 ppi in the page headers, 65 ppi on the cover (116 mm
 wide) and 30–60 ppi as the watermarks, so it is soft on the cover at A2. Eisa
 is getting the original file from the club.
+
+## W. The planner's screens, rebuilt — 29 Sep 2026
+
+The club asked for the site not to look like a generic AI template, and for
+the problems found on a phone to be fixed. Shown to Eisa as a working demo
+with before/after screenshots at phone size, and approved before anything was
+pushed. The design is recorded in `BASELINE.md`, "The planner".
+
+Fixed, as found on the live site on 28 Sep:
+
+- buttons smaller than a thumb, and the electives page's bottom bar squeezed
+  into narrow columns with tiny free-elective buttons: every control outside
+  the map is now at least 44 × 44 px, the free-elective buttons 48 px in a row
+  of their own;
+- hint and caption text under 4.5:1: the app's own text is now 4.5:1 or
+  better, and 12 px or larger;
+- the Arabic footer printed "2027 / 2026": now "2026/2027", unspaced;
+- Arabic not marked as Arabic for screen readers, and some of it set flush
+  left: all of it is now `lang="ar"`, including the sheet's own Arabic, marked
+  in place without moving anything, and set on the right;
+- no preview card or icon when the link is shared: `og.png`,
+  `apple-touch-icon.png` and `favicon-32.png`, drawn by `app/icons.js`.
+
+Counting changed, not asked for: the counter under a map now counts what that
+sheet asks of you. The electives page said "0 / 37", as if a student owed 37
+electives; it now says "0 / 9". Tick all on the electives page now includes
+the two free electives, so the page can read complete.
+
+### Checks
+
+| | |
+|---|---|
+| `app/ui.js` (new) | 28 screens, phone 390 × 664 and computer 1440 × 900: PASS. Run on a copy with planted faults (small buttons, faint text, unmarked and flush-left Arabic, a spaced year pair, a system font, a page too wide): every screen FAILS, each fault named |
+| planner rules | `rules.js` and `rules2.js`, 22 checks PASS; `test.js`, every scheduling scenario clean |
+| sheets | `verify.js` all seven pages PASS; `align-check.js` 0.02 px; `qrcheck.py` all six sheets at A2, A3 and A4. The guide itself did not change |
+| `public/index.html` | 828,322 bytes, MD5 `5e075f9c97119e837eed4d8cd7150bfd` (Chromium 1194) |
+
+### Found, not changed: a full stop after a figure in Arabic
+
+In an Arabic line a full stop that follows a Latin figure lands on the
+figure's left, so "2.67." prints as ".2.67". `BASELINE.md` already prefers
+ending an Arabic sentence on a word. Eight lines on the printed sheets end on a
+figure and a stop:
+
+| sheet | field in `courses.json` | ends |
+|---|---|---|
+| 05 | `transfer.ours.foot_ar` | … في صفحة 06. |
+| 05 | `transfer.inside.rows[0].ar` | … ولا تزيد على 50. |
+| 05 | `transfer.inside.rows[3].ar` | … إنذار معدل 2.00. |
+| 05 | `transfer.outside.rows[0].ar` | … ولا تزيد على 45. |
+| 05 | `transfer.outside.rows[1].ar` | … لا يقل عن 2.67. |
+| 06 | `numbers.anat.foot_ar` | … الأرقام الأربعة معاً: 1013. |
+| 06 | `numbers.examples.rows[1].ar` | … بـ 03. |
+| 06 | `numbers.notes[2].ar` | … التخصصين 1009 و1023. |
+
+Reported to Eisa on 29 Sep. The club decides whether to reword them. The
+planner has none, and `ui.js` fails on any.

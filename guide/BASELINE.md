@@ -204,3 +204,34 @@ A page ships only when all three scripts pass.
   a box that contains another listed box reads as a permanent overlap.
 - A new page is not verified until its components are named in those lists. A page that
   passes only because nothing on it is selected has not been checked.
+
+## The planner
+Approved 29 Sep 2026 (Eisa, for the club), from a working demo and before/after screenshots
+at phone size.
+The site speaks the sheet's language rather than an app template's.
+
+- **Palette and type are the sheet's.** Ground `#F5F5F5`, maroon `#660000`, the card
+  colours, Barlow Condensed italic for titles, Aleo for course names, DM Sans for
+  instructions, Cairo and Tajawal for Arabic. One exception, on screen only: the yellow
+  "pick one" bar is taken to `#8F6316` so white type on it clears 4.5:1.
+- **Header**: the club mark and nothing else as a logo; the name of the screen you are on,
+  English over Arabic on one centre line, as the sheet sets its title.
+- **First screen**: the cover's drawing of the degree, made by `covers.js`'s own
+  `constellation()`: drawn for a wide strip on a phone, the cover's own on a computer. It
+  draws itself once, left to right, in the order the courses are taken, and not at all
+  under reduced motion. The majors are drawn as course cards: a maroon bar with the major
+  code, and the long official name in both languages.
+- **Maps** open on the first row of courses, at a size where a course name is 12 px on a
+  phone. A row of buttons jumps around the sheet: "What you must do" first, then each row
+  named as the sheet names it (Before, Level 1 …, Pick 1, Take 2; on the electives page the
+  groups' own printed names). The counter counts what the sheet asks of you, not every
+  course printed on it.
+- **The plan** leads with one answer, the term you graduate. Below it each term is a band
+  of the sheet's course cards on a maroon wash that deepens term by term; the last term is
+  ringed in maroon. A course the plan chose for you is dashed in its group's colour, with a
+  Suggested / مقترح row.
+- **Not used**: big-number stat blocks, tracked capital labels in the app's own text,
+  "A · B" strings, one identical rounded card for everything.
+- **Floors, machine-checked by `app/ui.js`**: every control at least 44 × 44 px; text at
+  least 12 px and 4.5:1; Arabic marked `lang="ar"` and set on the right; no spaced year
+  pair and no full stop straight after a figure in Arabic; nothing wider than the screen.

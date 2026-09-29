@@ -54,7 +54,9 @@ npm run sheets    # dist/*.html
 npm run render    # dist/*.pdf + *.png   (needs Playwright's Chromium)
 npm run verify    # the checks below, plus the title centre line
 npm run planner   # public/index.html
-npm test          # the planner's scheduler and pick rules
+npm test          # the planner's scheduler, its pick rules, and every screen
+                  #   on a phone and a computer (app/ui.js)
+npm run icons     # only when the club mark changes: the link preview and icons
 ```
 
 `npm run verify` fails the build on any of: a course number that does not match

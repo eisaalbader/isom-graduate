@@ -47,8 +47,10 @@ cd guide && node align-check.js
 cd guide && python3 mkqr.py    # only if the site URL changes
 cd guide && python3 qrcheck.py # decodes the QR back off the finished PDFs
 python3 app/sync-pre.py        # after changing a line on the MIS map
+node app/icons.js              # only when the club mark changes: the share card and icons
 cd app  && node build-app.js   # -> public/index.html
-node app/test.js app/rules.js app/rules2.js   # 22 checks on the planner
+npm test                       # the planner: its 22 rule checks, the scheduling
+                               #   scenarios, and ui.js on every screen
 ```
 
 Then the booklet:
@@ -85,6 +87,16 @@ under 4.5:1 contrast · a glyph drawn in a font the page did not load.
 `align-check.js` holds the title's centre line over the
 course columns to 0.02 px. `qrcheck.py` rasterises each finished **PDF** at A2,
 A3 and A4 and decodes the code out of the printed page.
+
+The planner ships only when `npm test` passes. Besides the scheduler and the
+pick rules, `app/ui.js` walks every screen on a phone (390 × 664, an iPhone
+with Safari's bars) and on a computer, 28 screens in all, and fails on: a page
+error · a glyph in a font the page did not load · a button under 44 × 44 px ·
+text under 4.5:1 or under 12 px · Arabic not marked `lang="ar"` · Arabic set
+flush left · a spaced year pair in Arabic · a full stop straight after a
+figure in Arabic · a page wider than the screen. `PLANNER_HTML=file.html node
+app/ui.js` checks another build; run against one with planted faults, it fails
+every screen.
 
 ### The same commit must build the same sheets anywhere
 
@@ -194,7 +206,20 @@ printed sheets, tappable.
 
 It does not divide. It runs the remaining courses through the prerequisite
 lines printed on the sheets and gives a term-by-term plan. Courses it had to
-choose for the student are tagged **SUGGESTED · مقترح**.
+choose for the student are drawn dashed and marked **Suggested / مقترح**.
+
+It looks like the guide, not like an app template (approved 29 Sep 2026; the
+details are in `guide/BASELINE.md`, "The planner"). The first screen carries
+the cover's drawing of the degree, made by the cover's own `constellation()`
+in `covers.js`, never redrawn. A map opens on its courses at a size a phone
+can read, with a row of buttons named the way the sheet names its rows. The
+plan leads with the term you graduate. The counter under a map counts what
+that sheet asks of you (x / 9 on the electives, x / 11 on a major), and Tick
+all on the electives includes the two free electives.
+
+The link preview and icons (`public/og.png`, `apple-touch-icon.png`,
+`favicon-32.png`) are drawn by `node app/icons.js` from the club mark and the
+cover's drawing, and committed. Re-run it when the mark changes.
 
 **It enforces what the sheets print.** PICK 1 / PICK 2 / PICK 3 lock the rest of
 the group once filled; choosing one MIS path closes the other; TAKE BOTH never
@@ -239,7 +264,12 @@ Open in the guide itself:
   wide at about 65 ppi, and on the watermarks (30–60 ppi). Eisa is getting the
   original file from the club (28 Sep). When it comes, replace
   `guide/assets/isom-logo.png`, `isom-logo-white.png` and `isom-maroon.png`
-  from it, rebuild everything and re-run the checks.
+  from it, run `node app/icons.js`, rebuild everything and re-run the checks.
+- Eight Arabic lines on sheets 05 and 06 end with a figure and then a full
+  stop. In an Arabic line the stop lands on the figure's left, so "2.67."
+  prints as ".2.67" and "2.00." as ".2.00". Found 29 Sep, listed in
+  `guide/verification-log.md` section W; not changed, the club decides. The
+  planner has none (`ui.js` fails on it).
 
 ---
 
