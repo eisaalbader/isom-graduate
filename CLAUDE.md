@@ -125,7 +125,9 @@ are on. Checked 23 Sep on Windows (Chromium 1243) and Linux (1194): all six
 sheets pass, the three maps share one centre line, and `public/index.html` comes
 out byte-identical on both — and out of a clean clone. Checked again 28 Sep,
 after the font fix, on the same two: all seven pages pass, including the font
-check, and `public/index.html` is byte-identical (`447d93dd…`).
+check, and `public/index.html` is byte-identical (`447d93dd…`). And again 29 Sep,
+after the planner redesign: all seven pages pass, the planner's checks and
+`ui.js` pass on both, and `public/index.html` is byte-identical (`5e075f9c…`).
 
 **When you add a new component, add its class to `verify.js`'s selector lists**
 — the overflow list may hold containers, the overlap list must hold leaves only.

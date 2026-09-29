@@ -833,6 +833,19 @@ the two free electives, so the page can read complete.
 | sheets | `verify.js` all seven pages PASS; `align-check.js` 0.02 px; `qrcheck.py` all six sheets at A2, A3 and A4. The guide itself did not change |
 | `public/index.html` | 828,322 bytes, MD5 `5e075f9c97119e837eed4d8cd7150bfd` (Chromium 1194) |
 
+Built and checked again on the club's machine (Windows, Chromium 1243) on
+29 Sep before pushing: `verify.js` all seven pages PASS, `align-check.js`
+0.02 px, `public/index.html` came out byte-identical (`5e075f9c…`) and left
+`git status` clean, the 22 rule checks and every scheduling scenario passed,
+and `ui.js` passed all 28 screens.
+
+Pushed 29 Sep (`87cf6c3..8a92de5`). Deployed to production from that GitHub
+commit at 11:06 Kuwait time (`dpl_CXCbQxSGz4YAYmNfJ6dm6MuKteHi`). The live
+page fetched back is byte-identical to the build, and so are `og.png`,
+`apple-touch-icon.png` and `favicon-32.png`. Walked on the live URL at phone
+size through all six steps (OSCM): no page errors, no failed requests, and the
+share tags point at the live `og.png`.
+
 ### Found, not changed: a full stop after a figure in Arabic
 
 In an Arabic line a full stop that follows a Latin figure lands on the

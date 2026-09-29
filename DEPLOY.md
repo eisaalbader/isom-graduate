@@ -15,17 +15,20 @@ publish anything**: the Vercel project is not connected to the repo.
   `C:\Users\user\Desktop\isom-guide\isom-graduate` with `origin` set and
   `main` tracking it
 
-Checked 28 Sep 2026: production is commit `32437a4`, deployed at 23:29 Kuwait
-time from GitHub (deployment `dpl_APrwmnPb1hQbUpMw5ZhM7Jrr8Zhp`, made through
-the Vercel API from the pushed commit). The live page, fetched back, is
-795,574 bytes with MD5 `447d93ddda5dab30f15063162c698add`, byte-identical to
-`public/index.html` built on the club's machine and in the cloud.
+Checked 29 Sep 2026: production is commit `8a92de5`, the redesigned planner,
+deployed at 11:06 Kuwait time from GitHub (deployment
+`dpl_CXCbQxSGz4YAYmNfJ6dm6MuKteHi`, made through the Vercel API from the pushed
+commit). The live page, fetched back, is 828,322 bytes with MD5
+`5e075f9c97119e837eed4d8cd7150bfd`, byte-identical to `public/index.html`
+built on the club's machine and in the cloud. The link preview and icons
+(`og.png`, `apple-touch-icon.png`, `favicon-32.png`) are served byte-identical
+to the committed files.
 
 On 24 Sep the CLI on the club's machine answered `Error: Not authorized`: its
 sign-in had expired. Run `npx vercel login` (it opens a browser) before the
 next CLI deploy. The Vercel GitHub app can read the repo, so a production
 deployment can also be made straight from a commit on `main`, which is how
-0e4ba57 and 32437a4 went out.
+0e4ba57, 32437a4 and 8a92de5 went out.
 
 ## Publishing a change
 
@@ -53,7 +56,9 @@ certutil -hashfile live.html MD5
 certutil -hashfile public\index.html MD5
 ```
 
-Then scan the QR on page 1 to check it lands.
+Then scan the QR on page 1 to check it lands. The link preview is `public/og.png`,
+drawn by `node app/icons.js` and committed; WhatsApp keeps an old preview for a
+while, so a changed card may take a day to show there.
 
 ## If you change the URL
 
